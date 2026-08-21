@@ -58,7 +58,7 @@ const Footer = () => {
             <h4 className="font-heading text-base md:text-lg font-semibold mb-4 md:mb-5 text-secondary">Contact Us</h4>
             <ul className="space-y-3.5 md:space-y-4">
               <li>
-                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Srinagar More, Sacred Heart Church, Ranabandh Road, Chapra 741123, West Bengal, India")}`} target="_blank" rel="noopener noreferrer" className="flex gap-3 text-gray-400 text-sm hover:text-white transition-colors">
+                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Mount Carmel School, Seemanagar, 9th Mile, Krishnanagar, West Bengal, India")}`} target="_blank" rel="noopener noreferrer" className="flex gap-3 text-gray-400 text-sm hover:text-white transition-colors">
                   <MapPin size={18} className="text-secondary shrink-0 mt-0.5" />
                   <span className="break-words">{schoolInfo.address.line1}, {schoolInfo.address.city}, {schoolInfo.address.state}</span>
                 </a>

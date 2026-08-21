@@ -35,7 +35,7 @@ const Contact = () => {
 
   const fullAddress = `${schoolInfo.address.line1}, ${schoolInfo.address.city}, ${schoolInfo.address.state}`;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress + ', India')}`;
-  const mapEmbedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.0!2d${schoolInfo.map.longitude}!3d${schoolInfo.map.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMxJzAwLjAiTiA4OMKwMzYnMjcuMCJF!5e0!3m2!1sen!2sin!4v1700000000000`;
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Mount Carmel School, Seemanagar, 9th Mile, Krishnanagar, West Bengal, India')}&z=15&output=embed`;
 
   return (
     <PageLayout title="Contact Us" description="Get in touch with Mount Carmel School. Find our address, phone number, email, and send us a message.">
@@ -160,7 +160,7 @@ const Contact = () => {
       {/* Map */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <SectionTitle subtitle="Location" title="Find Us on the Map" description="We are located at Srinagar More, Chapra, West Bengal." />
+          <SectionTitle subtitle="Location" title="Find Us on the Map" description={`We are located at ${schoolInfo.address.line1}, ${schoolInfo.address.city}, ${schoolInfo.address.state}, India.`} />
           <div className="mt-8 rounded-xl overflow-hidden shadow-lg">
             <iframe
               src={mapEmbedUrl}

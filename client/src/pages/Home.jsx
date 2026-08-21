@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight } from 'lucide-react';
+﻿import { useState, useEffect, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
@@ -8,17 +9,63 @@ import Button from '../components/ui/Button';
 import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
 import values from '../data/values';
+import api from '../utils/api';
+
+const fallbackGallery = [
+  { image: '/images/events/events04.webp', title: 'Annual Day Celebration', category: 'Events' },
+  { image: '/images/events/dance01.webp', title: 'Dance Performance', category: 'Activities' },
+  { image: '/images/yoga/yoga.webp', title: 'Yoga Session', category: 'Yoga' },
+  { image: '/images/events/events07.webp', title: 'Prize Distribution', category: 'Events' },
+  { image: '/images/independence/inde01.webp', title: 'Independence Day', category: 'Activities' }
+];
 
 const valueIcons = [Award, HandHeart, Heart, GraduationCap];
 
 const milestones = [
   { year: '2004', title: 'Foundation', description: 'Established at Seemanagar with a vision for value-based education.' },
   { year: '2014', title: 'Decade of Growth', description: 'Ten years of nurturing students and building a strong community.' },
-  { year: '2019', title: 'New Campus', description: 'Expanded to a new campus at Chapra, Srinagar More.' },
+  { year: '2019', title: 'New Campus', description: 'Expanded and upgraded to the present campus at Seemanagar, 9th Mile, Krishnanagar.' },
   { year: 'Present', title: 'Continuing Legacy', description: 'Serving the community with faith, values, and academic excellence.' },
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [galleryImages, setGalleryImages] = useState(fallbackGallery);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const res = await api.get('/gallery');
+        if (res.data && res.data.length >= 3) {
+          const validImages = res.data.filter(img => img.image);
+          if (validImages.length >= 3) {
+            setGalleryImages(validImages);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch gallery for home carousel', error);
+      }
+    };
+    fetchGallery();
+  }, []);
+
+  const nextImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  }, [galleryImages.length]);
+
+  const prevImage = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  }, [galleryImages.length]);
+
+  useEffect(() => {
+    const timer = setInterval(nextImage, 4000);
+    return () => clearInterval(timer);
+  }, [nextImage]);
+
+  const handleCenterClick = () => {
+    navigate('/gallery');
+  };
   return (
     <PageLayout>
       {/* Hero Section */}
@@ -58,7 +105,7 @@ const Home = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-white/90 text-sm md:text-base lg:text-lg mb-10 max-w-3xl mx-auto font-sans leading-relaxed"
           >
-            A Christian missionary school dedicated to nurturing young minds with faith, values, academic excellence, and holistic development at our campus in Chapra.
+            A Christian missionary school dedicated to nurturing young minds with faith, values, academic excellence, and holistic development at our campus in Krishnanagar.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -205,37 +252,99 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Campus Section */}
-      <section className="py-16 md:py-24 bg-ivory">
+      {/* School Moments Section */}
+      <section className="py-16 md:py-24 bg-ivory overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <SectionTitle
-            subtitle="Our Campus"
-            title="A Place to Grow"
-            description="Our campus at Chapra provides modern facilities in a serene environment."
+            subtitle="School Moments"
+            title="School Moments"
+            description="Glimpses of life, learning, and celebration at Mount Carmel School."
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {['/images/campus/campus01.webp', '/images/campus/campus02.webp', '/images/campus/campus03.webp'].map((src, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                whileHover={{ scale: 1.03 }}
-                className="rounded-xl overflow-hidden shadow-md"
-              >
-                <img src={src} alt={`Campus view ${i + 1}`} className="w-full h-64 object-cover" />
-              </motion.div>
-            ))}
+          
+          <div className="relative mt-12 md:mt-16 mb-8">
+            <div className="relative h-[250px] sm:h-[350px] md:h-[450px] w-full max-w-6xl mx-auto flex items-center justify-center">
+              <AnimatePresence initial={false}>
+                {galleryImages.map((img, idx) => {
+                  const total = galleryImages.length;
+                  if (total === 0) return null;
+                  
+                  const isCenter = idx === currentIndex;
+                  const isLeft = idx === (currentIndex - 1 + total) % total;
+                  const isRight = idx === (currentIndex + 1) % total;
+
+                  if (!isCenter && !isLeft && !isRight) return null;
+
+                  let x = "0%";
+                  let scale = 1.15;
+                  let zIndex = 10;
+                  let opacity = 1;
+
+                  if (isLeft) {
+                    x = "-60%";
+                    scale = 0.85;
+                    zIndex = 5;
+                    opacity = 0.7;
+                  } else if (isRight) {
+                    x = "60%";
+                    scale = 0.85;
+                    zIndex = 5;
+                    opacity = 0.7;
+                  }
+
+                  // Adjust for mobile screens
+                  const getX = (val) => {
+                    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                      if (isLeft) return "-45%";
+                      if (isRight) return "45%";
+                    }
+                    return val;
+                  };
+
+                  return (
+                    <motion.div
+                      key={img.image || idx}
+                      initial={false}
+                      animate={{
+                        x: getX(x),
+                        scale: scale,
+                        opacity: opacity,
+                        zIndex: zIndex
+                      }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute w-[65%] sm:w-[55%] md:w-[45%] lg:w-[40%] h-[180px] sm:h-[250px] md:h-[350px] rounded-2xl overflow-hidden cursor-pointer shadow-xl bg-white"
+                      onClick={() => {
+                        if (isLeft) prevImage();
+                        else if (isRight) nextImage();
+                        else handleCenterClick();
+                      }}
+                    >
+                      <img src={img.image} alt={img.title || "School Moment"} className="w-full h-full object-cover" />
+                      {!isCenter && <div className="absolute inset-0 bg-black/20 hover:bg-transparent transition-colors duration-300" />}
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+            
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mt-8 md:mt-12 h-10"
+            >
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-primary">
+                {galleryImages[currentIndex]?.title || "Campus Life"}
+              </h3>
+            </motion.div>
           </div>
-          <div className="text-center mt-8">
-            <Button to="/facilities" variant="outline" size="sm" icon>
-              Explore Campus
+
+          <div className="text-center mt-6">
+            <Button to="/gallery" variant="outline" size="md" icon>
+              View Full Gallery
             </Button>
           </div>
         </div>
       </section>
-
       {/* Principal Preview */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
@@ -300,3 +409,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

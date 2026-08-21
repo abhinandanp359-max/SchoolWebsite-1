@@ -8,14 +8,16 @@ const SchemaMarkup = ({ type = 'school', page }) => {
       '@context': 'https://schema.org',
       '@type': 'School',
       name: 'Mount Carmel School',
-      description: 'A Christian missionary school committed to education, values, character, service, compassion, and excellence. Established in 2004, located in Chapra.',
+      description: 'A Christian missionary school committed to education, values, character, service, compassion, and excellence. Established in 2004, located at Seemanagar, 9th Mile, Krishnanagar.',
       url: baseUrl,
       logo: `${baseUrl}/images/branding/logo.webp`,
       image: `${baseUrl}/images/hero/banner.webp`,
       foundingDate: '2004',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Chapra',
+        addressLocality: 'Krishnanagar',
+        addressRegion: 'West Bengal',
+        streetAddress: 'Seemanagar, 9th Mile',
         addressCountry: 'IN'
       },
       contactPoint: {

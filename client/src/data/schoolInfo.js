@@ -4,14 +4,14 @@ const schoolInfo = {
   tagline: "Rooted in Values, Reaching for Excellence",
   established: 2004,
   previousLocation: "Seemanagar",
-  location: "Chapra",
+  location: "Krishnanagar",
   address: {
-    line1: "Srinagar More, Sacred Heart Church, Ranabandh Road",
-    city: "Chapra",
+    line1: "Seemanagar, 9th Mile (near B.S.F. Camp)",
+    city: "Krishnanagar",
     state: "West Bengal"
   },
   contact: {
-    phone: "+91 9679106606 / +91 8207043578",
+    phone: "+91 9679106606",
     email: "carmelmount2004@gmail.com"
   },
   social: {
@@ -19,11 +19,11 @@ const schoolInfo = {
     instagram: "#"
   },
   timings: {
-    office: "Office hours will be updated soon"
+    office: "10 AM - 4 PM"
   },
   map: {
-    latitude: 23.51665,
-    longitude: 88.6075
+    latitude: 23.5155447,
+    longitude: 88.5492713
   }
 };
 

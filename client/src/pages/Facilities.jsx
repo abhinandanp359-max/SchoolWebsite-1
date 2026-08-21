@@ -21,7 +21,7 @@ const campusImages = [
 
 const Facilities = () => {
   return (
-    <PageLayout title="Campus & Facilities" description="Explore the campus and facilities at Mount Carmel School, Chapra - modern classrooms, playground, library, and more.">
+    <PageLayout title="Campus & Facilities" description="Explore the campus and facilities at Mount Carmel School, Krishnanagar - modern classrooms, playground, library, and more.">
       {/* Hero */}
       <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 text-center">
@@ -104,7 +104,7 @@ const Facilities = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Our Chapra Campus</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Our Krishnanagar Campus</h2>
             <div className="space-y-4 text-warm-gray text-sm md:text-base leading-relaxed">
               <p>
                 Our present campus at {schoolInfo.address.line1}, {schoolInfo.address.city} is a modern facility designed to provide an ideal learning environment. The campus features well-designed classrooms, a library, a playground, and spaces for cultural and spiritual activities.

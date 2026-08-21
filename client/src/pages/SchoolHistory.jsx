@@ -26,14 +26,14 @@ const timeline = [
   },
   {
     year: 'New Era',
-    title: 'New Campus at Chapra',
-    description: `The school expanded to a new, modern campus at ${schoolInfo.location}, ${schoolInfo.address.line1}. The Chapra campus features improved infrastructure, spacious classrooms, and facilities designed to support holistic development.`,
+    title: `New Campus at ${schoolInfo.location}`,
+    description: `The school expanded to a new, modern campus at ${schoolInfo.address.line1}, ${schoolInfo.location}. The new campus features improved infrastructure, spacious classrooms, and facilities designed to support holistic development.`,
     icon: MapPin,
   },
   {
     year: 'Present',
     title: 'Continuing the Legacy',
-    description: 'Today, Mount Carmel School stands as a beacon of quality education and values in the Chapra community. With growing student strength, dedicated staff, and a vibrant campus life, the school continues to fulfill its mission of forming confident, compassionate, and responsible individuals.',
+    description: 'Today, Mount Carmel School stands as a beacon of quality education and values in the Krishnanagar community. With growing student strength, dedicated staff, and a vibrant campus life, the school continues to fulfill its mission of forming confident, compassionate, and responsible individuals.',
     icon: Calendar,
   },
 ];

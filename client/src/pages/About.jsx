@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { BookOpen, Eye, Cross } from 'lucide-react';
+import { Cross } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
-import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import schoolInfo from '../data/schoolInfo';
 import values from '../data/values';
@@ -63,7 +62,7 @@ const About = () => {
                   Mount Carmel School was founded in {schoolInfo.established} with a clear vision: to provide quality education rooted in Christian values to the children of our community.
                 </p>
                 <p>
-                  What began as a small institution at {schoolInfo.previousLocation} has grown into a thriving school at our present campus in {schoolInfo.location}. Over the years, we have remained faithful to our founding mission of nurturing the whole child — mind, body, and spirit.
+                  What began as a small institution at {schoolInfo.previousLocation} has grown into a thriving school at our present campus in {schoolInfo.location}. Over the years, we have remained faithful to our founding mission of nurturing the whole child - mind, body, and spirit.
                 </p>
                 <p>
                   Our school is guided by the dedicated MPV Sisters, whose commitment to education and service continues to inspire our community. Every student who walks through our doors becomes part of a family built on faith, love, and the pursuit of excellence.
@@ -74,33 +73,61 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Mother Mary */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionTitle
-            subtitle="Purpose"
-            title="Our Mission & Vision"
-            description="The guiding principles that shape everything we do."
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
-            <Card className="p-8 text-center">
-              <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                <BookOpen size={28} className="text-secondary" />
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+            {/* Left - Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="md:w-2/5 flex justify-center"
+            >
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-yellow-200/40 to-amber-100/30 blur-xl" />
+                <img
+                  src="/images/branding/mother-marry.webp"
+                  alt="Mother Mary - Our Patroness"
+                  className="relative w-64 md:w-80 rounded-2xl shadow-2xl object-cover"
+                />
               </div>
-              <h3 className="font-heading text-xl font-bold text-primary mb-3">Our Mission</h3>
-              <p className="text-warm-gray text-sm leading-relaxed">
-                To provide holistic education rooted in Christian values that empowers students to become compassionate, responsible, and excellent individuals who contribute positively to society.
-              </p>
-            </Card>
-            <Card className="p-8 text-center">
-              <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                <Eye size={28} className="text-secondary" />
+            </motion.div>
+
+            {/* Right - Text */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="md:w-3/5"
+            >
+              <p className="text-secondary font-semibold text-sm uppercase tracking-widest mb-2">Our Patroness</p>
+              <h2 className="font-heading text-2xl md:text-4xl font-bold text-primary mb-6 leading-tight">
+                Mother Mary{' '}
+                <span className="text-secondary">- Model of Grace &amp; Love</span>
+              </h2>
+              <div className="space-y-4 text-warm-gray text-sm md:text-base leading-relaxed">
+                <p>
+                  Mount Carmel School is named in honour of Our Lady of Mount Carmel - the Blessed Virgin Mary - whose spirit of humility, compassion, and unwavering faith continues to guide our institution every single day.
+                </p>
+                <p>
+                  Mary, the Mother of Jesus, stands as a timeless model of grace and service. Her "yes" to God's call reminds our students that true greatness lies not in power, but in love, sacrifice, and surrender to a higher purpose.
+                </p>
+                <p>
+                  At Mount Carmel, we look to Mary as our heavenly mother and intercessor. Her virtues - purity, humility, courage, and charity - form the spiritual foundation on which our school is built. We strive to instil these values in every child who walks through our gates.
+                </p>
+                <p>
+                  As our patroness, Mother Mary intercedes for our students, teachers, and families. Her loving presence is felt in our prayers, our service, and our daily commitment to nurturing minds and hearts for a better world.
+                </p>
               </div>
-              <h3 className="font-heading text-xl font-bold text-primary mb-3">Our Vision</h3>
-              <p className="text-warm-gray text-sm leading-relaxed">
-                To be a beacon of light in education, forming leaders who will transform society with integrity, compassion, and a deep sense of service to humanity.
-              </p>
-            </Card>
+              <div className="mt-6 italic text-primary/70 text-sm border-l-4 border-secondary pl-4">
+                "Do whatever He tells you." - John 2:5
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
