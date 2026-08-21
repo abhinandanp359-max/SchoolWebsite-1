@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://schoolwebsite-1-jtn5.onrender.com/api/$1"
+      "destination": "https://schoolwebsite-1-1.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",
