@@ -76,7 +76,7 @@ const Home = () => {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a0f0f]">
         <div className="absolute inset-0 bg-[#1a0f0f]">
           <img 
-            src="/images/branding/hero-assembly-new.jpg" 
+            src="/images/branding/hero.png" 
             alt="School Assembly Background" 
             className="w-full h-full object-cover object-center" 
           />
