@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -10,6 +10,7 @@ import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
 import values from '../data/values';
 import api from '../utils/api';
+
 
 const fallbackGallery = [
   { image: '/images/events/events04.webp', title: 'Annual Day Celebration', category: 'Events' },
@@ -32,6 +33,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [galleryImages, setGalleryImages] = useState(fallbackGallery);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -51,10 +53,12 @@ const Home = () => {
   }, []);
 
   const nextImage = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
   }, [galleryImages.length]);
 
   const prevImage = useCallback(() => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   }, [galleryImages.length]);
 
@@ -69,19 +73,33 @@ const Home = () => {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/images/hero/banner.webp" alt="Mount Carmel School Campus" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-secondary/60" />
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a0f0f]">
+        <div className="absolute inset-0 bg-[#1a0f0f]">
+          {/* Background image (Mobile) - Uses exact image uploaded by user */}
+          <img 
+            src="/images/assembly/assembly.webp" 
+            alt="School Assembly Background" 
+            className="md:hidden w-full h-full object-cover object-[center_20%]" 
+          />
+          {/* Background image (Desktop) */}
+          <img 
+            src="/images/branding/hero-assembly-new.jpg" 
+            alt="School Assembly Background" 
+            className="hidden md:block w-full h-full object-cover object-center md:object-[center_20%]" 
+          />
+          {/* Semi-transparent warm red/burgundy overlay */}
+          <div className="absolute inset-0 bg-[#5a1c1c]/25" />
+          {/* Subtle dark/warm gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2a1313]/40 to-[#1a0f0f]/85" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mb-6 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 backdrop-blur-sm inline-block"
+            className="mb-6 px-4 py-2 rounded-full bg-[#1a0f0f]/75 border border-secondary/50 backdrop-blur-md inline-block"
           >
-            <span className="text-secondary text-sm md:text-base font-medium">Est. 2004 · Christian Missionary School</span>
+            <span className="text-secondary text-xs sm:text-sm md:text-base font-medium whitespace-normal break-words">Est. 2004 · Christian Missionary School</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -146,33 +164,35 @@ const Home = () => {
         </div>
       </section>
 
-      {/* School Identity Section */}
+      {/* Principal Preview */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionTitle
-            subtitle="Our Identity"
-            title={schoolInfo.name}
-            description={schoolInfo.tagline}
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
-            {[
-              { label: 'School Type', value: schoolInfo.type },
-              { label: 'Established', value: schoolInfo.established },
-              { label: 'Location', value: schoolInfo.location },
-              { label: 'Motto', value: 'Rooted in values, Reaching for Excellence' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="text-center p-4 rounded-xl bg-ivory/50"
-              >
-                <p className="text-secondary text-xs font-semibold uppercase tracking-wider mb-1">{item.label}</p>
-                <p className="font-heading text-lg font-bold text-primary">{item.value}</p>
-              </motion.div>
-            ))}
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg shrink-0"
+            >
+              <img src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <p className="text-secondary font-semibold text-sm uppercase tracking-wider mb-2">From the Principal's Desk</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-2">{principalData.principalName}</h2>
+              <p className="text-warm-gray text-sm mb-4">{principalData.designation}</p>
+              <blockquote className="text-charcoal text-sm md:text-base leading-relaxed italic border-l-4 border-secondary pl-4 mb-6">
+                "Rooted in values, Reaching for Excellence"
+              </blockquote>
+              <Button to="/about/principal-message" variant="outline" size="sm" icon>
+                Read Full Message
+              </Button>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -263,7 +283,7 @@ const Home = () => {
           
           <div className="relative mt-12 md:mt-16 mb-8">
             <div className="relative h-[250px] sm:h-[350px] md:h-[450px] w-full max-w-6xl mx-auto flex items-center justify-center">
-              <AnimatePresence initial={false}>
+              <AnimatePresence initial={false} custom={direction}>
                 {galleryImages.map((img, idx) => {
                   const total = galleryImages.length;
                   if (total === 0) return null;
@@ -274,43 +294,56 @@ const Home = () => {
 
                   if (!isCenter && !isLeft && !isRight) return null;
 
-                  let x = "0%";
-                  let scale = 1.15;
-                  let zIndex = 10;
-                  let opacity = 1;
+                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                  const leftX = isMobile ? "-45%" : "-60%";
+                  const rightX = isMobile ? "45%" : "60%";
 
-                  if (isLeft) {
-                    x = "-60%";
-                    scale = 0.85;
-                    zIndex = 5;
-                    opacity = 0.7;
-                  } else if (isRight) {
-                    x = "60%";
-                    scale = 0.85;
-                    zIndex = 5;
-                    opacity = 0.7;
-                  }
-
-                  // Adjust for mobile screens
-                  const getX = (val) => {
-                    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-                      if (isLeft) return "-45%";
-                      if (isRight) return "45%";
-                    }
-                    return val;
+                  const variants = {
+                    enter: (dir) => ({
+                      x: dir > 0 ? "100%" : "-100%",
+                      scale: 0.85,
+                      opacity: 0,
+                      zIndex: 1
+                    }),
+                    center: {
+                      x: "0%",
+                      scale: 1.15,
+                      opacity: 1,
+                      zIndex: 10
+                    },
+                    left: {
+                      x: leftX,
+                      scale: 0.85,
+                      opacity: 0.7,
+                      zIndex: 5
+                    },
+                    right: {
+                      x: rightX,
+                      scale: 0.85,
+                      opacity: 0.7,
+                      zIndex: 5
+                    },
+                    exit: (dir) => ({
+                      x: dir > 0 ? "-100%" : "100%",
+                      scale: 0.85,
+                      opacity: 0,
+                      zIndex: 1
+                    })
                   };
+
+                  let animateState = "center";
+                  if (isLeft) animateState = "left";
+                  if (isRight) animateState = "right";
 
                   return (
                     <motion.div
                       key={img.image || idx}
-                      initial={false}
-                      animate={{
-                        x: getX(x),
-                        scale: scale,
-                        opacity: opacity,
-                        zIndex: zIndex
-                      }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      custom={direction}
+                      variants={variants}
+                      initial="enter"
+                      animate={animateState}
+                      exit="exit"
+                      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                       className="absolute w-[65%] sm:w-[55%] md:w-[45%] lg:w-[40%] h-[180px] sm:h-[250px] md:h-[350px] rounded-2xl overflow-hidden cursor-pointer shadow-xl bg-white"
                       onClick={() => {
                         if (isLeft) prevImage();
@@ -345,38 +378,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Principal Preview */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg shrink-0"
-            >
-              <img src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <p className="text-secondary font-semibold text-sm uppercase tracking-wider mb-2">From the Principal's Desk</p>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-2">{principalData.principalName}</h2>
-              <p className="text-warm-gray text-sm mb-4">{principalData.designation}</p>
-              <blockquote className="text-charcoal text-sm md:text-base leading-relaxed italic border-l-4 border-secondary pl-4 mb-6">
-                "Rooted in values, Reaching for Excellence"
-              </blockquote>
-              <Button to="/about/principal-message" variant="outline" size="sm" icon>
-                Read Full Message
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-primary to-secondary">
