@@ -75,17 +75,10 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a0f0f]">
         <div className="absolute inset-0 bg-[#1a0f0f]">
-          {/* Background image (Mobile) - Uses exact image uploaded by user */}
-          <img 
-            src="/images/assembly/assembly.webp" 
-            alt="School Assembly Background" 
-            className="md:hidden w-full h-full object-cover object-[center_20%]" 
-          />
-          {/* Background image (Desktop) */}
           <img 
             src="/images/branding/hero-assembly-new.jpg" 
             alt="School Assembly Background" 
-            className="hidden md:block w-full h-full object-cover object-center md:object-[center_20%]" 
+            className="w-full h-full object-cover object-center" 
           />
           {/* Semi-transparent warm red/burgundy overlay */}
           <div className="absolute inset-0 bg-[#5a1c1c]/25" />

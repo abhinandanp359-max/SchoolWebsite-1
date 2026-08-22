@@ -12,8 +12,8 @@ exports.submitEnquiry = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Invalid email format' });
     }
 
-    // Validate phone format
-    if (!phone || phone.trim().length < 8) {
+    // Validate phone format (if provided)
+    if (phone && phone.trim().length < 8) {
       return res.status(400).json({ success: false, message: 'Invalid phone number' });
     }
 
@@ -31,8 +31,8 @@ exports.submitEnquiry = async (req, res, next) => {
         message
       });
     } else if (type === 'Contact Enquiry') {
-      if (!parentName || !phone || !message) {
-        return res.status(400).json({ success: false, message: 'Name, Phone, and Message are required' });
+      if (!parentName || !email || !message) {
+        return res.status(400).json({ success: false, message: 'Name, Email, and Message are required' });
       }
       // Note: mapping parentName to ContactEnquiry's name field
       savedEnquiry = await ContactEnquiry.create({

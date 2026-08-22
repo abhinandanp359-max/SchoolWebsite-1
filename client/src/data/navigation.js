@@ -23,7 +23,6 @@ export const footerLinks = {
   about: [
     { name: "School History", path: "/about/history" },
     { name: "Principal's Message", path: "/about/principal-message" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "News & Notices", path: "/news" }
+    { name: "Gallery", path: "/gallery" }
   ]
 };

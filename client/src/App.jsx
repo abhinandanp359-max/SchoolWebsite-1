@@ -12,7 +12,6 @@ const Academics = lazy(() => import('./pages/Academics'));
 const Facilities = lazy(() => import('./pages/Facilities'));
 const Activities = lazy(() => import('./pages/Activities'));
 const Gallery = lazy(() => import('./pages/Gallery'));
-const News = lazy(() => import('./pages/News'));
 const Admissions = lazy(() => import('./pages/Admissions'));
 const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -42,7 +41,6 @@ function App() {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/gallery" element={<Gallery />} />
-          <Route path="/news" element={<News />} />
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/contact" element={<Contact />} />
         </Route>

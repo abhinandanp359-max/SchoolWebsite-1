@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram, ArrowUp } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, ArrowUp } from 'lucide-react';
 import schoolInfo from '../data/schoolInfo';
 import { footerLinks } from '../data/navigation';
 
@@ -24,7 +24,7 @@ const Footer = () => {
               A Christian missionary school committed to education, values, character, service, compassion, and excellence. Established in {schoolInfo.established}.
             </p>
             <div className="flex gap-3">
-              {[{ icon: Facebook, href: schoolInfo.social.facebook }, { icon: Instagram, href: schoolInfo.social.instagram }].map(({ icon: Icon, href }, idx) => (
+              {[{ icon: Facebook, href: schoolInfo.social.facebook }].map(({ icon: Icon, href }, idx) => (
                 <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors">
                   <Icon size={18} />
                 </a>
