@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { LogIn, CircleAlert } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 
@@ -10,6 +10,7 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +18,9 @@ export default function AdminLogin() {
     setLoading(true);
     try {
       await login(username, password);
-      navigate("/admin");
+      // Return to the page the admin originally requested (e.g. an enquiry
+      // deep link from a notification email), otherwise the dashboard.
+      navigate(location.state?.from?.pathname || "/admin", { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
     } finally {

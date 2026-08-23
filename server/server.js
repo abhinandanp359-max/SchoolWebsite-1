@@ -50,6 +50,7 @@ app.use('/api/gallery', galleryRoutes);
 app.use('/api/admissions', admissionRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/enquiries', enquiryRoutes);
+app.use('/api/notifications', require('./routes/notifications'));
 
 app.get('/', (req, res) => {
   res.json({ message: 'Mount Carmel School API is running' });

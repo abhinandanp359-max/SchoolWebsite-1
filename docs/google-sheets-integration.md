@@ -7,7 +7,11 @@ Create a new Google Sheet named **Mount Carmel School – Enquiries**.
 
 ### Step 2
 Create the headers in Row 1:
-`Timestamp` | `Type` | `Student Name` | `Parent Name` | `Class` | `Phone` | `Email` | `Message`
+`Timestamp` | `Type` | `Student Name` | `Parent Name` | `Class` | `Phone` | `Email` | `Message` | `Enquiry ID`
+
+> The `Enquiry ID` column is the unique record identifier used by the **VIEW ENQUIRY**
+> deep link in notification emails. It is appended as the last column so all existing
+> columns and data remain unchanged.
 
 ### Step 3
 Open **Extensions → Apps Script** from the Google Sheet menu.
@@ -29,6 +33,7 @@ function doPost(e) {
     const sheet = SpreadsheetApp.openById(spreadsheetId).getSheets()[0];
     
     const timestamp = new Date();
+    const enquiryId = data.id || '';
     const type = data.type || 'Unknown Enquiry';
     const studentName = data.studentName || '';
     const parentName = data.parentName || '';
@@ -37,7 +42,7 @@ function doPost(e) {
     const email = data.email || '';
     const message = data.message || '';
     
-    // 1. Append to Sheet
+    // 1. Append to Sheet (Enquiry ID added as the last column — existing columns untouched)
     sheet.appendRow([
       timestamp,
       type,
@@ -46,7 +51,8 @@ function doPost(e) {
       className,
       phone,
       email,
-      message
+      message,
+      enquiryId
     ]);
     
     // 2. Send Email

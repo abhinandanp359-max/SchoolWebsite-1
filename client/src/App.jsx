@@ -21,6 +21,8 @@ const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminGallery = lazy(() => import('./pages/admin/AdminGallery'));
 const AdminEnquiries = lazy(() => import('./pages/admin/AdminEnquiries'));
+const AdminEnquiryDetail = lazy(() => import('./pages/admin/AdminEnquiryDetail'));
+const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
 
 const pageFallback = (
   <div className="min-h-screen flex items-center justify-center bg-ivory">
@@ -51,6 +53,8 @@ function App() {
           <Route path="news" element={<AdminNews />} />
           <Route path="gallery" element={<AdminGallery />} />
           <Route path="enquiries" element={<AdminEnquiries />} />
+          <Route path="enquiries/:id" element={<AdminEnquiryDetail />} />
+          <Route path="notifications" element={<AdminNotifications />} />
         </Route>
         <Route path="*" element={<PublicLayout />}>
           <Route path="*" element={<NotFound />} />

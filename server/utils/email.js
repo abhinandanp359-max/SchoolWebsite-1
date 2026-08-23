@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enquiryEmailTemplate");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -8,52 +9,92 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const clientBaseUrl = () => (process.env.CLIENT_URL || "").replace(/\/$/, "");
+
+/*
+ * Logo shown at the top of every notification email.
+ * Hosted URL (not an attachment) — displays inline like a normal newsletter
+ * image and never appears in the recipient's attachment list.
+ * NOTE: the URL becomes fully loadable once CLIENT_URL points to the live domain;
+ * on localhost Gmail's image proxy cannot fetch it and shows the alt text instead.
+ */
+const logoUrl = () => {
+  const base = clientBaseUrl();
+  return base ? `${base}/images/branding/logo.png` : "";
+};
+
+/* Fallback link when no specific enquiry id is available */
+const adminEnquiriesUrl = () => {
+  const base = clientBaseUrl();
+  return base ? `${base}/admin/enquiries` : "";
+};
+
+/*
+ * Deep link to the EXACT enquiry record that generated this email.
+ * Uses the unique Mongo _id — never names/phones/emails.
+ */
+const enquiryViewUrl = (enquiry) => {
+  const id = enquiry?._id || enquiry?.id;
+  const base = clientBaseUrl();
+  if (!base || !id) return adminEnquiriesUrl();
+  return `${base}/admin/enquiries/${id}`;
+};
+
+/**
+ * Render the final notification email (subject + html) for any enquiry record.
+ * Used by sendAdmissionEmail / sendContactEmail / test endpoint / live preview.
+ */
+const renderEnquiryEmail = ({ type, enquiry }) => {
+  const norm = normaliseEnquiry({ ...enquiry, type });
+  const subject =
+    type === "Admission Enquiry"
+      ? `New Admission Enquiry — ${enquiry.studentName || ""}`.trim()
+      : `New Contact Enquiry — ${enquiry.name || ""}`.trim();
+
+  const html = buildEnquiryEmail({
+    type,
+    enquiry,
+    logoSrc: logoUrl(),
+    viewUrl: enquiryViewUrl(enquiry),
+  });
+
+  return { subject, html, tokenValues: norm.tokenValues };
+};
+
 const sendContactEmail = async (enquiry) => {
+  const { subject, html } = renderEnquiryEmail({ type: "Contact Enquiry", enquiry });
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.NOTIFY_EMAIL,
-    subject: `New Contact Enquiry — ${enquiry.name}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #6B1D2A;">New Contact Enquiry</h2>
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px 0; font-weight: bold; width: 120px;">Name</td><td style="padding: 8px 0;">${enquiry.name}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold;">Email</td><td style="padding: 8px 0;">${enquiry.email}</td></tr>
-          ${enquiry.phone ? `<tr><td style="padding: 8px 0; font-weight: bold;">Phone</td><td style="padding: 8px 0;">${enquiry.phone}</td></tr>` : ""}
-          <tr><td style="padding: 8px 0; font-weight: bold; vertical-align: top;">Message</td><td style="padding: 8px 0;">${enquiry.message}</td></tr>
-        </table>
-        <hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;" />
-        <p style="color: #888; font-size: 12px;">Mount Carmel School Website — Contact Form</p>
-      </div>
-    `,
+    subject,
+    html,
   };
-
   return transporter.sendMail(mailOptions);
 };
 
 const sendAdmissionEmail = async (enquiry) => {
+  const { subject, html } = renderEnquiryEmail({ type: "Admission Enquiry", enquiry });
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.NOTIFY_EMAIL,
-    subject: `New Admission Enquiry — ${enquiry.studentName}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #6B1D2A;">New Admission Enquiry</h2>
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px 0; font-weight: bold; width: 140px;">Parent Name</td><td style="padding: 8px 0;">${enquiry.parentName}</td></tr>
-          <tr><td style="padding: 8px 0; font-weight: bold;">Student Name</td><td style="padding: 8px 0;">${enquiry.studentName}</td></tr>
-          ${enquiry.className ? `<tr><td style="padding: 8px 0; font-weight: bold;">Class</td><td style="padding: 8px 0;">${enquiry.className}</td></tr>` : ""}
-          <tr><td style="padding: 8px 0; font-weight: bold;">Phone</td><td style="padding: 8px 0;">${enquiry.phone}</td></tr>
-          ${enquiry.email ? `<tr><td style="padding: 8px 0; font-weight: bold;">Email</td><td style="padding: 8px 0;">${enquiry.email}</td></tr>` : ""}
-          ${enquiry.message ? `<tr><td style="padding: 8px 0; font-weight: bold; vertical-align: top;">Message</td><td style="padding: 8px 0;">${enquiry.message}</td></tr>` : ""}
-        </table>
-        <hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;" />
-        <p style="color: #888; font-size: 12px;">Mount Carmel School Website — Admission Enquiry Form</p>
-      </div>
-    `,
+    subject,
+    html,
   };
-
   return transporter.sendMail(mailOptions);
+};
+
+/**
+ * Send a composed email through the existing transport
+ * (used by the admin notification composer).
+ */
+const sendCustomEmail = async ({ to, subject, html, attachments = [] }) => {
+  return transporter.sendMail({
+    from: `"Mount Carmel School" <${process.env.EMAIL_USER}>`,
+    to,
+    subject,
+    html,
+    attachments,
+  });
 };
 
 const verifyTransporter = async () => {
@@ -67,4 +108,10 @@ const verifyTransporter = async () => {
   }
 };
 
-module.exports = { sendContactEmail, sendAdmissionEmail, verifyTransporter };
+module.exports = {
+  sendContactEmail,
+  sendAdmissionEmail,
+  sendCustomEmail,
+  renderEnquiryEmail,
+  verifyTransporter,
+};

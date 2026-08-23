@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       api.get('/auth/me')
-        .then(data => setUser(data))
+        .then(data => setUser(data.admin || null))
         .catch(() => localStorage.removeItem('token'))
         .finally(() => setLoading(false));
     } else {
@@ -21,12 +21,19 @@ const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     const data = await api.post('/auth/login', { username, password });
-    localStorage.setItem('token', data.token);
-    setUser(data.user);
+    // Auth uses an httpOnly cookie (set by the login response). We keep a
+    // marker in localStorage so the session survives page reloads.
+    localStorage.setItem('token', 'httpOnly-cookie');
+    setUser(data.admin || null);
     return data;
   };
 
   const logout = async () => {
+    try {
+      await api.post('/auth/logout');
+    } catch {
+      /* cookie already cleared */
+    }
     localStorage.removeItem('token');
     setUser(null);
   };

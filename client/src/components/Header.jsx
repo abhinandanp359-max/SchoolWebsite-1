@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Menu, ChevronRight } from 'lucide-react';
+import { ChevronDown, Menu, X, ChevronRight } from 'lucide-react';
 import useScrollPosition from '../hooks/useScrollPosition';
 import AnimatedDropdown from './ui/AnimatedDropdown';
 import { mainNav } from '../data/navigation';
@@ -81,9 +81,20 @@ const Header = () => {
                     type="button"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="-mr-2 rounded-lg p-2 text-charcoal transition-colors hover:text-primary"
-                    aria-label="Open menu"
+                    aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                   >
-                    <Menu size={24} />
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.span
+                        key={isMobileMenuOpen ? 'close' : 'open'}
+                        initial={{ rotate: isMobileMenuOpen ? -90 : 90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: isMobileMenuOpen ? 90 : -90, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                        className="flex items-center justify-center"
+                      >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                      </motion.span>
+                    </AnimatePresence>
                   </button>
                 }
                 triggerMode="click"

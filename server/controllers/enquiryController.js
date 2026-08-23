@@ -1,5 +1,6 @@
 const AdmissionEnquiry = require('../models/AdmissionEnquiry');
 const ContactEnquiry = require('../models/ContactEnquiry');
+const { sendAdmissionEmail, sendContactEmail } = require('../utils/email');
 
 exports.submitEnquiry = async (req, res, next) => {
   try {
@@ -45,11 +46,13 @@ exports.submitEnquiry = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Invalid enquiry type' });
     }
 
-    // Forward to Google Apps Script Web App
+    // Forward to Google Apps Script Web App (existing spreadsheet — columns preserved,
+    // unique enquiry id appended as the last column for the View Enquiry deep link)
     const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
     if (scriptUrl) {
       try {
         const payload = {
+          id: savedEnquiry._id.toString(),
           type,
           studentName: studentName || '',
           parentName: parentName || '',
@@ -74,6 +77,11 @@ exports.submitEnquiry = async (req, res, next) => {
     } else {
       console.warn('GOOGLE_APPS_SCRIPT_URL is not defined in environment variables.');
     }
+
+    // Notify admin through the existing email system (fire-and-forget, never blocks the reply).
+    // The email carries a deep link to this exact enquiry record.
+    const notify = type === 'Admission Enquiry' ? sendAdmissionEmail : sendContactEmail;
+    notify(savedEnquiry).catch((err) => console.error('Enquiry notification email failed:', err.message));
 
     // Return clean success to React
     res.status(201).json({ success: true, data: savedEnquiry });

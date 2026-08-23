@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link, Outlet, Navigate } from 'react-router-dom';
+import { Link, Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Bell } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 
 const AdminLayout = () => {
   const { user, loading, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
 
   const handleLogout = async () => {
     await logout();
@@ -19,7 +21,9 @@ const AdminLayout = () => {
   }
 
   if (!user) {
-    return <Navigate to="/admin/login" replace />;
+    // Remember the requested page (e.g. /admin/enquiries/<id> from an email link)
+    // so login can redirect straight back to it.
+    return <Navigate to="/admin/login" replace state={{ from: location }} />;
   }
 
   const navItems = [
@@ -27,7 +31,8 @@ const AdminLayout = () => {
     { label: 'Events', path: '/admin/events', icon: '??' },
     { label: 'News', path: '/admin/news', icon: '??' },
     { label: 'Gallery', path: '/admin/gallery', icon: '??' },
-    { label: 'Enquiries', path: '/admin/enquiries', icon: '??' }
+    { label: 'Enquiries', path: '/admin/enquiries', icon: '??' },
+    { label: 'Notifications', path: '/admin/notifications', icon: <Bell size={16} /> }
   ];
 
   return (
