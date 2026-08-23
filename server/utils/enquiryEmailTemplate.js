@@ -27,7 +27,7 @@ const escapeHtml = (value) =>
 
 const formatSubmittedAt = (date) => {
   const d = date ? new Date(date) : new Date();
-  if (Number.isNaN(d.getTime())) return outer;
+  if (Number.isNaN(d.getTime())) return '';
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const pad = (n) => String(n).padStart(2, '0');
