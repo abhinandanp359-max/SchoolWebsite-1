@@ -189,11 +189,11 @@ const buildEnquiryEmail = ({
       <td style="padding:26px 32px 30px 32px;" align="left">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
           <tr>
-            <td class="mcs-stack" style="padding:0 10px 10px 0;">
+            <td class="mcs-stack" align="left" style="padding:0 10px 10px 0; width: 50%;">
               ${bulletproofButton({ href: viewUrl, label: 'View Enquiry', variant: 'solid' })}
             </td>
             ${norm.enquiry.email ? `
-            <td class="mcs-stack" style="padding:0;">
+            <td class="mcs-stack" align="right" style="padding:0; width: 50%;">
               ${bulletproofButton({ href: `mailto:${norm.enquiry.email}`, label: 'Reply', variant: 'outline' })}
             </td>` : ''}
           </tr>
