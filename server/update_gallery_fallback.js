@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+const fs = require('fs');
+
+const galleryCode = `import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
@@ -105,11 +107,11 @@ const Gallery = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
+                className={\`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer \${
                   activeCategory === category
                     ? 'bg-primary text-white shadow-md'
                     : 'bg-white text-charcoal hover:bg-primary/5 hover:text-primary border border-gray-100'
-                }`}
+                }\`}
               >
                 {category}
               </button>
@@ -227,3 +229,7 @@ const Gallery = () => {
 };
 
 export default Gallery;
+`;
+
+fs.writeFileSync('../client/src/pages/Gallery.jsx', galleryCode, 'utf8');
+console.log('Restored default images and kept dynamic fetching!');

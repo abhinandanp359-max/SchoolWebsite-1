@@ -70,11 +70,12 @@ const Admissions = () => {
         <div className="max-w-3xl mx-auto px-4">
           <SectionTitle
             subtitle="Get Started"
-            title="Admission Enquiry"
-            description="Fill out the form below and our team will contact you with further details."
+            title="Admission Process"
+            description="Download our physical admission form or fill out the online enquiry form to get started."
           />
 
           <Card className="p-6 md:p-10 mt-8">
+            <h3 className="text-lg font-bold text-charcoal mb-6 border-b border-gray-100 pb-3">Online Admission Enquiry</h3>
             {status === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -138,6 +139,24 @@ const Admissions = () => {
                 {loading ? 'Submitting...' : 'Submit Enquiry'}
               </button>
             </form>
+          </Card>
+
+          {/* Download Form Card */}
+          <Card className="p-6 md:p-8 mt-8 border-l-4 border-l-secondary bg-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-xl font-bold text-charcoal mb-2">Admission Registration Form</h3>
+                <p className="text-sm text-warm-gray">Download the physical admission registration form in PDF format to submit at the school office.</p>
+              </div>
+              <a
+                href="/docs/Mount-Carmel-School-Admission-Form.pdf"
+                download="Mount-Carmel-School-Admission-Form.pdf"
+                className="shrink-0 inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg uppercase tracking-wide text-sm"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Form
+              </a>
+            </div>
           </Card>
         </div>
       </section>

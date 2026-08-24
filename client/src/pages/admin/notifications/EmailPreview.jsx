@@ -52,24 +52,7 @@ export default function EmailPreview({ html, loading, device, onDeviceChange }) 
           >
             <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
           </button>
-          <div className="flex rounded-lg bg-gray-100 p-0.5">
-            {[
-              { key: "desktop", icon: Monitor, label: "Desktop" },
-              { key: "mobile", icon: Smartphone, label: "Mobile" },
-            ].map(({ key, icon: Icon, label }) => (
-              <button
-                key={key}
-                onClick={() => onDeviceChange(key)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition cursor-pointer ${
-                  device === key
-                    ? "bg-white text-primary shadow-sm"
-                    : "text-warm-gray hover:text-charcoal"
-                }`}
-              >
-                <Icon size={13} /> {label}
-              </button>
-            ))}
-          </div>
+
         </div>
       </div>
 

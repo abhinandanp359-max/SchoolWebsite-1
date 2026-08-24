@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Bell, Mail, Paperclip, Save, Send, FlaskConical, CheckCircle2, AlertCircle } from "lucide-react";
 import api from "../../utils/api";
 import EmailPreview from "./notifications/EmailPreview";
@@ -39,8 +40,8 @@ const buildTokenValues = (record) => {
 };
 
 const defaultSubject = (tab, record) => {
-  const label = tab === "admission" ? "New Admission Enquiry" : "New Contact Enquiry";
-  return record ? `${label} — ${displayName(record)}` : `${label} — Mount Carmel School`;
+  const label = tab === "admission" ? "Re: Admission Enquiry" : "Re: Contact Enquiry";
+  return `${label} — Mount Carmel School`;
 };
 
 const fileToBase64 = (file) =>
@@ -52,18 +53,24 @@ const fileToBase64 = (file) =>
   });
 
 export default function AdminNotifications() {
+  const [searchParams] = useSearchParams();
+  
   /* data */
-  const [tab, setTab] = useState("admission");
+  const [tab, setTab] = useState(searchParams.get("tab") || "admission");
   const [records, setRecords] = useState([]);
   const [recordsLoading, setRecordsLoading] = useState(true);
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState(searchParams.get("id") || "");
   const [config, setConfig] = useState({ notifyEmail: "", fields: [] });
 
   /* composer fields */
+  const defaultAdmissionMessage = `Dear {{name}},\n\nThank you for your interest in Mount Carmel School. We have received your admission enquiry.\n\nYou can download the admission form directly from our website. For further information, please feel free to contact us or visit the school campus.\n\nBest regards,\nMount Carmel School`;
+  
+  const defaultContactMessage = `Dear {{name}},\n\nThank you for contacting Mount Carmel School. We have received your message regarding "{{subject}}".\n\nOur team is reviewing your query and will get back to you shortly.\n\nBest regards,\nMount Carmel School`;
+
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [subjectDirty, setSubjectDirty] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(defaultAdmissionMessage);
   const [files, setFiles] = useState([]);
   const [busy, setBusy] = useState(null);
   const [status, setStatus] = useState(null);
@@ -86,13 +93,11 @@ export default function AdminNotifications() {
       .get("/notifications/config")
       .then((res) => {
         setConfig(res.data || { notifyEmail: "", fields: [] });
-        setTo(res.data?.notifyEmail || "");
       })
       .catch(() => {});
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (saved) {
-        if (saved.to) setTo(saved.to);
         if (saved.subject) {
           setSubject(saved.subject);
           setSubjectDirty(true);
@@ -104,6 +109,15 @@ export default function AdminNotifications() {
     }
   }, []);
 
+  /* auto-fill the "to" field with the user's email */
+  useEffect(() => {
+    if (selectedRecord && selectedRecord.email) {
+      setTo(selectedRecord.email);
+    } else {
+      setTo("");
+    }
+  }, [selectedRecord]);
+
   /* real enquiry records for the active tab */
   useEffect(() => {
     let cancelled = false;
@@ -113,7 +127,10 @@ export default function AdminNotifications() {
       .then((res) => {
         if (cancelled) return;
         setRecords(res.data || []);
-        setSelectedId(res.data?.[0]?._id || "");
+        setSelectedId((prev) => {
+          if (prev && (res.data || []).some((r) => r._id === prev)) return prev;
+          return res.data?.[0]?._id || "";
+        });
       })
       .catch(() => !cancelled && setRecords([]))
       .finally(() => !cancelled && setRecordsLoading(false));
@@ -133,7 +150,12 @@ export default function AdminNotifications() {
     const timer = setTimeout(() => {
       setPreviewLoading(true);
       api
-        .post("/notifications/preview", { type: activeTab.type, enquiry: selectedRecord || {} })
+        .post("/notifications/preview", {
+          type: activeTab.type,
+          enquiry: selectedRecord || {},
+          subject,
+          message,
+        })
         .then((res) => !cancelled && setPreviewHtml(res.data?.html || ""))
         .catch(() => !cancelled && setPreviewHtml(""))
         .finally(() => !cancelled && setPreviewLoading(false));
@@ -142,7 +164,7 @@ export default function AdminNotifications() {
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [selectedRecord?._id, tab, JSON.stringify(selectedRecord)]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedRecord?._id, tab, subject, message, JSON.stringify(selectedRecord)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const flash = (kind, text) => {
     setStatus({ kind, text });
@@ -188,6 +210,8 @@ export default function AdminNotifications() {
         message,
         tokenValues: buildTokenValues(selectedRecord),
         attachments,
+        enquiryId: selectedRecord?._id,
+        type: activeTab.type,
       });
       flash("success", res.message || "Notification sent.");
     } catch (err) {
@@ -238,7 +262,11 @@ export default function AdminNotifications() {
               {TABS.map((t) => (
                 <button
                   key={t.key}
-                  onClick={() => setTab(t.key)}
+                  onClick={() => {
+                    setTab(t.key);
+                    setMessage(t.key === "admission" ? defaultAdmissionMessage : defaultContactMessage);
+                    setSubjectDirty(false);
+                  }}
                   className={`px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer ${
                     tab === t.key
                       ? "bg-primary text-white"
@@ -310,46 +338,9 @@ export default function AdminNotifications() {
               />
             </label>
 
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-widest text-warm-gray block mb-2">Insert Field</span>
-              <div className="flex flex-wrap gap-1.5">
-                {(config.fields || []).map((f) => (
-                  <button
-                    key={f.token}
-                    onClick={() => insertToken(f.token)}
-                    title={f.label}
-                    className="px-2.5 py-1 rounded-md bg-secondary/10 text-secondary-dark text-xs font-mono border border-secondary/40 hover:bg-secondary/20 transition cursor-pointer"
-                  >
-                    {`{{${f.token}}}`}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            <label className="block">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-warm-gray block mb-2">
-                Attachments <span className="normal-case font-normal text-gray-400">(max 5)</span>
-              </span>
-              <span className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-dashed border-gray-300 text-sm text-warm-gray hover:border-primary hover:text-primary transition cursor-pointer">
-                <Paperclip size={15} />
-                {files.length > 0 ? `${files.length} file${files.length > 1 ? "s" : ""} selected` : "Attach files"}
-                <input
-                  type="file"
-                  multiple
-                  className="hidden"
-                  onChange={(e) => setFiles(Array.from(e.target.files || []).slice(0, 5))}
-                />
-              </span>
-              {files.length > 0 && (
-                <ul className="mt-2 space-y-1 max-w-full overflow-hidden">
-                  {files.map((f, i) => (
-                    <li key={i} className="text-xs text-warm-gray truncate">
-                      • {f.name} ({Math.ceil(f.size / 1024)} KB)
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </label>
+
+
           </div>
 
           {status && (
@@ -364,26 +355,36 @@ export default function AdminNotifications() {
             </div>
           )}
 
-          <div className="mt-5 pt-5 border-t border-gray-100 flex flex-wrap gap-2.5">
-            <button
-              onClick={saveTemplate}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-medium text-charcoal hover:bg-gray-50 transition cursor-pointer"
-            >
-              <Save size={15} /> Save Template
-            </button>
-            <button
-              onClick={sendTestEmail}
-              disabled={busy !== null}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 border-secondary text-secondary-dark text-sm font-semibold uppercase tracking-wide hover:bg-secondary/10 transition disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
-            >
-              <FlaskConical size={15} /> {busy === "test" ? "Sending…" : "Test Email"}
-            </button>
+          <div className="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between flex-wrap gap-4">
+            
+            <label className="flex-1 min-w-0">
+              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 border-gray-200 text-sm font-semibold text-warm-gray hover:border-primary hover:text-primary transition cursor-pointer">
+                <Paperclip size={16} />
+                {files.length > 0 ? `${files.length} file${files.length > 1 ? "s" : ""} selected` : "Attach files"}
+                <input
+                  type="file"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => setFiles(Array.from(e.target.files || []).slice(0, 5))}
+                />
+              </span>
+              {files.length > 0 && (
+                <div className="mt-1.5 flex flex-wrap gap-2 text-xs text-warm-gray">
+                  {files.map((f, i) => (
+                    <span key={i} className="truncate max-w-[120px] bg-gray-100 px-2 py-1 rounded">
+                      {f.name}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </label>
+
             <button
               onClick={sendNotification}
               disabled={busy !== null}
-              className="ml-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold uppercase tracking-wide hover:bg-primary-dark transition shadow-sm disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
+              className="ml-auto shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold uppercase tracking-widest hover:bg-primary-dark transition shadow-md hover:shadow-lg disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
             >
-              <Send size={15} /> {busy === "send" ? "Sending…" : "Send Notification"}
+              <Send size={16} /> {busy === "send" ? "Sending…" : "Send Notification"}
             </button>
           </div>
         </section>

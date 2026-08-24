@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+const fs = require('fs');
+
+const galleryCode = `import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
@@ -6,55 +8,20 @@ import SectionTitle from '../components/ui/SectionTitle';
 import api from '../utils/api';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
-const initialImages = [
-  { _id: 'static-1', image: '/images/campus/campus01.webp', title: 'School Campus', category: 'Campus' },
-  { _id: 'static-2', image: '/images/campus/campus02.webp', title: 'Campus Building', category: 'Campus' },
-  { _id: 'static-3', image: '/images/campus/campus03.webp', title: 'Campus Grounds', category: 'Campus' },
-  { _id: 'static-4', image: '/images/events/events01.webp', title: 'School Event', category: 'Events' },
-  { _id: 'static-5', image: '/images/events/events02.webp', title: 'Celebration', category: 'Events' },
-  { _id: 'static-6', image: '/images/events/events03.webp', title: 'Cultural Program', category: 'Events' },
-  { _id: 'static-7', image: '/images/events/events04.webp', title: 'Annual Day', category: 'Events' },
-  { _id: 'static-8', image: '/images/events/events05.webp', title: 'Sports Day', category: 'Events' },
-  { _id: 'static-9', image: '/images/events/events06.webp', title: 'Festival Celebration', category: 'Events' },
-  { _id: 'static-10', image: '/images/events/events07.webp', title: 'Prize Distribution', category: 'Events' },
-  { _id: 'static-11', image: '/images/events/events08.webp', title: 'School Function', category: 'Events' },
-  { _id: 'static-12', image: '/images/yoga/yoga.webp', title: 'Yoga Session', category: 'Yoga' },
-  { _id: 'static-13', image: '/images/yoga/yoga01.webp', title: 'Yoga Practice', category: 'Yoga' },
-  { _id: 'static-14', image: '/images/yoga/yoga02.webp', title: 'Yoga Exercise', category: 'Yoga' },
-  { _id: 'static-15', image: '/images/yoga/yoga03.webp', title: 'Yoga Day', category: 'Yoga' },
-  { _id: 'static-16', image: '/images/yoga/yoga04.webp', title: 'Yoga Activity', category: 'Yoga' },
-  { _id: 'static-17', image: '/images/yoga/yoga05.webp', title: 'Yoga Training', category: 'Yoga' },
-  { _id: 'static-18', image: '/images/yoga/yoga06.webp', title: 'Meditation', category: 'Yoga' },
-  { _id: 'static-19', image: '/images/yoga/yoga07.webp', title: 'Yoga Class', category: 'Yoga' },
-  { _id: 'static-20', image: '/images/yoga/yoga08.webp', title: 'Mindfulness', category: 'Yoga' },
-  { _id: 'static-21', image: '/images/yoga/yoga09.webp', title: 'Yoga Workshop', category: 'Yoga' },
-  { _id: 'static-22', image: '/images/yoga/yoga10.webp', title: 'Student Yoga', category: 'Yoga' },
-  { _id: 'static-23', image: '/images/yoga/yoga11.webp', title: 'Group Yoga', category: 'Yoga' },
-  { _id: 'static-24', image: '/images/yoga/yoga12.webp', title: 'Yoga Camp', category: 'Yoga' },
-  { _id: 'static-25', image: '/images/yoga/yoga13.webp', title: 'Wellness Program', category: 'Yoga' },
-  { _id: 'static-26', image: '/images/independence/inde01.webp', title: 'Independence Day', category: 'Activities' },
-  { _id: 'static-27', image: '/images/events/dance01.webp', title: 'Dance Performance', category: 'Activities' },
-  { _id: 'static-28', image: '/images/students/students01.webp', title: 'Students', category: 'Activities' },
-  { _id: 'static-29', image: '/images/students/students02.webp', title: 'Students Group', category: 'Activities' },
-  { _id: 'static-30', image: '/images/events/events03.webp', title: 'Student Activity', category: 'Activities' },
-];
-
-const categories = ['All', 'Campus', 'Events', 'Yoga', 'Activities'];
+const categories = ['All', 'Campus', 'Students', 'Events', 'Sports', 'Cultural', 'Celebrations', 'Activities'];
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [allImages, setAllImages] = useState(initialImages);
+  const [allImages, setAllImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGallery = async () => {
       try {
         const res = await api.get('/gallery');
-        const dbImages = res.data || [];
-        // Combine DB images (newer) with initial static images
-        setAllImages([...dbImages, ...initialImages]);
+        setAllImages(res.data || []);
       } catch (err) {
         console.error('Failed to fetch gallery', err);
       } finally {
@@ -105,11 +72,11 @@ const Gallery = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
+                className={\`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer \${
                   activeCategory === category
                     ? 'bg-primary text-white shadow-md'
                     : 'bg-white text-charcoal hover:bg-primary/5 hover:text-primary border border-gray-100'
-                }`}
+                }\`}
               >
                 {category}
               </button>
@@ -227,3 +194,7 @@ const Gallery = () => {
 };
 
 export default Gallery;
+`;
+
+fs.writeFileSync('../client/src/pages/Gallery.jsx', galleryCode, 'utf8');
+console.log('Restored fully dynamic gallery');

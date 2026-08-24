@@ -142,10 +142,17 @@ export default function AdminEnquiryDetail() {
         <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-wide ${cfg?.badgeClass || "bg-gray-100 text-gray-600 border-gray-200"}`}>
           <TypeIcon size={13} /> {cfg?.label || type}
         </span>
-        <span className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${STATUS_STYLES[status] || STATUS_STYLES.new}`}>
-          {status}
+        <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full capitalize ${status === "replied" ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"}`}>
+          {status === "replied" && <MessageSquareText size={12} />}
+          {status === "replied" ? "Replied" : "New"}
         </span>
         <span className="ml-auto text-xs text-gray-400 font-mono truncate max-w-[180px]">#{enquiry._id}</span>
+        <Link
+          to={`/admin/notifications?tab=${typeKey}&id=${enquiry._id}`}
+          className="ml-2 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition shadow-sm cursor-pointer"
+        >
+          <Mail size={14} /> Reply
+        </Link>
       </div>
 
       {/* info card */}
@@ -182,25 +189,6 @@ export default function AdminEnquiryDetail() {
               </div>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* status */}
-      <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6">
-        <p className="text-sm font-medium text-slate-700 mb-3">Update Status</p>
-        <div className="flex flex-wrap gap-2">
-          {["new", "contacted", "resolved"].map((s) => (
-            <button
-              key={s}
-              onClick={() => changeStatus(s)}
-              disabled={savingStatus || status === s}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition capitalize cursor-pointer disabled:cursor-not-allowed ${
-                status === s ? "bg-green-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-              }`}
-            >
-              {s}
-            </button>
-          ))}
         </div>
       </section>
     </div>

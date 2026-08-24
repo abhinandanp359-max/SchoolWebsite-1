@@ -11,6 +11,7 @@ const PrincipalMessage = lazy(() => import('./pages/PrincipalMessage'));
 const Academics = lazy(() => import('./pages/Academics'));
 const Facilities = lazy(() => import('./pages/Facilities'));
 const Activities = lazy(() => import('./pages/Activities'));
+const Events = lazy(() => import('./pages/Events'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Admissions = lazy(() => import('./pages/Admissions'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -23,6 +24,7 @@ const AdminGallery = lazy(() => import('./pages/admin/AdminGallery'));
 const AdminEnquiries = lazy(() => import('./pages/admin/AdminEnquiries'));
 const AdminEnquiryDetail = lazy(() => import('./pages/admin/AdminEnquiryDetail'));
 const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
+const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
 
 const pageFallback = (
   <div className="min-h-screen flex items-center justify-center bg-ivory">
@@ -42,6 +44,7 @@ function App() {
           <Route path="/academics" element={<Academics />} />
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/contact" element={<Contact />} />
@@ -50,11 +53,11 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="events" element={<AdminEvents />} />
-          <Route path="news" element={<AdminNews />} />
           <Route path="gallery" element={<AdminGallery />} />
           <Route path="enquiries" element={<AdminEnquiries />} />
           <Route path="enquiries/:id" element={<AdminEnquiryDetail />} />
           <Route path="notifications" element={<AdminNotifications />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="*" element={<PublicLayout />}>
           <Route path="*" element={<NotFound />} />

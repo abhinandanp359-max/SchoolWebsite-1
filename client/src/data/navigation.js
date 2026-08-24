@@ -8,6 +8,7 @@ export const mainNav = [
   { name: "Academics", path: "/academics" },
   { name: "Campus", path: "/facilities" },
   { name: "Activities", path: "/activities" },
+  { name: "Events", path: "/events" },
   { name: "Admissions", path: "/admissions" },
   { name: "Contact", path: "/contact" }
 ];
@@ -17,6 +18,7 @@ export const footerLinks = {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Academics", path: "/academics" },
+    { name: "Events", path: "/events" },
     { name: "Admissions", path: "/admissions" },
     { name: "Contact", path: "/contact" }
   ],

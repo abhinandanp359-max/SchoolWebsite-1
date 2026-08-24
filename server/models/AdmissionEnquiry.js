@@ -31,7 +31,7 @@ const admissionEnquirySchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['new', 'contacted', 'resolved'],
+    enum: ['new', 'contacted', 'resolved', 'replied'],
     default: 'new',
   },
 }, { timestamps: true });

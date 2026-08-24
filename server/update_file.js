@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+const fs = require('fs');
+
+const code = `import { useState, useEffect } from "react";
 import { X, CheckCircle2 } from "lucide-react";
 import api from "../../utils/api";
 
@@ -39,9 +41,9 @@ export default function AdminEnquiries() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-1.5 text-sm font-medium rounded-md transition cursor-pointer ${
+              className={\`px-4 py-1.5 text-sm font-medium rounded-md transition cursor-pointer \${
                 activeTab === tab.key ? "bg-slate-100 text-slate-800" : "text-slate-500 hover:text-slate-700"
-              }`}
+              }\`}
             >
               {tab.label}
             </button>
@@ -72,9 +74,9 @@ export default function AdminEnquiries() {
                 </p>
               </div>
               <span
-                className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full shrink-0 capitalize ${
+                className={\`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full shrink-0 capitalize \${
                   item.status === "replied" ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"
-                }`}
+                }\`}
               >
                 {item.status === "replied" && <CheckCircle2 size={12} />}
                 {item.status === "replied" ? "Replied" : "New"}
@@ -118,7 +120,7 @@ export default function AdminEnquiries() {
 
             <div className="border-t pt-4">
               <a
-                href={`/admin/notifications?tab=${activeTab === "admissions" ? "admission" : "contact"}&id=${selected._id}`}
+                href={\`/admin/notifications?tab=\${activeTab === "admissions" ? "admission" : "contact"}&id=\${selected._id}\`}
                 className="inline-flex items-center justify-center w-full px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition cursor-pointer"
               >
                 Reply
@@ -130,3 +132,7 @@ export default function AdminEnquiries() {
     </div>
   );
 }
+`;
+
+fs.writeFileSync('../client/src/pages/admin/AdminEnquiries.jsx', code, 'utf8');
+console.log('Done!');

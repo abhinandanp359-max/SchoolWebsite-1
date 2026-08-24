@@ -49,31 +49,25 @@ router.get('/config', protect, (req, res) => {
 });
 
 /*
- * Render the ACTUAL final email HTML for a given enquiry record.
- * The composer preview displays exactly what will be sent.
- * Body: { type: 'Admission Enquiry' | 'Contact Enquiry', enquiry: {...} }
+ * Render the ACTUAL final email HTML for the composed message.
+ * The composer preview displays exactly what will be sent to the user.
+ * Body: { type: 'Admission Enquiry' | 'Contact Enquiry', enquiry: {...}, subject, message }
  */
 router.post('/preview', protect, (req, res) => {
   try {
-    const { type, enquiry = {} } = req.body || {};
+    const { type, enquiry = {}, subject = '', message = '' } = req.body || {};
     if (!['Admission Enquiry', 'Contact Enquiry'].includes(type)) {
       return res.status(400).json({ success: false, message: 'Invalid enquiry type' });
     }
 
     const norm = normaliseEnquiry({ ...enquiry, type });
-    const html = buildEnquiryEmail({
-      type,
-      enquiry,
-      logoSrc: logoUrl(),
-      viewUrl: enquiryViewUrl(enquiry),
+    const finalSubject = substituteTokens(subject || '(No subject)', norm.tokenValues);
+    const finalHtml = buildComposedEmail({
+      heading: finalSubject,
+      body: substituteTokens(message || 'No message content provided.', norm.tokenValues),
     });
 
-    const subject =
-      type === 'Admission Enquiry'
-        ? `New Admission Enquiry — ${enquiry.studentName || ''}`.trim()
-        : `New Contact Enquiry — ${enquiry.name || ''}`.trim();
-
-    res.json({ success: true, data: { html, subject, title: norm.title } });
+    res.json({ success: true, data: { html: finalHtml, subject: finalSubject, title: finalSubject } });
   } catch (error) {
     console.error('Preview render error:', error.message);
     res.status(500).json({ success: false, message: 'Failed to render preview' });
@@ -117,7 +111,7 @@ router.post('/test', protect, async (req, res, next) => {
  */
 router.post('/send', protect, async (req, res, next) => {
   try {
-    const { to, subject, message = '', tokenValues = {}, attachments = [] } = req.body || {};
+    const { to, subject, message = '', tokenValues = {}, attachments = [], enquiryId, type } = req.body || {};
     if (!to) return res.status(400).json({ success: false, message: 'Recipient is required' });
     if (!subject && !message) {
       return res.status(400).json({ success: false, message: 'Subject or message is required' });
@@ -139,6 +133,12 @@ router.post('/send', protect, async (req, res, next) => {
 
     await sendCustomEmail({ to, subject: finalSubject, html: finalHtml, attachments: safeAttachments });
 
+    // Automatically mark the enquiry as replied if we have its ID
+    if (enquiryId && type) {
+      const model = type === 'Admission Enquiry' ? require('../models/AdmissionEnquiry') : require('../models/ContactEnquiry');
+      await model.findByIdAndUpdate(enquiryId, { status: 'replied' }).catch(err => console.error("Failed to mark as replied:", err));
+    }
+
     res.json({ success: true, message: `Notification sent to ${to}` });
   } catch (error) {
     next(error);
@@ -157,7 +157,8 @@ const buildComposedEmail = ({ heading, body }) => {
 <tr><td align="center" style="padding:28px 12px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid ${BRAND.line};border-radius:14px;overflow:hidden;">
 <tr><td bgcolor="#5a1920" align="center" style="background-color:#5a1920;padding:26px 32px;border-bottom:3px solid ${BRAND.gold};">
-<div style="font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:26px;letter-spacing:3px;color:#fdfaf3;font-weight:bold;text-transform:uppercase;">Mount Carmel School</div>
+<img src="${logoUrl() || 'https://www.mountcarmelschool.in/images/branding/logo.png'}" alt="Mount Carmel School Logo" style="max-height: 50px; display: block; margin: 0 auto; object-fit: contain;" />
+<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:22px;letter-spacing:2px;color:#fdfaf3;font-weight:bold;text-transform:uppercase;margin-top:10px;">Mount Carmel School</div>
 </td></tr>
 <tr><td class="mcs-pad" style="padding:30px 32px;">
 <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:21px;line-height:29px;color:${BRAND.burgundy};margin:0 0 14px 0;">${escapeHtml(heading)}</h1>

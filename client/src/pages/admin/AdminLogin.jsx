@@ -29,12 +29,17 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-ivory px-4 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.png')] opacity-20 mix-blend-overlay"></div>
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary rounded-full blur-[100px] opacity-10"></div>
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-secondary rounded-full blur-[100px] opacity-20"></div>
+
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8 space-y-8 relative z-10">
         <div className="flex flex-col items-center gap-3">
-          <img src="/logo.webp" alt="School Logo" className="h-20 w-20 object-contain" />
-          <h1 className="text-2xl font-bold text-slate-800">Admin Panel</h1>
-          <p className="text-sm text-slate-500">Mount Carmel School</p>
+          <img src="/images/branding/logo.webp" alt="School Logo" className="h-24 w-24 object-contain mb-2" />
+          <h1 className="text-2xl font-bold text-primary font-heading uppercase tracking-wide">Admin Panel</h1>
+          <p className="text-sm font-semibold text-secondary uppercase tracking-widest">Mount Carmel School</p>
         </div>
 
         {error && (
@@ -46,25 +51,25 @@ export default function AdminLogin() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Username</label>
+            <label className="block text-xs font-bold uppercase tracking-widest text-warm-gray mb-1.5">Username</label>
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition text-charcoal bg-gray-50"
               placeholder="Enter username"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+            <label className="block text-xs font-bold uppercase tracking-widest text-warm-gray mb-1.5">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition text-charcoal bg-gray-50"
               placeholder="Enter password"
             />
           </div>
@@ -72,10 +77,10 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark disabled:bg-primary/60 text-white font-bold tracking-wide uppercase py-3.5 rounded-lg transition shadow-md cursor-pointer mt-4"
           >
             <LogIn size={18} />
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Signing in..." : "Secure Sign In"}
           </button>
         </form>
       </div>

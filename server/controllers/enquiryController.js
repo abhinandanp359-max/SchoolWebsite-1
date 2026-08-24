@@ -50,30 +50,30 @@ exports.submitEnquiry = async (req, res, next) => {
     // unique enquiry id appended as the last column for the View Enquiry deep link)
     const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL;
     if (scriptUrl) {
-      try {
-        const payload = {
-          id: savedEnquiry._id.toString(),
-          type,
-          studentName: studentName || '',
-          parentName: parentName || '',
-          className: className || '',
-          phone: phone || '',
-          email: email || '',
-          message: message || ''
-        };
+      const payload = {
+        id: savedEnquiry._id.toString(),
+        type,
+        studentName: studentName || '',
+        parentName: parentName || '',
+        className: className || '',
+        phone: phone || '',
+        email: email || '',
+        message: message || ''
+      };
 
-        const response = await fetch(scriptUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
+      fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
         if (!response.ok) {
           console.error('Failed to send enquiry to Google Apps Script', response.statusText);
         }
-      } catch (err) {
+      })
+      .catch(err => {
         console.error('Error sending enquiry to Google Apps Script:', err.message);
-      }
+      });
     } else {
       console.warn('GOOGLE_APPS_SCRIPT_URL is not defined in environment variables.');
     }

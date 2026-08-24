@@ -82,9 +82,15 @@ const Footer = () => {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-5 md:px-4 py-4 md:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 md:gap-4">
-          <p className="text-gray-500 text-xs md:text-sm text-center sm:text-left">
-            &copy; {new Date().getFullYear()} {schoolInfo.name}. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-gray-500 text-xs md:text-sm text-center sm:text-left">
+              &copy; {new Date().getFullYear()} {schoolInfo.name}. All rights reserved.
+            </p>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <Link to="/admin" className="text-gray-500 text-xs md:text-sm hover:text-white transition-colors">
+              Admin Login
+            </Link>
+          </div>
           <button onClick={scrollToTop} className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center hover:bg-secondary transition-colors" aria-label="Scroll to top">
             <ArrowUp size={18} className="text-secondary" />
           </button>
