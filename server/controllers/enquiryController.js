@@ -78,14 +78,11 @@ exports.submitEnquiry = async (req, res, next) => {
       console.warn('GOOGLE_APPS_SCRIPT_URL is not defined in environment variables.');
     }
 
-    // Await the email notification to ensure it works, and if it fails, throw an error
+    // Notify admin through the existing email system (fire-and-forget, never blocks the reply).
+    // The email carries a deep link to this exact enquiry record.
+    // NOTE: Render Free Tier blocks outbound SMTP traffic (ports 465, 587). This will silently hang and fail on Render Free.
     const notify = type === 'Admission Enquiry' ? sendAdmissionEmail : sendContactEmail;
-    try {
-      await notify(savedEnquiry);
-    } catch (err) {
-      console.error('Enquiry notification email failed:', err.message);
-      return res.status(500).json({ success: false, message: `Email failed to send: ${err.message}. Please check your Render Environment Variables (EMAIL_USER, EMAIL_PASS).` });
-    }
+    notify(savedEnquiry).catch((err) => console.error('Enquiry notification email failed:', err.message));
 
     // Return clean success to React
     res.status(201).json({ success: true, data: savedEnquiry });
