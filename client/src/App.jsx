@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
+import useScrollToTop from './hooks/useScrollToTop';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -32,9 +33,15 @@ const pageFallback = (
   </div>
 );
 
+function ScrollToTop() {
+  useScrollToTop();
+  return null;
+}
+
 function App() {
   return (
     <Suspense fallback={pageFallback}>
+      <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
