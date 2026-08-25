@@ -78,10 +78,14 @@ exports.submitEnquiry = async (req, res, next) => {
       console.warn('GOOGLE_APPS_SCRIPT_URL is not defined in environment variables.');
     }
 
-    // Notify admin through the existing email system (fire-and-forget, never blocks the reply).
-    // The email carries a deep link to this exact enquiry record.
+    // Await the email notification to ensure it works, and if it fails, throw an error
     const notify = type === 'Admission Enquiry' ? sendAdmissionEmail : sendContactEmail;
-    notify(savedEnquiry).catch((err) => console.error('Enquiry notification email failed:', err.message));
+    try {
+      await notify(savedEnquiry);
+    } catch (err) {
+      console.error('Enquiry notification email failed:', err.message);
+      return res.status(500).json({ success: false, message: `Email failed to send: ${err.message}. Please check your Render Environment Variables (EMAIL_USER, EMAIL_PASS).` });
+    }
 
     // Return clean success to React
     res.status(201).json({ success: true, data: savedEnquiry });
