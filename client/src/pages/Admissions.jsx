@@ -32,10 +32,11 @@ const Admissions = () => {
     setStatus(null);
     try {
       await api.post('/enquiries', { ...form, type: 'Admission Enquiry' });
-      setStatus('success');
+      setStatus({ type: 'success' });
       setForm(initialForm);
-    } catch {
-      setStatus('error');
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || error.message || 'Something went wrong. Please try again later.';
+      setStatus({ type: 'error', message: errorMsg });
     } finally {
       setLoading(false);
     }
@@ -76,7 +77,7 @@ const Admissions = () => {
 
           <Card className="p-6 md:p-10 mt-8">
             <h3 className="text-lg font-bold text-charcoal mb-6 border-b border-gray-100 pb-3">Online Admission Enquiry</h3>
-            {status === 'success' && (
+            {status?.type === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -86,14 +87,14 @@ const Admissions = () => {
                 <span className="text-sm font-medium">Your enquiry has been submitted successfully. We will get back to you soon.</span>
               </motion.div>
             )}
-            {status === 'error' && (
+            {status?.type === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-3 bg-red-50 text-red-700 p-4 rounded-lg mb-6"
               >
-                <CircleAlert size={20} />
-                <span className="text-sm font-medium">Something went wrong. Please try again later.</span>
+                <CircleAlert size={20} className="shrink-0" />
+                <span className="text-sm font-medium">{status.message}</span>
               </motion.div>
             )}
 

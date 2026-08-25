@@ -24,10 +24,11 @@ const Contact = () => {
     setStatus(null);
     try {
       await api.post('/enquiries', { ...form, type: 'Contact Enquiry' });
-      setStatus('success');
+      setStatus({ type: 'success' });
       setForm(initialForm);
-    } catch {
-      setStatus('error');
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || error.message || 'Something went wrong. Please try again later.';
+      setStatus({ type: 'error', message: errorMsg });
     } finally {
       setLoading(false);
     }
