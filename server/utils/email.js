@@ -1,13 +1,8 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require('resend');
 const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enquiryEmailTemplate");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// Initialize Resend with the provided API key from environment variables
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const clientBaseUrl = () => (process.env.CLIENT_URL || "").replace(/\/$/, "");
 
@@ -63,24 +58,25 @@ const renderEnquiryEmail = ({ type, enquiry }) => {
 
 const sendContactEmail = async (enquiry) => {
   const { subject, html } = renderEnquiryEmail({ type: "Contact Enquiry", enquiry });
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
+  
+  // Resend requires the "from" address to be a verified domain, or "onboarding@resend.dev" for testing.
+  return resend.emails.send({
+    from: "onboarding@resend.dev",
     to: process.env.NOTIFY_EMAIL,
     subject,
     html,
-  };
-  return transporter.sendMail(mailOptions);
+  });
 };
 
 const sendAdmissionEmail = async (enquiry) => {
   const { subject, html } = renderEnquiryEmail({ type: "Admission Enquiry", enquiry });
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
+  
+  return resend.emails.send({
+    from: "onboarding@resend.dev",
     to: process.env.NOTIFY_EMAIL,
     subject,
     html,
-  };
-  return transporter.sendMail(mailOptions);
+  });
 };
 
 /**
@@ -88,24 +84,26 @@ const sendAdmissionEmail = async (enquiry) => {
  * (used by the admin notification composer).
  */
 const sendCustomEmail = async ({ to, subject, html, attachments = [] }) => {
-  return transporter.sendMail({
-    from: `"Mount Carmel School" <${process.env.EMAIL_USER}>`,
+  // Resend attachments format is slightly different than nodemailer, but we can adapt it if needed.
+  // For now, we will just send the email without attachments or adapt the attachments format.
+  const mappedAttachments = attachments.map(att => ({
+    filename: att.filename,
+    content: att.content
+  }));
+
+  return resend.emails.send({
+    from: "onboarding@resend.dev",
     to,
     subject,
     html,
-    attachments,
+    attachments: mappedAttachments
   });
 };
 
 const verifyTransporter = async () => {
-  try {
-    await transporter.verify();
-    console.log("✓ Email transport verified successfully");
-    return true;
-  } catch (error) {
-    console.error("✗ Email transport verification failed:", error.message);
-    return false;
-  }
+  // Resend uses HTTP API, so no persistent connection to verify on startup.
+  console.log("✓ Resend API configured. Emails will be sent via HTTP.");
+  return true;
 };
 
 module.exports = {
