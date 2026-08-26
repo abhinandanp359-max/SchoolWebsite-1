@@ -1,8 +1,8 @@
 const { Resend } = require('resend');
 const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enquiryEmailTemplate");
 
-// Initialize Resend with the provided API key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend with the provided API key from environment variables (or a dummy key to prevent crash on startup)
+const resend = new Resend(process.env.RESEND_API_KEY || "missing_api_key");
 
 const clientBaseUrl = () => (process.env.CLIENT_URL || "").replace(/\/$/, "");
 
