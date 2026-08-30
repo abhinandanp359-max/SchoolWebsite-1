@@ -70,16 +70,16 @@ const Contact = () => {
             <div>
               <SectionTitle subtitle="Message" title="Send Us a Message" description="" center={false} />
               <Card className="p-6 md:p-8 mt-4">
-                {status === 'success' && (
+                {status?.type === 'success' && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 bg-green-50 text-green-700 p-4 rounded-lg mb-5">
                     <CircleCheckBig size={20} />
                     <span className="text-sm font-medium">Message sent successfully. We will get back to you soon.</span>
                   </motion.div>
                 )}
-                {status === 'error' && (
+                {status?.type === 'error' && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 bg-red-50 text-red-700 p-4 rounded-lg mb-5">
                     <CircleAlert size={20} />
-                    <span className="text-sm font-medium">Something went wrong. Please try again later.</span>
+                    <span className="text-sm font-medium">{status.message || 'Something went wrong. Please try again later.'}</span>
                   </motion.div>
                 )}
 
