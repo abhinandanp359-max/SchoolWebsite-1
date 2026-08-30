@@ -73,13 +73,18 @@ const sendEmail = async ({ to, subject, html, attachments = [] }) => {
       filename: att.filename,
       content: att.content
     }));
-    return resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
       to,
       subject,
       html,
       attachments: mappedAttachments.length > 0 ? mappedAttachments : undefined
     });
+    if (error) {
+      console.error("Resend API Error:", error);
+      throw new Error(error.message);
+    }
+    return data;
   } else {
     return transporter.sendMail({
       from: process.env.EMAIL_USER,
