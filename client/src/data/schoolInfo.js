@@ -6,9 +6,11 @@ const schoolInfo = {
   previousLocation: "Seemanagar",
   location: "Krishnanagar",
   address: {
-    line1: "Seemanagar, 9th Mile (near B.S.F. Camp)",
-    city: "Krishnanagar",
-    state: "West Bengal"
+    line1: "Chapra Village, Srinagar, Bangaljhi P.O.",
+    city: "Nadia District",
+    state: "West Bengal",
+    pincode: "741123",
+    full: "Chapra Village, Srinagar, Bangaljhi P.O., Nadia District, West Bengal, Pin Code: 741123"
   },
   contact: {
     phone: "+91 9679106606",

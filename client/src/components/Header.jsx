@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Menu, X, ChevronRight } from 'lucide-react';
+import { ChevronDown, Menu, X, ChevronRight, ArrowUpRight } from 'lucide-react';
 import useScrollPosition from '../hooks/useScrollPosition';
 import AnimatedDropdown from './ui/AnimatedDropdown';
 import { mainNav } from '../data/navigation';
@@ -41,7 +41,7 @@ const Header = () => {
         <div className={`flex h-16 items-center justify-between transition-[height] duration-300 md:h-20 ${isScrolled ? 'max-lg:h-14' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3">
             <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-10 w-10 shrink-0 object-contain md:h-14 md:w-14" />
-            <div className="min-w-0">
+            <div className="hidden lg:block min-w-0">
               <h1 className="truncate font-heading text-base font-bold leading-tight text-primary transition-colors group-hover:text-primary-dark md:text-xl">Mount Carmel</h1>
               <p className="text-[10px] font-semibold uppercase tracking-widest text-secondary md:text-xs">School</p>
             </div>
@@ -68,9 +68,21 @@ const Header = () => {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 md:gap-3">
-            <Link to="/admissions" className="hidden bg-secondary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-secondary-dark hover:shadow-lg md:inline-flex">Admissions</Link>
+          <div className="flex items-center gap-2 md:gap-3 max-lg:-translate-x-6">
+            <Link to="/admissions" className="hidden lg:inline-flex bg-secondary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-secondary-dark hover:shadow-lg">Admissions</Link>
             
+            {/* Mobile/Tablet Admissions Button */}
+            <Link 
+              to="/admissions" 
+              className={`lg:hidden flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-colors whitespace-nowrap uppercase ${
+                location.pathname === '/admissions'
+                  ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
+                  : 'bg-red-600 hover:bg-red-700 active:bg-red-800'
+              }`}
+            >
+              ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />
+            </Link>
+
             {/* Mobile Dropdown Menu using the new AnimatedDropdown component */}
             <div className="lg:hidden">
               <AnimatedDropdown
@@ -134,15 +146,6 @@ const Header = () => {
                     ))}
                   </ul>
                   
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <Link
-                      to="/admissions"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-primary-dark"
-                    >
-                      Admissions <ChevronRight size={16} />
-                    </Link>
-                  </div>
                 </nav>
               </AnimatedDropdown>
             </div>

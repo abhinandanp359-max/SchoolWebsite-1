@@ -12,13 +12,7 @@ import values from '../data/values';
 import api from '../utils/api';
 
 
-const fallbackGallery = [
-  { image: '/images/events/events04.webp', title: 'Annual Day Celebration', category: 'Events' },
-  { image: '/images/events/dance01.webp', title: 'Dance Performance', category: 'Activities' },
-  { image: '/images/yoga/yoga.webp', title: 'Yoga Session', category: 'Yoga' },
-  { image: '/images/events/events07.webp', title: 'Prize Distribution', category: 'Events' },
-  { image: '/images/independence/inde01.webp', title: 'Independence Day', category: 'Activities' }
-];
+
 
 const valueIcons = [Award, HandHeart, Heart, GraduationCap];
 
@@ -31,7 +25,7 @@ const milestones = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [galleryImages, setGalleryImages] = useState(fallbackGallery);
+  const [galleryImages, setGalleryImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -39,11 +33,9 @@ const Home = () => {
     const fetchGallery = async () => {
       try {
         const res = await api.get('/gallery');
-        if (res.data && res.data.length >= 3) {
+        if (res.data) {
           const validImages = res.data.filter(img => img.image);
-          if (validImages.length >= 3) {
-            setGalleryImages(validImages);
-          }
+          setGalleryImages(validImages);
         }
       } catch (error) {
         console.error('Failed to fetch gallery for home carousel', error);
@@ -73,32 +65,30 @@ const Home = () => {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#1a0f0f]">
-        <div className="absolute inset-0 bg-[#1a0f0f]">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-900">
+        <div className="absolute inset-0">
           <img 
-            src="/images/branding/hero.png" 
+            src="/images/hero/hero-assembly-bright.jpg" 
             alt="School Assembly Background" 
-            className="w-full h-full object-cover object-center" 
+            className="w-full h-full object-cover object-center brightness-[1.02] contrast-[1.01]" 
           />
-          {/* Semi-transparent warm red/burgundy overlay */}
-          <div className="absolute inset-0 bg-[#5a1c1c]/25" />
-          {/* Subtle dark/warm gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2a1313]/40 to-[#1a0f0f]/85" />
+          {/* Subtle top gradient for high text readability without darkening the photo */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-transparent pointer-events-none" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="mb-6 px-4 py-2 rounded-full bg-[#1a0f0f]/75 border border-secondary/50 backdrop-blur-md inline-block"
+            className="mb-6 px-4 py-2 rounded-full bg-black/40 border border-secondary/50 backdrop-blur-md inline-block shadow-md"
           >
-            <span className="text-secondary text-xs sm:text-sm md:text-base font-medium whitespace-normal break-words">Est. 2004 · Christian Missionary School</span>
+            <span className="text-secondary text-xs sm:text-sm md:text-base font-semibold whitespace-normal break-words">Est. 2004 · Christian Missionary School</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+            className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]"
           >
             Mount Carmel <span className="text-secondary">School</span>
           </motion.h1>
@@ -106,7 +96,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-heading italic text-secondary text-xl md:text-2xl lg:text-3xl mb-6"
+            className="font-heading italic text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-6 [text-shadow:_0_2px_10px_rgba(0,0,0,0.95)]"
           >
             "Rooted in values, Reaching for Excellence"
           </motion.h2>
@@ -114,7 +104,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-white/90 text-sm md:text-base lg:text-lg mb-10 max-w-3xl mx-auto font-sans leading-relaxed"
+            className="text-white text-sm md:text-base lg:text-lg mb-10 max-w-3xl mx-auto font-sans leading-relaxed [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)]"
           >
             A Christian missionary school dedicated to nurturing young minds with faith, values, academic excellence, and holistic development at our campus in Krishnanagar.
           </motion.p>
@@ -122,14 +112,16 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mt-8 lg:mt-0"
           >
             <Button to="/about" variant="secondary" size="lg" icon>
               Explore Our School
             </Button>
-            <Button to="/admissions" variant="outline-light" size="lg">
-              Admissions
-            </Button>
+            <div className="hidden lg:block">
+              <Button to="/admissions" variant="outline-light" size="lg">
+                Admissions
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>

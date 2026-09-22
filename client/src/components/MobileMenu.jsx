@@ -147,17 +147,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 ))}
               </ul>
 
-              {/* Contained full-width CTA */}
-              <div className="pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-5">
-                <Link
-                  to="/admissions"
-                  onClick={onClose}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-white shadow-md transition-colors hover:bg-primary-dark active:bg-primary-dark"
-                >
-                  Admissions
-                  <ChevronRight size={16} />
-                </Link>
-              </div>
             </nav>
           </motion.aside>
         )}

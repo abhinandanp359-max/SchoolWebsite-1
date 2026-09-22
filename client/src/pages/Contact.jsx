@@ -34,9 +34,9 @@ const Contact = () => {
     }
   };
 
-  const fullAddress = `${schoolInfo.address.line1}, ${schoolInfo.address.city}, ${schoolInfo.address.state}`;
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress + ', India')}`;
-  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Mount Carmel School, Seemanagar, 9th Mile, Krishnanagar, West Bengal, India')}&z=15&output=embed`;
+  const fullAddress = schoolInfo.address.full;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Mount Carmel School, Chapra Village, Srinagar, Bangaljhi P.O., Nadia District, West Bengal 741123')}&z=15&output=embed`;
 
   return (
     <PageLayout title="Contact Us" description="Get in touch with Mount Carmel School. Find our address, phone number, email, and send us a message.">
@@ -161,7 +161,7 @@ const Contact = () => {
       {/* Map */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <SectionTitle subtitle="Location" title="Find Us on the Map" description={`We are located at ${schoolInfo.address.line1}, ${schoolInfo.address.city}, ${schoolInfo.address.state}, India.`} />
+          <SectionTitle subtitle="Location" title="Find Us on the Map" description={`We are located at ${fullAddress}.`} />
           <div className="mt-8 rounded-xl overflow-hidden shadow-lg">
             <iframe
               src={mapEmbedUrl}

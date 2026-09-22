@@ -23,7 +23,7 @@ export default function AdminLogin() {
       // deep link from a notification email), otherwise the dashboard.
       navigate(location.state?.from?.pathname || "/admin", { replace: true });
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials");
+      setError(err.message || (typeof err === 'string' ? err : "Invalid credentials"));
     } finally {
       setLoading(false);
     }

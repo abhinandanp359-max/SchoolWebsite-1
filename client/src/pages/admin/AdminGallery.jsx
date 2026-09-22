@@ -67,7 +67,10 @@ export default function AdminGallery() {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Gallery</h1>
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800">Images</h1>
+          <p className="text-slate-500 font-medium mt-1">Total Images: {images.length}</p>
+        </div>
         <button
           onClick={() => setShowForm(true)}
           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition cursor-pointer"
