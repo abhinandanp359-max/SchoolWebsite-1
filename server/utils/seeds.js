@@ -1,44 +1,50 @@
 const Admin = require('../models/Admin');
 const Gallery = require('../models/Gallery');
 
-const initialGalleryData = [
-  { title: "Main Campus Building", category: "campus", image: "/images/branding/hero.png" },
-  { title: "School Entrance & Gardens", category: "campus", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Science Laboratory", category: "campus", image: "/images/branding/hero.png" },
-  { title: "School Library & Reading Hall", category: "campus", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Modern Computer Lab", category: "campus", image: "/images/branding/hero.png" },
-  { title: "Green Playground & Sports Complex", category: "campus", image: "/images/hero/hero-assembly-bright.jpg" },
+const realGalleryImages = [
+  // Campus
+  { title: "Main School Campus", category: "campus", image: "/images/campus/campus01.webp" },
+  { title: "School Building View", category: "campus", image: "/images/campus/campus02.webp" },
+  { title: "Campus Courtyard", category: "campus", image: "/images/campus/campus03.webp" },
 
-  { title: "Morning Prayer & Assembly", category: "assembly", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Principal Addressing Students", category: "assembly", image: "/images/branding/hero.png" },
-  { title: "National Anthem & Pledge", category: "assembly", image: "/images/hero/hero-assembly-bright.jpg" },
+  // Assembly
+  { title: "Morning Assembly", category: "assembly", image: "/images/assembly/assembly.webp" },
+  { title: "Student Line Assembly", category: "assembly", image: "/images/assembly/assembly01.webp" },
 
-  { title: "Classroom Learning Sessions", category: "students", image: "/images/branding/hero.png" },
-  { title: "Group Discussion & Activity", category: "students", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Interactive Smart Board Learning", category: "students", image: "/images/branding/hero.png" },
-  { title: "Art & Craft Workshop", category: "students", image: "/images/hero/hero-assembly-bright.jpg" },
+  // Students
+  { title: "Classroom Students", category: "students", image: "/images/students/students01.webp" },
+  { title: "Student Learning Session", category: "students", image: "/images/students/students02.webp" },
 
-  { title: "Annual Sports Day Competition", category: "sports", image: "/images/branding/hero.png" },
-  { title: "Inter-House Football Championship", category: "sports", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Basketball Finals", category: "sports", image: "/images/branding/hero.png" },
+  // Events
+  { title: "Cultural Dance Event", category: "events", image: "/images/events/dance01.webp" },
+  { title: "School Event Celebration", category: "events", image: "/images/events/events01.webp" },
+  { title: "Stage Performance", category: "events", image: "/images/events/events02.webp" },
+  { title: "Annual Day Event", category: "events", image: "/images/events/events03.webp" },
+  { title: "Student Choir & Music", category: "events", image: "/images/events/events04.webp" },
+  { title: "Award Distribution Event", category: "events", image: "/images/events/events05.webp" },
+  { title: "Grand Celebration Event", category: "events", image: "/images/events/events06.webp" },
+  { title: "Outdoor School Event", category: "events", image: "/images/events/events07.webp" },
+  { title: "Cultural Festival", category: "events", image: "/images/events/events08.webp" },
 
-  { title: "International Yoga Day Celebration", category: "yoga", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Morning Meditation Session", category: "yoga", image: "/images/branding/hero.png" },
+  // Yoga
+  { title: "Yoga Day Session", category: "yoga", image: "/images/yoga/yoga.webp" },
+  { title: "Student Yoga Practice 1", category: "yoga", image: "/images/yoga/yoga01.webp" },
+  { title: "Student Yoga Practice 2", category: "yoga", image: "/images/yoga/yoga02.webp" },
+  { title: "Student Yoga Practice 3", category: "yoga", image: "/images/yoga/yoga03.webp" },
+  { title: "Student Yoga Practice 4", category: "yoga", image: "/images/yoga/yoga04.webp" },
+  { title: "Group Yoga Asana", category: "yoga", image: "/images/yoga/yoga05.webp" },
+  { title: "Outdoor Yoga Session", category: "yoga", image: "/images/yoga/yoga06.webp" },
+  { title: "Yoga Meditation", category: "yoga", image: "/images/yoga/yoga07.webp" },
+  { title: "Yoga Demonstration", category: "yoga", image: "/images/yoga/yoga08.webp" },
+  { title: "Mass Yoga Event", category: "yoga", image: "/images/events/yoga day.webp" },
 
-  { title: "Annual Cultural Fest Performance", category: "cultural", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Traditional Folk Dance", category: "cultural", image: "/images/branding/hero.png" },
-  { title: "School Choir & Music Performance", category: "cultural", image: "/images/hero/hero-assembly-bright.jpg" },
-
-  { title: "Independence Day Flag Hoisting", category: "celebrations", image: "/images/branding/hero.png" },
-  { title: "Teachers' Day Celebration", category: "celebrations", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Christmas & New Year Festivities", category: "celebrations", image: "/images/branding/hero.png" },
-
-  { title: "Robotics Club Demonstration", category: "activities", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Tree Plantation Drive", category: "activities", image: "/images/branding/hero.png" },
-  { title: "Cleanliness & Social Service Drive", category: "activities", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Inter-School Debate Championship", category: "events", image: "/images/branding/hero.png" },
-  { title: "Science Exhibition Models Display", category: "events", image: "/images/hero/hero-assembly-bright.jpg" },
-  { title: "Excellence Awards Ceremony", category: "events", image: "/images/branding/hero.png" }
+  // Independence Day / Celebrations
+  { title: "Independence Day Flag Hoisting", category: "celebrations", image: "/images/independence/inde01.webp" },
+  { title: "Independence Day Parade", category: "celebrations", image: "/images/independence/inde02.webp" },
+  { title: "Patriotic Performance", category: "celebrations", image: "/images/independence/inde03.webp" },
+  { title: "National Celebration", category: "celebrations", image: "/images/independence/inde04.webp" },
+  { title: "Flag Ceremony", category: "celebrations", image: "/images/independence/inde05.webp" },
+  { title: "Independence Day Gathering", category: "celebrations", image: "/images/independence/inde06.webp" }
 ];
 
 const seedAdmin = async () => {
@@ -54,8 +60,8 @@ const seedAdmin = async () => {
 
     const galleryCount = await Gallery.countDocuments();
     if (galleryCount === 0) {
-      await Gallery.insertMany(initialGalleryData);
-      console.log('Default gallery images seeded successfully.');
+      await Gallery.insertMany(realGalleryImages);
+      console.log('Real gallery images seeded successfully.');
     }
   } catch (error) {
     console.error('Error in seed process:', error.message);
