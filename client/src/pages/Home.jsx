@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
@@ -25,9 +25,33 @@ const milestones = [
 
 const Home = () => {
   const navigate = useNavigate();
+  const heroRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Smooth, subtle parallax scrolling translation for the hero photo
+  const heroY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    shouldReduceMotion ? ['0%', '0%'] : isMobile ? ['0%', '6%'] : ['0%', '15%']
+  );
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -65,15 +89,24 @@ const Home = () => {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-900">
-        <div className="absolute inset-0">
-          <img 
-            src="/images/hero/hero-assembly-bright.jpg" 
-            alt="School Assembly Background" 
-            className="w-full h-full object-cover object-center brightness-[1.02] contrast-[1.01]" 
-          />
-          {/* Subtle top gradient for high text readability without darkening the photo */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-transparent pointer-events-none" />
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div 
+            className="w-full h-[115%] -top-[7%] absolute inset-x-0 will-change-transform" 
+            style={{ y: heroY }}
+          >
+            <picture className="w-full h-full block">
+              <source media="(max-width: 767px)" srcSet="/images/hero/hero-campus-building-mobile.jpg" />
+              <source media="(min-width: 768px)" srcSet="/images/hero/hero-campus-building.jpg" />
+              <img 
+                src="/images/hero/hero-campus-building.jpg" 
+                alt="Mount Carmel School Campus Building" 
+                className="w-full h-full object-cover object-center" 
+              />
+            </picture>
+          </motion.div>
+          {/* Gradient overlay for clear text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 pointer-events-none" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
           <motion.div
@@ -112,16 +145,11 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mt-8 lg:mt-0"
+            className="flex justify-center mt-8 lg:mt-0"
           >
-            <Button to="/about" variant="secondary" size="lg" icon>
+            <Button to="/about" variant="dark" size="lg" icon>
               Explore Our School
             </Button>
-            <div className="hidden lg:block">
-              <Button to="/admissions" variant="outline-light" size="lg">
-                Admissions
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -380,11 +408,11 @@ const Home = () => {
             <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-8">
               Give your child the gift of value-based education at Mount Carmel School. Admissions are now open.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button to="/admissions" variant="primary" size="lg" icon>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button to="/admissions" variant="dark" size="lg" icon className="w-full sm:w-52">
                 Apply Now
               </Button>
-              <Button to="/contact" variant="outline-light" size="lg">
+              <Button to="/contact" variant="outline-light-pill" size="lg" icon className="w-full sm:w-52">
                 Contact Us
               </Button>
             </div>

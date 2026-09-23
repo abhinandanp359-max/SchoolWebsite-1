@@ -122,7 +122,7 @@ const Facilities = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Visit Our Campus</h2>
           <p className="text-white/80 text-sm md:text-base mb-8">Schedule a visit to see our campus and meet our team.</p>
-          <Button to="/contact" variant="secondary" size="lg" icon>Contact Us</Button>
+          <Button to="/contact" variant="dark" size="lg" icon>Contact Us</Button>
         </div>
       </section>
     </PageLayout>

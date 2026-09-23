@@ -1,2 +1,2 @@
-import { ArrowRight } from 'lucide-react';
-export default ArrowRight;
+import { ArrowUpRight } from 'lucide-react';
+export default ArrowUpRight;

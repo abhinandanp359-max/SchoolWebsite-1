@@ -150,8 +150,7 @@ const Academics = () => {
       <section className="py-16 md:py-20 bg-gradient-to-br from-primary to-secondary">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Ready to Join Our Community?</h2>
-          <p className="text-white/80 text-sm md:text-base mb-8">Explore admissions and give your child the gift of quality, value-based education.</p>
-          <Button to="/admissions" variant="primary" size="lg" icon>Apply for Admission</Button>
+          <p className="text-white/80 text-sm md:text-base max-w-2xl mx-auto">Explore admissions and give your child the gift of quality, value-based education.</p>
         </div>
       </section>
     </PageLayout>

@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { ArrowLeft } from 'lucide-react';
 import SchemaMarkup from './SchemaMarkup';
 
 const PageLayout = ({ title, description, canonical, children, className = '', schema = true }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const baseUrl = 'https://mountcarmelschool.edu.in';
   const fullTitle = title ? `${title} | Mount Carmel School` : 'Mount Carmel School | Growing in Knowledge, Values and Compassion';
   const metaDescription = description || 'Mount Carmel School - A Christian missionary school committed to education, values, character, service, compassion, and excellence.';
@@ -14,6 +16,16 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  const handleBack = () => {
+    if (typeof window !== 'undefined' && window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
+
+  const showBackButton = location.pathname !== '/';
 
   return (
     <>
@@ -35,6 +47,19 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
       <div className={className}>
         {children}
       </div>
+
+      {showBackButton && (
+        <button
+          type="button"
+          onClick={handleBack}
+          className="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary text-white shadow-lg hover:bg-primary-dark transition-all duration-300 focus:outline-none group active:scale-95 border border-white/20"
+          aria-label="Go to previous page"
+          title="Go back to previous page"
+        >
+          <ArrowLeft size={18} strokeWidth={2.5} className="transition-transform group-hover:-translate-x-1" />
+          <span className="text-xs font-bold tracking-wider uppercase">Back</span>
+        </button>
+      )}
     </>
   );
 };

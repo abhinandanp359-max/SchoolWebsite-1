@@ -38,13 +38,9 @@ const Header = () => {
   return (
     <header className={`sticky top-0 z-50 bg-white shadow-sm transition-all duration-300 ${isScrolled ? 'bg-white/95 shadow-lg backdrop-blur-md' : ''} ${isNavbarHidden ? 'max-lg:-translate-y-full max-lg:shadow-none' : ''}`}>
       <div className="mx-auto max-w-7xl px-4">
-        <div className={`flex h-16 items-center justify-between transition-[height] duration-300 md:h-20 ${isScrolled ? 'max-lg:h-14' : ''}`}>
-          <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3">
-            <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-10 w-10 shrink-0 object-contain md:h-14 md:w-14" />
-            <div className="hidden lg:block min-w-0">
-              <h1 className="truncate font-heading text-base font-bold leading-tight text-primary transition-colors group-hover:text-primary-dark md:text-xl">Mount Carmel</h1>
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-secondary md:text-xs">School</p>
-            </div>
+        <div className={`flex h-18 items-center justify-between transition-[height] duration-300 md:h-24 ${isScrolled ? 'h-14 md:h-20' : ''}`}>
+          <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
+            <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-14 w-14 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" />
           </Link>
 
           {/* Desktop navigation */}
@@ -69,16 +65,15 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2 md:gap-3 max-lg:-translate-x-6">
-            <Link to="/admissions" className="hidden lg:inline-flex bg-secondary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-secondary-dark hover:shadow-lg">Admissions</Link>
-            
-            {/* Mobile/Tablet Admissions Button */}
-            <Link 
-              to="/admissions" 
-              className={`lg:hidden flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-colors whitespace-nowrap uppercase ${
+            {/* Unified Admissions Button — same colour (#8F2D3A) as APPLY NOW buttons */}
+            <Link
+              to="/admissions"
+              className={`flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-all whitespace-nowrap uppercase ${
                 location.pathname === '/admissions'
                   ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
-                  : 'bg-primary hover:bg-primary-dark active:bg-primary-dark'
+                  : 'hover:opacity-90 active:opacity-80'
               }`}
+              style={location.pathname !== '/admissions' ? { backgroundColor: '#8F2D3A' } : {}}
             >
               ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />
             </Link>

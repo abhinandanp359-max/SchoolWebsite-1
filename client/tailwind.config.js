@@ -17,6 +17,7 @@ export default {
           dark: '#b8933d',
           light: '#d4b85e',
         },
+        burgundy: '#8F2D3A',
         charcoal: '#2d3436',
         'warm-gray': '#636e72',
         ivory: '#f8f6f0',
