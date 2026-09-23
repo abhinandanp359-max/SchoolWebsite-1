@@ -77,7 +77,7 @@ const Header = () => {
               className={`lg:hidden flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-colors whitespace-nowrap uppercase ${
                 location.pathname === '/admissions'
                   ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
-                  : 'bg-red-600 hover:bg-red-700 active:bg-red-800'
+                  : 'bg-primary hover:bg-primary-dark active:bg-primary-dark'
               }`}
             >
               ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />

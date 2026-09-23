@@ -381,7 +381,7 @@ const Home = () => {
               Give your child the gift of value-based education at Mount Carmel School. Admissions are now open.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button to="/admissions" variant="secondary" size="lg" icon>
+              <Button to="/admissions" variant="primary" size="lg" icon>
                 Apply Now
               </Button>
               <Button to="/contact" variant="outline-light" size="lg">
