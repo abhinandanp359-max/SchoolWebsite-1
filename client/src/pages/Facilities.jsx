@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Building2, TreePine, BookOpen, Users } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -22,31 +23,49 @@ const campusImages = [
 const Facilities = () => {
   return (
     <PageLayout title="Campus & Facilities" description="Explore the campus and facilities at Mount Carmel School, Krishnanagar - modern classrooms, playground, library, and more.">
-      {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <motion.h1
+      {/* Full-width Scenic Facilities Hero Section */}
+      <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero/campus-facilities-hero.jpg"
+            alt="Mount Carmel School Campus"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+        </div>
+
+
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full text-left">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="max-w-xl text-left"
           >
-            Campus & Facilities
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-white/80 text-base md:text-lg max-w-2xl mx-auto"
-          >
-            A modern campus designed to inspire learning, growth, and community.
-          </motion.p>
+            <span className="text-[#FDF0D5] font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-2 [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
+              INFRASTRUCTURE
+            </span>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.7)]">
+              Campus & Facilities
+            </h1>
+            <p className="text-white/95 text-sm sm:text-base md:text-lg font-sans max-w-lg leading-relaxed [text-shadow:_0_2px_8px_rgba(0,0,0,0.7)]">
+              A modern campus designed to inspire learning, growth, and community.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Campus Images */}
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        <BotanicalAccent
+          className="absolute -bottom-8 -left-8 w-44 sm:w-56 text-[#A26A38]/15 -rotate-12 pointer-events-none"
+        />
+        <BotanicalAccent
+          flip
+          className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
           <SectionTitle
             subtitle="Our Campus"
             title="Welcome to Our Campus"

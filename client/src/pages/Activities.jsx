@@ -2,17 +2,53 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, HandHeart, Palette, Music, Users, Leaf, Heart } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 
 const activities = [
-  { icon: HandHeart, title: 'Prayer & Worship', description: 'Daily prayers, weekly assemblies, and spiritual formation that nurture faith and community.' },
-  { icon: Users, title: 'Sports & Games', description: 'Physical education, outdoor sports, and inter-school competitions promoting health and teamwork.' },
-  { icon: Palette, title: 'Arts & Crafts', description: 'Creative expression through drawing, painting, and craft activities that develop imagination.' },
-  { icon: Music, title: 'Cultural Programs', description: 'Festivals, cultural days, and annual celebrations that showcase talent and heritage.' },
-  { icon: Heart, title: 'Community Service', description: 'Service projects and outreach programs that teach empathy and social responsibility.' },
-  { icon: Leaf, title: 'Environmental Awareness', description: 'Tree planting, clean-up drives, and eco-clubs fostering care for creation.' },
-  { icon: HandHeart, title: 'Yoga & Wellness', description: 'Yoga sessions and wellness activities promoting physical and mental well-being.' },
+  { 
+    icon: HandHeart, 
+    title: 'Prayer & Worship', 
+    image: '/images/activities/prayer.jpg',
+    description: 'Daily prayers, weekly assemblies, and spiritual formation that nurture faith and community.' 
+  },
+  { 
+    icon: Users, 
+    title: 'Sports & Games', 
+    image: '/images/activities/sports.jpg',
+    description: 'Physical education, outdoor sports, and inter-school competitions promoting health and teamwork.' 
+  },
+  { 
+    icon: Palette, 
+    title: 'Arts & Crafts', 
+    image: '/images/activities/arts.jpg',
+    description: 'Creative expression through drawing, painting, and craft activities that develop imagination.' 
+  },
+  { 
+    icon: Music, 
+    title: 'Cultural Programs', 
+    image: '/images/events/dance01.webp',
+    description: 'Festivals, cultural days, and annual celebrations that showcase talent and heritage.' 
+  },
+  { 
+    icon: Heart, 
+    title: 'Community Service', 
+    image: '/images/activities/community.jpg',
+    description: 'Service projects and outreach programs that teach empathy and social responsibility.' 
+  },
+  { 
+    icon: Leaf, 
+    title: 'Environmental Awareness', 
+    image: '/images/campus/campus02.webp',
+    description: 'Tree planting, clean-up drives, and eco-clubs fostering care for creation.' 
+  },
+  { 
+    icon: HandHeart, 
+    title: 'Yoga & Wellness', 
+    image: '/images/yoga/yoga.webp',
+    description: 'Yoga sessions and wellness activities promoting physical and mental well-being.' 
+  },
 ];
 
 const yogaImages = [
@@ -52,31 +88,50 @@ const Activities = () => {
 
   return (
     <PageLayout title="Activities" description="Explore co-curricular activities at Mount Carmel School - sports, arts, yoga, cultural programs, and more.">
-      {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <motion.h1
+      {/* Full-width Scenic Activities Hero Section */}
+      <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero/activities-hero.png"
+            alt="Mount Carmel School Student Activities"
+            className="w-full h-full object-cover object-[center_right] sm:object-center"
+          />
+          {/* Subtle mobile-friendly gradient for narrow screens */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#4A151C]/80 via-[#4A151C]/35 to-transparent sm:hidden pointer-events-none" />
+        </div>
+
+
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="max-w-xl text-left"
           >
-            Activities
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-white/80 text-base md:text-lg max-w-2xl mx-auto"
-          >
-            Beyond academics — nurturing talents, building character, and fostering joy.
-          </motion.p>
+            <span className="text-[#FDF0D5] font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-2 [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
+              CO-CURRICULAR &amp; CAMPUS LIFE
+            </span>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.7)]">
+              Student Activities
+            </h1>
+            <p className="text-white/95 text-sm sm:text-base md:text-lg font-sans max-w-lg leading-relaxed [text-shadow:_0_2px_8px_rgba(0,0,0,0.7)]">
+              Beyond academics â€” nurturing talents, building character, sportsmanship, and fostering lifelong joy.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Activities Grid */}
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        <BotanicalAccent
+          className="absolute -bottom-8 -left-8 w-44 sm:w-56 text-[#A26A38]/15 -rotate-12 pointer-events-none"
+        />
+        <BotanicalAccent
+          flip
+          className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
           <SectionTitle
             subtitle="Co-Curricular"
             title="Our Activities"
@@ -86,12 +141,29 @@ const Activities = () => {
             {activities.map((activity, i) => {
               const Icon = activity.icon;
               return (
-                <Card key={i} className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
-                    <Icon size={22} className="text-secondary" />
+                <Card key={i} className="group flex flex-col h-full border border-amber-200/60 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  {/* Activity Photo Header */}
+                  <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
+                    <img 
+                      src={activity.image} 
+                      alt={activity.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70" />
+                    <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl bg-white/95 text-secondary flex items-center justify-center shadow-md backdrop-blur-xs border border-white/60">
+                      <Icon size={20} strokeWidth={2.2} />
+                    </div>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-primary mb-2">{activity.title}</h3>
-                  <p className="text-warm-gray text-sm leading-relaxed">{activity.description}</p>
+
+                  {/* Card Body */}
+                  <div className="p-5 sm:p-6 flex flex-col flex-1">
+                    <h3 className="font-heading text-lg sm:text-xl font-bold text-primary mb-2">
+                      {activity.title}
+                    </h3>
+                    <p className="text-warm-gray text-xs sm:text-sm leading-relaxed flex-1">
+                      {activity.description}
+                    </p>
+                  </div>
                 </Card>
               );
             })}

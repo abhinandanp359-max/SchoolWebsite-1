@@ -6,6 +6,7 @@ import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
 import values from '../data/values';
@@ -155,8 +156,12 @@ const Home = () => {
       </section>
 
       {/* Welcome Section */}
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        {/* Subtle decorative botanical accent framing section margin */}
+        <BotanicalAccent
+          className="absolute -bottom-8 -left-8 w-44 sm:w-56 text-[#A26A38]/15 -rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
           <SectionTitle
             subtitle="Welcome"
             title="Welcome to Mount Carmel School"
@@ -405,20 +410,13 @@ const Home = () => {
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               Begin Your Child's Journey
             </h2>
-            <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
               Give your child the gift of value-based education at Mount Carmel School. Admissions are now open.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button to="/admissions" variant="dark" size="lg" icon className="w-full sm:w-52">
-                Apply Now
-              </Button>
-              <Button to="/contact" variant="outline-light-pill" size="lg" icon className="w-full sm:w-52">
-                Contact Us
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>
+
     </PageLayout>
   );
 };

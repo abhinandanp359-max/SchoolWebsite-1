@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import SchemaMarkup from './SchemaMarkup';
+import Button from './ui/Button';
 
-const PageLayout = ({ title, description, canonical, children, className = '', schema = true }) => {
+const PageLayout = ({ title, description, canonical, children, className = '', schema = true, hideBackButton = false }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const baseUrl = 'https://mountcarmelschool.edu.in';
@@ -13,9 +15,38 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
   const canonicalUrl = canonical || `${baseUrl}${location.pathname}`;
   const ogImage = `${baseUrl}/images/hero/banner.webp`;
 
+  const isHomePage = location.pathname === '/';
+  const isEnquiryPage = location.pathname === '/admissions' || location.pathname === '/contact';
+  const [showFloatingApply, setShowFloatingApply] = useState(!isHomePage && !isEnquiryPage);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isEnquiryPage) {
+      setShowFloatingApply(false);
+      return;
+    }
+
+    if (!isHomePage) {
+      setShowFloatingApply(true);
+      return;
+    }
+
+    setShowFloatingApply(false);
+
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowFloatingApply(true);
+      } else {
+        setShowFloatingApply(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location.pathname, isHomePage, isEnquiryPage]);
 
   const handleBack = () => {
     if (typeof window !== 'undefined' && window.history.state && window.history.state.idx > 0) {
@@ -25,7 +56,7 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
     }
   };
 
-  const showBackButton = location.pathname !== '/';
+  const showBackButton = location.pathname !== '/' && !hideBackButton;
 
   return (
     <>
@@ -60,6 +91,29 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
           <span className="text-xs font-bold tracking-wider uppercase">Back</span>
         </button>
       )}
+
+      {/* Floating Apply Now Button */}
+      <AnimatePresence>
+        {showFloatingApply && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="fixed bottom-6 right-6 z-40 drop-shadow-xl"
+          >
+            <Button
+              to="/admissions"
+              variant="dark"
+              size="lg"
+              icon
+              className="shadow-2xl"
+            >
+              Apply Now
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

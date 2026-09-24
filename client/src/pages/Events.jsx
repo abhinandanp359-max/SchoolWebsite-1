@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, ChevronRight, Info } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import api from '../utils/api';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -60,6 +61,16 @@ const Events = () => {
       <section className="bg-primary pt-24 pb-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.png')] opacity-10 mix-blend-overlay"></div>
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary rounded-full blur-[120px] opacity-20"></div>
+        
+        {/* Subtle corner botanical leaf accents */}
+        <BotanicalAccent 
+          className="absolute -top-3 -left-3 w-28 sm:w-36 text-amber-200/20 pointer-events-none" 
+        />
+        <BotanicalAccent 
+          flip 
+          className="absolute -top-3 -right-3 w-32 sm:w-40 text-amber-200/20 rotate-12 pointer-events-none" 
+        />
+
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -76,8 +87,16 @@ const Events = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-5xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        {/* Subtle corner botanical accents */}
+        <BotanicalAccent
+          className="absolute -bottom-8 -left-8 w-44 sm:w-56 text-[#A26A38]/15 -rotate-12 pointer-events-none"
+        />
+        <BotanicalAccent
+          flip
+          className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-5xl mx-auto px-4">
           {loading ? (
             <div className="flex justify-center items-center py-20">
               <LoadingSpinner size="lg" />

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { BookOpen, GraduationCap, Brain, CheckCircle2 } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -39,25 +40,37 @@ const whyChooseUs = [
 const Academics = () => {
   return (
     <PageLayout title="Academics" description="Explore the academic programs at Mount Carmel School - Primary, Middle, and Secondary education with a focus on holistic development.">
-      {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <motion.h1
+      {/* Full-width Scenic Academics Hero Section */}
+      <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-primary">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero/academics-hero.jpg"
+            alt="Students learning in classroom"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Soft warm burgundy/golden overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#4A151C]/90 via-[#722F37]/70 to-[#B8860B]/40 pointer-events-none" />
+        </div>
+
+
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full text-center">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="max-w-2xl mx-auto"
           >
-            Academics
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-white/80 text-base md:text-lg max-w-2xl mx-auto"
-          >
-            Nurturing minds, building character, and empowering students for a brighter future.
-          </motion.p>
+            <span className="text-[#FDF0D5] font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3 [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
+              EDUCATION & LEARNING
+            </span>
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.7)]">
+              Academics
+            </h1>
+            <p className="text-white/95 text-base md:text-lg font-sans max-w-xl mx-auto leading-relaxed [text-shadow:_0_2px_8px_rgba(0,0,0,0.7)]">
+              Nurturing minds, building character, and empowering students for a brighter future.
+            </p>
+          </motion.div>
         </div>
       </section>
 

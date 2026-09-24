@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users, Building2, Star } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Button from '../components/ui/Button';
 import schoolInfo from '../data/schoolInfo';
@@ -42,8 +43,15 @@ const SchoolHistory = () => {
   return (
     <PageLayout title="School History" description="Learn about the journey of Mount Carmel School from its foundation in 2004 to the present day.">
       {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      <section className="relative overflow-hidden py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
+        <BotanicalAccent 
+          className="absolute -top-3 -left-3 w-28 sm:w-36 text-amber-200/20 pointer-events-none" 
+        />
+        <BotanicalAccent 
+          flip 
+          className="absolute -top-3 -right-3 w-32 sm:w-40 text-amber-200/20 rotate-12 pointer-events-none" 
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,8 +72,15 @@ const SchoolHistory = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-4xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        <BotanicalAccent
+          className="absolute -bottom-8 -left-8 w-44 sm:w-56 text-[#A26A38]/15 -rotate-12 pointer-events-none"
+        />
+        <BotanicalAccent
+          flip
+          className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-4xl mx-auto px-4">
           <SectionTitle
             subtitle="Milestones"
             title="Our Journey Through the Years"

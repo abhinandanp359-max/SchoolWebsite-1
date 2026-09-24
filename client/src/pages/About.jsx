@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Cross } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
+import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Button from '../components/ui/Button';
 import schoolInfo from '../data/schoolInfo';
@@ -10,8 +11,12 @@ const About = () => {
   return (
     <PageLayout title="About Us" description="Learn about Mount Carmel School - a Christian missionary school rooted in values and committed to excellence in education.">
       {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      <section className="relative overflow-hidden py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
+        <BotanicalAccent 
+          variant="corner" 
+          className="absolute -top-3 -left-3 w-28 sm:w-36 text-amber-200/15 pointer-events-none" 
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -32,8 +37,12 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-ivory">
+        <BotanicalAccent
+          flip
+          className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -192,9 +201,9 @@ const About = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Want to Learn More?</h2>
           <p className="text-white/80 text-sm md:text-base mb-8">Explore our history, meet our principal, or get in touch with us.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/about/history" variant="secondary" size="md" icon>Our History</Button>
-            <Button to="/about/principal-message" variant="outline-light" size="md">Principal's Message</Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button to="/about/history" variant="dark" size="md" icon>Our History</Button>
+            <Button to="/about/principal-message" variant="outline-light-pill" size="md">Principal's Message</Button>
           </div>
         </div>
       </section>
