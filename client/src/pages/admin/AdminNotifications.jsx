@@ -355,10 +355,10 @@ export default function AdminNotifications() {
             </div>
           )}
 
-          <div className="mt-5 pt-5 border-t border-gray-100 flex items-center justify-between flex-wrap gap-4">
+          <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             
-            <label className="flex-1 min-w-0">
-              <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 border-gray-200 text-sm font-semibold text-warm-gray hover:border-primary hover:text-primary transition cursor-pointer">
+            <label className="w-full sm:flex-1 sm:min-w-0">
+              <span className="inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 rounded-lg border-2 border-gray-200 text-sm font-semibold text-warm-gray hover:border-primary hover:text-primary transition cursor-pointer">
                 <Paperclip size={16} />
                 {files.length > 0 ? `${files.length} file${files.length > 1 ? "s" : ""} selected` : "Attach files"}
                 <input
@@ -382,7 +382,7 @@ export default function AdminNotifications() {
             <button
               onClick={sendNotification}
               disabled={busy !== null}
-              className="ml-auto shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold uppercase tracking-widest hover:bg-primary-dark transition shadow-md hover:shadow-lg disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
+              className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-lg bg-primary text-white text-sm font-bold uppercase tracking-widest hover:bg-primary-dark transition shadow-md hover:shadow-lg disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
             >
               <Send size={16} /> {busy === "send" ? "Sending…" : "Send Notification"}
             </button>
