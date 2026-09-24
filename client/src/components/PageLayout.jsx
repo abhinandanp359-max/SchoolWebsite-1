@@ -105,7 +105,7 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
             <Button
               to="/admissions"
               variant="dark"
-              size="lg"
+              size="sm"
               icon
               className="shadow-2xl"
             >
