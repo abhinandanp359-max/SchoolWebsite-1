@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const clientBaseUrl = () => (process.env.CLIENT_URL || "").replace(/\/$/, "");
+const clientBaseUrl = () => (process.env.CLIENT_URL || "").trim().replace(/\/$/, "");
 
 /*
  * Logo shown at the top of every notification email.
