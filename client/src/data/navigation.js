@@ -9,7 +9,6 @@ export const mainNav = [
   { name: "Campus", path: "/facilities" },
   { name: "Activities", path: "/activities" },
   { name: "Events", path: "/events" },
-  { name: "Admissions", path: "/admissions" },
   { name: "Contact", path: "/contact" }
 ];
 
