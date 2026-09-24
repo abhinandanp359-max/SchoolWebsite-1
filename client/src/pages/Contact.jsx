@@ -46,7 +46,7 @@ const Contact = () => {
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0">
           <img
-            src="/images/hero/contact-hero.png"
+            src="/images/hero/admissions-hero.jpg"
             alt="Mount Carmel School Campus"
             className="w-full h-full object-cover object-[center_right] sm:object-center"
           />

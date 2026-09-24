@@ -98,7 +98,7 @@ const Admissions = () => {
         {/* School Building and Students Photo - Natural & Bright */}
         <div className="absolute inset-0">
           <img
-            src="/images/hero/admissions-hero.jpg"
+            src="/images/hero/contact-hero.png"
             alt="Mount Carmel School Campus and Students"
             className="w-full h-full object-cover object-[center_35%]"
           />
