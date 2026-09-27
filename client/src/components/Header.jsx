@@ -24,9 +24,9 @@ const Header = () => {
       const y = window.scrollY;
       if (y <= 80 || isMobileMenuOpen) {
         setIsNavbarHidden(false);
-      } else if (y > lastY + 6) {
+      } else if (y > lastY + 25) {
         setIsNavbarHidden(true);
-      } else if (y < lastY - 6) {
+      } else if (y < lastY - 25) {
         setIsNavbarHidden(false);
       }
       lastY = y;

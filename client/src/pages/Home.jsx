@@ -95,7 +95,11 @@ const Home = () => {
   // and dynamically pick the right one so that mobile gets the aggressive 45% speed!
   const desktopY = useTransform(smoothScrollY, [0, 1000], [0, 200]);
   const mobileY = useTransform(smoothScrollY, [0, 1000], [0, 450]);
-  const heroY = isMobile ? mobileY : desktopY;
+  const rawHeroY = isMobile ? mobileY : desktopY;
+  
+  // Prevent subpixel rendering on mobile by snapping to whole pixels!
+  // Subpixel translation on low-end screens causes massive "shimmering" or "shaking"
+  const heroY = useTransform(rawHeroY, value => Math.round(value));
 
   useEffect(() => {
     const fetchGallery = async () => {
