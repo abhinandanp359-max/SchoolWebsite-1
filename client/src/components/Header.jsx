@@ -38,14 +38,9 @@ const Header = () => {
   return (
     <header className={`absolute w-full left-0 top-0 z-50 bg-transparent transition-all duration-300 ${isNavbarHidden ? 'max-lg:-translate-y-full' : ''}`}>
       <div className="mx-auto w-full max-w-[1440px] 2xl:max-w-[1920px] px-4">
-        <div className={`flex h-18 items-center justify-between transition-[height] duration-300 md:h-24 ${isScrolled ? 'h-14 md:h-20' : ''}`}>
+        <div className={`flex h-20 items-center justify-between transition-[height] duration-300 md:h-28 ${isScrolled ? 'h-16 md:h-24' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
-            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-12 w-12 shrink-0 object-contain md:h-16 md:w-16 transition-all duration-300" fetchpriority="high" />
-            <div className="flex flex-col">
-              <span className="font-heading text-[10px] sm:text-lg md:text-xl font-semibold text-white tracking-wide leading-tight sm:whitespace-nowrap [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)]">
-                Mount Carmel <br className="sm:hidden" />School
-              </span>
-            </div>
+            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
           </Link>
 
 
