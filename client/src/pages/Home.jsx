@@ -137,7 +137,7 @@ const Home = () => {
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <motion.div 
             style={{ y: heroY, scale: isMobile ? 1.35 : 1.2, transformOrigin: "bottom" }} 
-            className="w-full h-full transform-gpu"
+            className="w-full h-full will-change-transform"
           >
             <picture className="w-full h-full block">
               <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
