@@ -402,41 +402,39 @@ const Home = () => {
             </Link>
           </div>
 
-          {/* Right Images */}
-          <div className="w-full lg:w-2/3 relative">
-            {/* Nav buttons on top right */}
-            <div className="absolute -top-16 right-0 hidden lg:flex gap-3">
-               <button onClick={() => {
-                 if(galleryScrollRef.current) galleryScrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-               }} className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
-                 <ChevronLeft size={18} />
-               </button>
-               <button onClick={() => {
-                 if(galleryScrollRef.current) galleryScrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-               }} className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
-                 <ChevronRight size={18} />
-               </button>
-            </div>
-            
-            <div 
-              ref={galleryScrollRef}
-              className="flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scroll-smooth" 
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          {/* Right Images (Infinite Smooth Auto-Scroll) */}
+          <div className="w-full lg:w-2/3 relative overflow-hidden">
+            <motion.div 
+              className="flex w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: Math.max(30, galleryImages.length * 8) }}
             >
-              <style dangerouslySetInnerHTML={{__html: `
-                .hide-scrollbar::-webkit-scrollbar { display: none; }
-              `}} />
-              {galleryImages.map((img, idx) => (
-                <div key={idx} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] snap-center rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                  <img src={img.image} alt={img.title || "School moment"} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                </div>
-              ))}
-              {/* Fallback empty states if not enough images */}
-              {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
-                <div key={`empty-${i}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] snap-center rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                </div>
-              ))}
-            </div>
+              {/* Set 1 */}
+              <div className="flex gap-4 md:gap-5 pr-4 md:pr-5">
+                {galleryImages.map((img, idx) => (
+                  <div key={`set1-${idx}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
+                    <img src={img.image} alt={img.title || "School moment"} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ))}
+                {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
+                  <div key={`set1-empty-${i}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
+                  </div>
+                ))}
+              </div>
+
+              {/* Set 2 (Duplicate for seamless loop) */}
+              <div className="flex gap-4 md:gap-5 pr-4 md:pr-5">
+                {galleryImages.map((img, idx) => (
+                  <div key={`set2-${idx}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
+                    <img src={img.image} alt={img.title || "School moment"} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ))}
+                {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
+                  <div key={`set2-empty-${i}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
