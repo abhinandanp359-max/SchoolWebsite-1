@@ -18,6 +18,7 @@ const galleryRoutes = require('./routes/gallery');
 const admissionRoutes = require('./routes/admissions');
 const contactRoutes = require('./routes/contact');
 const enquiryRoutes = require('./routes/enquiries');
+const uploadRoutes = require('./routes/upload');
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use('/api/admissions', admissionRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/notifications', require('./routes/notifications'));
+app.use('/api/upload', uploadRoutes);
 
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {

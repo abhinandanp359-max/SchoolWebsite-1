@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, PenLine, Eye, EyeOff, X } from "lucide-react";
+import { Plus, Trash2, PenLine, Eye, EyeOff, X, Upload, Loader2 } from "lucide-react";
 import api from "../../utils/api";
 
 const emptyForm = {
@@ -17,6 +17,7 @@ export default function AdminNews() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyForm);
+  const [uploading, setUploading] = useState(false);
 
   const fetchNews = async () => {
     try {
@@ -36,6 +37,27 @@ export default function AdminNews() {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    setUploading(true);
+    try {
+      const res = await api.post('/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setForm(prev => ({ ...prev, image: res.data.url }));
+    } catch (err) {
+      console.error('Failed to upload image:', err);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -138,14 +160,26 @@ export default function AdminNews() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Image URL</label>
-                <input
-                  name="image"
-                  value={form.image}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="https://example.com/image.webp"
-                />
+                <label className="block text-sm font-medium text-slate-700 mb-1">Image</label>
+                <div className="flex items-center gap-4">
+                  {form.image && (
+                    <img src={form.image} alt="Preview" className="h-16 w-16 rounded-lg object-cover bg-slate-100" />
+                  )}
+                  <label className="flex-1">
+                    <div className="flex items-center justify-center w-full px-4 py-4 border-2 border-dashed border-slate-300 rounded-lg hover:border-blue-500 hover:bg-slate-50 transition cursor-pointer">
+                      {uploading ? (
+                        <div className="flex items-center gap-2 text-blue-600">
+                          <Loader2 size={18} className="animate-spin" /> Uploading...
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 text-slate-600">
+                          <Upload size={18} /> {form.image ? "Change Image" : "Choose Image"}
+                        </div>
+                      )}
+                    </div>
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploading} />
+                  </label>
+                </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Document URL</label>
@@ -179,7 +213,8 @@ export default function AdminNews() {
               </label>
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer"
+                disabled={uploading}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-2.5 rounded-lg transition cursor-pointer"
               >
                 {editingId ? "Update" : "Create"}
               </button>
