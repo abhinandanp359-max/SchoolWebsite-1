@@ -184,7 +184,7 @@ const Home = () => {
           </div>
           
           {/* Right Image */}
-          <div className="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 xl:p-10 flex flex-col relative min-h-[350px] md:min-h-[400px] lg:min-h-[350px]">
+          <div className="w-full lg:w-1/2 px-4 pb-6 pt-2 sm:p-6 lg:p-8 xl:p-10 flex flex-col relative min-h-[260px] md:min-h-[400px] lg:min-h-[350px]">
             <div className="relative w-full h-full flex-grow">
               <img 
                 src="/images/legacy-girl.webp" 
