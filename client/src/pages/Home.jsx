@@ -51,11 +51,11 @@ const Home = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Smooth parallax scrolling translation for desktop only. Disabled on mobile to fix scroll lag.
+  // Smooth parallax scrolling translation for the hero photo
   const heroY = useTransform(
     scrollYProgress,
     [0, 1],
-    (shouldReduceMotion || isMobile) ? ['0%', '0%'] : ['0%', '20%']
+    shouldReduceMotion ? ['0%', '0%'] : ['0%', '20%']
   );
 
   useEffect(() => {
