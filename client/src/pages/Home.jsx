@@ -299,7 +299,7 @@ const Home = () => {
               <blockquote className="text-charcoal text-sm md:text-base leading-relaxed italic border-l-4 border-secondary pl-4 mb-6">
                 "Rooted in values, Reaching for Excellence"
               </blockquote>
-              <Button to="/about/principal-message" variant="primary" size="sm" icon>
+              <Button to="/about/principal-message" variant="outline-red-hover-brown" size="sm" icon>
                 Read Full Message
               </Button>
             </motion.div>
@@ -375,7 +375,7 @@ const Home = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button to="/about/history" variant="primary" size="sm" icon>
+            <Button to="/about/history" variant="outline-red-hover-brown" size="sm" icon>
               View Full History
             </Button>
           </div>

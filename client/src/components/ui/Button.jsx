@@ -10,6 +10,7 @@ const Button = ({ children, to, href, variant = 'primary', size = 'md', icon = f
 
   const variants = {
     primary:         'bg-[#574737] hover:brightness-90 text-white hover:shadow-lg rounded-full border-2 border-transparent',
+    'outline-red-hover-brown': 'bg-white text-[#722129] border-2 border-[#722129] hover:bg-[#574737] hover:border-[#574737] hover:text-white active:bg-[#574737] rounded-full shadow-sm',
     secondary:       'bg-secondary hover:bg-secondary-dark text-white hover:shadow-lg rounded-full',
     // dark = shared pill — same colour and pill shape as the top ADMISSIONS button
     dark:            'border-2 border-transparent hover:opacity-90 active:opacity-80 text-white rounded-full uppercase tracking-wider shadow-sm font-bold',
