@@ -40,9 +40,9 @@ const Header = () => {
       <div className="mx-auto w-full max-w-[1440px] 2xl:max-w-[1920px] px-4">
         <div className={`flex h-18 items-center justify-between transition-[height] duration-300 md:h-24 ${isScrolled ? 'h-14 md:h-20' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
-            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-14 w-14 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
+            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-12 w-12 shrink-0 object-contain md:h-16 md:w-16 transition-all duration-300" fetchpriority="high" />
             <div className="flex flex-col">
-              <span className="font-heading text-[1.1rem] sm:text-xl md:text-2xl font-bold text-white leading-tight [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)]">
+              <span className="font-heading text-[15px] sm:text-lg md:text-xl font-semibold text-white tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] whitespace-nowrap">
                 Mount Carmel School
               </span>
             </div>
