@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight, Play, Leaf, Users, Star } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
@@ -84,22 +89,67 @@ const Home = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { scrollY } = useScroll();
-  
-  // Apply a spring physics smoothing to the scroll value. 
-  // This COMPLETELY eliminates the "shaking" or "jitter" on mobile devices 
-  // caused by the JS thread falling slightly behind the native scroll thread!
-  const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const bgRef = useRef(null);
+  const midRef = useRef(null);
+  const textRef = useRef(null);
 
-  // Fix: useTransform caches initial values. We must create two separate MotionValues 
-  // and dynamically pick the right one so that mobile gets the aggressive 45% speed!
-  const desktopY = useTransform(smoothScrollY, [0, 1000], [0, 200]);
-  const mobileY = useTransform(smoothScrollY, [0, 1000], [0, 450]);
-  const rawHeroY = isMobile ? mobileY : desktopY;
-  
-  // Prevent subpixel rendering on mobile by snapping to whole pixels!
-  // Subpixel translation on low-end screens causes massive "shimmering" or "shaking"
-  const heroY = useTransform(rawHeroY, value => Math.round(value));
+  useGSAP(() => {
+    if (shouldReduceMotion) return;
+
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      // Desktop Parallax Layers
+      gsap.to(bgRef.current, {
+        yPercent: 30, // 0.3x
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+
+      gsap.to(midRef.current, {
+        yPercent: 50, // 0.5x midground
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+
+      gsap.to(textRef.current, {
+        yPercent: 70, // 0.7x foreground text
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    mm.add("(max-width: 767px)", () => {
+      // Mobile - simpler parallax
+      gsap.to(bgRef.current, {
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    return () => mm.revert(); // cleanup
+  }, { scope: heroRef, dependencies: [shouldReduceMotion] });
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -144,8 +194,9 @@ const Home = () => {
         
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
-          <motion.div 
-            style={{ y: heroY, scale: isMobile ? 1.35 : 1.2, transformOrigin: "bottom" }} 
+          <div 
+            ref={bgRef}
+            style={{ transform: `scale(${isMobile ? 1.35 : 1.2})`, transformOrigin: "bottom" }} 
             className="w-full h-full will-change-transform"
           >
             <picture className="w-full h-full block">
@@ -160,15 +211,17 @@ const Home = () => {
                 fetchpriority="high"
               />
             </picture>
-          </motion.div>
+          </div>
           {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
-          
-          {/* Diffused depth shadow behind typography */}
-          <div className="absolute top-0 left-0 w-full h-1/2 md:h-full md:bottom-0 md:w-2/3 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/50 to-transparent md:blur-3xl opacity-60 md:mix-blend-multiply" />
+          <div ref={midRef} className="absolute inset-0 z-[5] w-full h-full will-change-transform">
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
+            
+            {/* Diffused depth shadow behind typography */}
+            <div className="absolute top-0 left-0 w-full h-1/2 md:h-full md:bottom-0 md:w-2/3 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/50 to-transparent md:blur-3xl opacity-60 md:mix-blend-multiply" />
+          </div>
           
           {/* Text Content absolutely positioned over the image bounds */}
-          <div className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-start pt-[20vh] md:justify-center md:pt-16 pb-32 md:pb-0 px-6 sm:px-12 md:px-16 lg:px-24 overflow-visible">
+          <div ref={textRef} className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-start pt-[20vh] md:justify-center md:pt-16 pb-32 md:pb-0 px-6 sm:px-12 md:px-16 lg:px-24 overflow-visible will-change-transform">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

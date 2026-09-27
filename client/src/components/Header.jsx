@@ -41,7 +41,7 @@ const Header = () => {
         <div className={`flex h-20 items-center justify-between transition-[height] duration-300 md:h-28 ${isScrolled ? 'h-16 md:h-24' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-3 md:gap-4 py-1">
             <img src="/images/branding/logo-transparent.webp" alt="Mount Carmel School Logo" className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
-            <span className="hidden md:block font-heading text-lg lg:text-xl font-bold text-white tracking-wide leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.6)]">
+            <span className={`hidden md:block font-heading text-lg lg:text-xl font-bold tracking-wide leading-tight ${location.pathname === '/gallery' ? 'text-slate-900 drop-shadow-sm' : 'text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.6)]'}`}>
               Mount Carmel<br />School
             </span>
           </Link>
@@ -53,7 +53,7 @@ const Header = () => {
               <div key={item.name} className="relative" onMouseEnter={() => item.children && setHoveredItem(item.name)} onMouseLeave={() => setHoveredItem(null)}>
                 <Link 
                   to={item.path} 
-                  className={`relative flex items-center gap-1 px-4 py-2 text-sm transition-all duration-300 text-white
+                  className={`relative flex items-center gap-1 px-4 py-2 text-sm transition-all duration-300 ${location.pathname === '/gallery' ? 'text-slate-900' : 'text-white'}
                     after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-[60%] after:-translate-x-1/2 after:bg-[#F3D086] after:transition-transform after:duration-300
                     ${location.pathname === item.path 
                       ? 'font-bold after:scale-x-100' 
@@ -95,10 +95,10 @@ const Header = () => {
                 isOpen={isMobileMenuOpen}
                 onClose={() => setIsMobileMenuOpen(false)}
                 trigger={
-                  <button
+                <button
                     type="button"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="-mr-2 rounded-lg p-2 text-white transition-colors hover:bg-white/10"
+                    className={`-mr-2 rounded-lg p-2 transition-colors ${location.pathname === '/gallery' ? 'text-slate-900 hover:bg-black/5' : 'text-white hover:bg-white/10'}`}
                     aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                   >
                     <AnimatePresence mode="wait" initial={false}>
