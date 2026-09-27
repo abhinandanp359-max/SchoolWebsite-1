@@ -6,6 +6,7 @@ import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import NotificationBell from '../components/ui/NotificationBell';
 import BotanicalAccent from '../components/ui/BotanicalAccent';
 import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
@@ -92,6 +93,7 @@ const Home = () => {
   };
   return (
     <PageLayout>
+      <NotificationBell />
       {/* Hero Section */}
       <section ref={heroRef} className="relative w-full min-h-[100svh] flex flex-col items-center max-md:bg-transparent bg-[#3D1418] overflow-hidden">
         

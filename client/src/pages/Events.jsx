@@ -18,6 +18,18 @@ const Events = () => {
         // Filter out inactive events just in case, though backend should do it
         const activeEvents = (res.data || []).filter(e => e.isActive);
         setEvents(activeEvents);
+
+        // Mark as read for NotificationBell
+        try {
+          const activeIds = activeEvents.map(e => e._id);
+          if (activeIds.length > 0) {
+            const stored = JSON.parse(localStorage.getItem('readEventIds') || '[]');
+            const newStored = Array.from(new Set([...stored, ...activeIds]));
+            localStorage.setItem('readEventIds', JSON.stringify(newStored));
+          }
+        } catch (storageError) {
+          console.error('Failed to update read events in localStorage', storageError);
+        }
       } catch (error) {
         console.error('Failed to fetch events:', error);
       } finally {
