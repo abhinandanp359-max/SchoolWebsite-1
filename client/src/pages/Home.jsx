@@ -55,7 +55,7 @@ const Home = () => {
   const heroY = useTransform(
     scrollYProgress,
     [0, 1],
-    shouldReduceMotion ? ['0%', '0%'] : ['0%', '20%']
+    ['0%', '20%'] // Forced on because the user explicitly requested it
   );
 
   useEffect(() => {
