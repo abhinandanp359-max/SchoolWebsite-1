@@ -96,12 +96,13 @@ const Home = () => {
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col">
           <picture className="w-full h-full block">
-            <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-mobile-new.webp" />
-            <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-new.webp" />
+            <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students.webp" />
+            <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
             <img 
-              src="/images/hero/home-hero-new.webp" 
+              src="/images/hero/home-hero-students.webp" 
               alt="Mount Carmel School" 
               className="w-full h-full object-cover object-center"
+              fetchpriority="high"
             />
           </picture>
           {/* Subtle overlay */}
