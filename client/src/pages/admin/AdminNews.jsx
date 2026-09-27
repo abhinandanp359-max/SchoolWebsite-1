@@ -51,7 +51,7 @@ export default function AdminNews() {
       const res = await api.post('/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      setForm(prev => ({ ...prev, image: res.data.url }));
+      setForm(prev => ({ ...prev, image: res.url }));
     } catch (err) {
       console.error('Failed to upload image:', err);
       alert('Failed to upload image. Please try again.');
