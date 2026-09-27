@@ -48,11 +48,11 @@ const Home = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Smooth, subtle parallax scrolling translation for the hero photo
+  // Smooth, noticeable parallax scrolling translation for the hero photo (works on both mobile and desktop)
   const heroY = useTransform(
     scrollYProgress,
     [0, 1],
-    shouldReduceMotion ? ['0%', '0%'] : isMobile ? ['0%', '6%'] : ['0%', '15%']
+    shouldReduceMotion ? ['0%', '0%'] : ['0%', '20%']
   );
 
   useEffect(() => {
@@ -94,9 +94,9 @@ const Home = () => {
       <section ref={heroRef} className="relative w-full min-h-[100svh] flex flex-col items-center max-md:bg-transparent bg-[#3D1418] overflow-hidden">
         
         {/* Wrapper absolute to fill the 100svh container completely */}
-        <div className="absolute inset-0 flex flex-col">
+        <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <motion.div 
-            style={{ y: heroY, scale: 1.1 }} 
+            style={{ y: heroY, scale: 1.25, transformOrigin: "top" }} 
             className="w-full h-full transform-gpu"
           >
             <picture className="w-full h-full block">
