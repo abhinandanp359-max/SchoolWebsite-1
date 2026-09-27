@@ -96,7 +96,7 @@ const Home = () => {
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col">
           <picture className="w-full h-full block">
-            <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students.jpg" />
+            <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
             <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
             <img 
               src="/images/hero/home-hero-students.jpg" 
@@ -105,14 +105,14 @@ const Home = () => {
               fetchpriority="high"
             />
           </picture>
-          {/* Cinematic Gradient Overlay */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
+          {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
           
           {/* Diffused depth shadow behind typography */}
-          <div className="absolute top-0 left-0 bottom-0 w-full md:w-2/3 pointer-events-none bg-gradient-to-r from-black/40 to-transparent blur-3xl opacity-60 mix-blend-multiply" />
+          <div className="absolute top-0 left-0 w-full h-1/2 md:h-full md:bottom-0 md:w-2/3 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/40 to-transparent blur-3xl opacity-60 mix-blend-multiply" />
           
           {/* Text Content absolutely positioned over the image bounds */}
-          <div className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-center pt-16 pb-32 md:pb-0 px-4 sm:px-12 md:px-16 lg:px-24 overflow-visible">
+          <div className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-start pt-[20vh] md:justify-center md:pt-16 pb-32 md:pb-0 px-6 sm:px-12 md:px-16 lg:px-24 overflow-visible">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -127,13 +127,13 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]"
             >
-              Growing in<br />Knowledge, Values<br />and <span className="text-[#F3D086]">Compassion</span>
+              Growing in<br />Knowledge, Values<br />& <span className="text-[#F3D086]">Compassion</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-white/95 text-sm md:text-base lg:text-lg mb-8 md:mb-12 max-w-xl font-sans leading-relaxed [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)] pr-4"
+              className="text-white/95 text-sm md:text-base lg:text-lg mb-8 md:mb-12 max-w-xl font-sans leading-relaxed hidden md:block [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)] pr-4"
             >
               At Mount Carmel School, we nurture young minds to become compassionate, confident and responsible global citizens.
             </motion.p>
