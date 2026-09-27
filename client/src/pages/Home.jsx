@@ -93,9 +93,11 @@ const Home = () => {
     const fetchGallery = async () => {
       try {
         const res = await api.get('/gallery');
-        if (res.data) {
+        if (res.data && Array.isArray(res.data)) {
           const validImages = res.data.filter(img => img.image);
-          setGalleryImages(validImages);
+          if (validImages.length > 0) {
+            setGalleryImages(validImages);
+          }
         }
       } catch (error) {
         console.error('Failed to fetch gallery for home carousel', error);
