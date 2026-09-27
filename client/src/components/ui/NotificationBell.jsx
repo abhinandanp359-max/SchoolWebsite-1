@@ -10,7 +10,7 @@ const NotificationBell = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await api.get('/events');
+        const res = await api.get(`/events?t=${Date.now()}`);
         const activeEvents = (res.data || []).filter(e => e.isActive);
         
         let readIds = [];
