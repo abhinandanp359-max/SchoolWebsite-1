@@ -86,8 +86,11 @@ const Home = () => {
 
   const { scrollY } = useScroll();
 
-  // Desktop gets standard 20% speed. Mobile gets 45% speed so it is MUCH more visible!
-  const heroY = useTransform(scrollY, [0, 1000], [0, isMobile ? 450 : 200]);
+  // Fix: useTransform caches initial values. We must create two separate MotionValues 
+  // and dynamically pick the right one so that mobile gets the aggressive 45% speed!
+  const desktopY = useTransform(scrollY, [0, 1000], [0, 200]);
+  const mobileY = useTransform(scrollY, [0, 1000], [0, 450]);
+  const heroY = isMobile ? mobileY : desktopY;
 
   useEffect(() => {
     const fetchGallery = async () => {
