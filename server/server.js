@@ -26,7 +26,19 @@ connectDB().then(() => {
   seedAdmin();
 });
 
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+      imgSrc: ["'self'", "data:", "blob:", "https://res.cloudinary.com"],
+      connectSrc: ["'self'", "https://schoolwebsite-1-5.onrender.com"],
+    },
+  },
+}));
 app.use(morgan('dev'));
 
 const limiter = rateLimit({
