@@ -37,11 +37,8 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
     setShowFloatingApply(false);
 
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowFloatingApply(true);
-      } else {
-        setShowFloatingApply(false);
-      }
+      const shouldShow = window.scrollY > 200;
+      setShowFloatingApply(prev => prev !== shouldShow ? shouldShow : prev);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
