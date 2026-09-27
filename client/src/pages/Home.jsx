@@ -60,7 +60,17 @@ const Home = () => {
   const heroRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
-  const [galleryImages, setGalleryImages] = useState([]);
+
+  // Fallback images so the carousel is NEVER empty or stuck loading while API wakes up
+  const FALLBACK_GALLERY_IMAGES = [
+    { image: '/images/events/events01.webp', title: 'Cultural Event' },
+    { image: '/images/events/events02.webp', title: 'School Assembly' },
+    { image: '/images/events/events03.webp', title: 'Annual Function' },
+    { image: '/images/events/events04.webp', title: 'Student Activities' },
+    { image: '/images/events/events05.webp', title: 'Campus Life' }
+  ];
+
+  const [galleryImages, setGalleryImages] = useState(FALLBACK_GALLERY_IMAGES);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const galleryScrollRef = useRef(null);
