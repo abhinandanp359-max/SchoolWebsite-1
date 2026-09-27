@@ -53,7 +53,15 @@ const Header = () => {
           <nav className="hidden items-center gap-1 lg:flex">
             {mainNav.map((item) => (
               <div key={item.name} className="relative" onMouseEnter={() => item.children && setHoveredItem(item.name)} onMouseLeave={() => setHoveredItem(null)}>
-                <Link to={item.path} className={`flex items-center gap-1 rounded-[14px] px-4 py-2 text-sm font-medium transition-colors ${location.pathname === item.path ? 'bg-white/20 text-white font-bold shadow-sm' : 'text-white/95 hover:bg-white/10 hover:text-white'}`}>
+                <Link 
+                  to={item.path} 
+                  className={`relative flex items-center gap-1 px-4 py-2 text-sm transition-all duration-300 text-white
+                    after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-[60%] after:-translate-x-1/2 after:bg-[#F3D086] after:transition-transform after:duration-300
+                    ${location.pathname === item.path 
+                      ? 'font-bold after:scale-x-100' 
+                      : 'font-medium opacity-90 hover:opacity-100 after:scale-x-0 hover:after:scale-x-100'
+                    }`}
+                >
                   {item.name}
                   {item.children && <ChevronDown size={14} className={`transition-transform ${hoveredItem === item.name ? 'rotate-180' : ''}`} />}
                 </Link>
