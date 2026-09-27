@@ -51,11 +51,11 @@ const Home = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Smooth, noticeable parallax scrolling translation for the hero photo (works on both mobile and desktop)
+  // Smooth parallax scrolling translation for desktop only. Disabled on mobile to fix scroll lag.
   const heroY = useTransform(
     scrollYProgress,
     [0, 1],
-    shouldReduceMotion ? ['0%', '0%'] : ['0%', '20%']
+    (shouldReduceMotion || isMobile) ? ['0%', '0%'] : ['0%', '20%']
   );
 
   useEffect(() => {
@@ -100,7 +100,7 @@ const Home = () => {
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <motion.div 
-            style={{ y: heroY, scale: 1.2, transformOrigin: "bottom" }} 
+            style={{ y: heroY, scale: 1.2, transformOrigin: "bottom", willChange: "transform" }} 
             className="w-full h-full transform-gpu"
           >
             <picture className="w-full h-full block">
