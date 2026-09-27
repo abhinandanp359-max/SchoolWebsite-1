@@ -99,21 +99,16 @@ const Home = () => {
         
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
-          <motion.div 
-            style={{ y: heroY, scale: 1.25, transformOrigin: "top" }} 
-            className="w-full h-full transform-gpu"
-          >
-            <picture className="w-full h-full block">
-              <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
-              <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
-              <img 
-                src="/images/hero/home-hero-students.jpg" 
-                alt="Mount Carmel School" 
-                className="w-full h-full object-cover object-center"
-                fetchpriority="high"
-              />
-            </picture>
-          </motion.div>
+          <picture className="w-full h-full block">
+            <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
+            <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
+            <img 
+              src="/images/hero/home-hero-students.jpg" 
+              alt="Mount Carmel School" 
+              className="w-full h-full object-cover object-center"
+              fetchpriority="high"
+            />
+          </picture>
           {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
           
