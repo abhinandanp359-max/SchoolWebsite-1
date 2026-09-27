@@ -42,17 +42,17 @@ const getCarouselStyles = (position, isMobile) => {
   const baseRadius = isMobile ? 20 : 24;
   
   if (position === 0) {
-    return { x: "0%", scale: 1, zIndex: 30, opacity: 1, filter: "blur(0px)", borderRadius: `${baseRadius}px` };
+    return { x: "0%", scale: 1, zIndex: 30, opacity: 1, borderRadius: `${baseRadius}px` };
   } else if (position === 1) {
-    return { x: isMobile ? "60%" : "75%", scale: 0.8, zIndex: 20, opacity: 0.7, filter: "blur(1px)", borderRadius: `${baseRadius / 0.8}px` };
+    return { x: isMobile ? "60%" : "75%", scale: 0.8, zIndex: 20, opacity: 0.7, borderRadius: `${baseRadius / 0.8}px` };
   } else if (position === -1) {
-    return { x: isMobile ? "-60%" : "-75%", scale: 0.8, zIndex: 20, opacity: 0.7, filter: "blur(1px)", borderRadius: `${baseRadius / 0.8}px` };
+    return { x: isMobile ? "-60%" : "-75%", scale: 0.8, zIndex: 20, opacity: 0.7, borderRadius: `${baseRadius / 0.8}px` };
   } else if (position === 2) {
-    return { x: "140%", scale: 0.65, zIndex: 10, opacity: 0.3, filter: "blur(3px)", borderRadius: `${baseRadius / 0.65}px` };
+    return { x: "140%", scale: 0.65, zIndex: 10, opacity: 0.3, borderRadius: `${baseRadius / 0.65}px` };
   } else if (position === -2) {
-    return { x: "-140%", scale: 0.65, zIndex: 10, opacity: 0.3, filter: "blur(3px)", borderRadius: `${baseRadius / 0.65}px` };
+    return { x: "-140%", scale: 0.65, zIndex: 10, opacity: 0.3, borderRadius: `${baseRadius / 0.65}px` };
   }
-  return { x: "0%", scale: 0.5, zIndex: 0, opacity: 0, filter: "blur(5px)", borderRadius: `${baseRadius / 0.5}px` };
+  return { x: "0%", scale: 0.5, zIndex: 0, opacity: 0, borderRadius: `${baseRadius / 0.5}px` };
 };
 
 const Home = () => {
