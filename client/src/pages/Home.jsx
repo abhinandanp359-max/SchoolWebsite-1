@@ -105,8 +105,11 @@ const Home = () => {
               fetchpriority="high"
             />
           </picture>
-          {/* Subtle overlay */}
-          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+          {/* Cinematic Gradient Overlay */}
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
+          
+          {/* Diffused depth shadow behind typography */}
+          <div className="absolute top-0 left-0 bottom-0 w-full md:w-2/3 pointer-events-none bg-gradient-to-r from-black/40 to-transparent blur-3xl opacity-60 mix-blend-multiply" />
           
           {/* Text Content absolutely positioned over the image bounds */}
           <div className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-center pt-16 pb-32 md:pb-0 px-4 sm:px-12 md:px-16 lg:px-24 overflow-visible">
