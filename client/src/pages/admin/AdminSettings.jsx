@@ -41,7 +41,7 @@ export default function AdminSettings() {
   return (
     <div className="p-4 sm:p-6 max-w-[1500px] mx-auto">
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <span className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+        <span className="h-10 w-10 rounded-xl bg-primary/10 text-slate-900 flex items-center justify-center shrink-0">
           <Settings size={18} />
         </span>
         <div className="min-w-0">
@@ -80,7 +80,7 @@ export default function AdminSettings() {
             </div>
 
             <div className="pt-4 border-t border-gray-100">
-              <label className="block text-[11px] font-bold uppercase tracking-widest text-primary mb-1.5">Current Password (Required)</label>
+              <label className="block text-[11px] font-bold uppercase tracking-widest text-slate-900 mb-1.5">Current Password (Required)</label>
               <input
                 type="password"
                 value={currentPassword}
@@ -113,7 +113,7 @@ export default function AdminSettings() {
         </section>
 
         <section className="bg-[#fbf8f1] rounded-2xl shadow-sm border border-[#eadfc8] p-6 self-start">
-           <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-3">Security Notice</h3>
+           <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-3">Security Notice</h3>
            <p className="text-sm text-charcoal leading-relaxed mb-4">
              Changing your username or password will immediately update your credentials for future logins.
            </p>

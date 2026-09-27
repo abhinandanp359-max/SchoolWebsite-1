@@ -94,33 +94,33 @@ const Admissions = () => {
       hideBackButton={status?.type === 'success'}
     >
       {/* Hero Section with Bright Natural Campus Background */}
-      <section className="relative overflow-hidden min-h-[300px] sm:min-h-[360px] md:min-h-[420px] flex items-center">
+      <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center">
         {/* School Building and Students Photo - Natural & Bright */}
         <div className="absolute inset-0">
           <img
-            src="/images/hero/contact-hero.png"
+            src="/images/hero/contact-hero.webp"
             alt="Mount Carmel School Campus and Students"
             className="w-full h-full object-cover object-[center_35%]"
           />
-          {/* Soft translucent warm burgundy gradient on the left; right side remains bright and natural */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#6E202A]/55 via-[#822C36]/25 via-45% to-transparent to-75% pointer-events-none" />
+          {/* Subtle localized gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent pointer-events-none" />
         </div>
 
 
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-40 md:pb-16 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             className="max-w-2xl"
           >
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.85)]">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
               Begin Your Journey <br />
-              <span className="font-serif italic font-normal text-[#FDF0D5] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">With Us</span>
+              <span className="text-[#F3D086]">With Us</span>
             </h1>
-            <p className="mt-4 text-white text-sm sm:text-base md:text-lg font-sans leading-relaxed max-w-xl [text-shadow:_0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="mt-4 text-white/95 text-sm md:text-base lg:text-lg font-sans leading-relaxed max-w-xl [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)] pr-4">
               At Mount Carmel School, we believe in nurturing every child's unique potential. Our admissions process is the first step towards a brighter future.
             </p>
           </motion.div>
@@ -128,7 +128,7 @@ const Admissions = () => {
       </section>
 
       {/* Main Content Area */}
-      <section className="relative overflow-hidden py-12 md:py-16 bg-[#FAF7F2]">
+      <section className="relative overflow-hidden pt-28 pb-12 md:pt-40 md:pb-16 bg-[#FAF7F2]">
         {/* Subtle botanical corner framing inspired by reference */}
         <BotanicalAccent
           variant="corner"
@@ -140,7 +140,7 @@ const Admissions = () => {
           className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left Column: Forms (approx 7 or 8 cols out of 12) */}
@@ -172,7 +172,7 @@ const Admissions = () => {
                     <div className="flex flex-col items-center gap-3">
                       <Link
                         to="/"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#8F2D3A] hover:bg-[#78232F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md active:scale-95"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#574737] hover:bg-[#3D1418] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md active:scale-95"
                       >
                         <Home size={15} />
                         <span>BACK TO HOME</span>
@@ -180,7 +180,7 @@ const Admissions = () => {
                       <button
                         type="button"
                         onClick={() => setStatus(null)}
-                        className="text-xs font-medium text-warm-gray hover:text-primary transition-colors underline pt-2"
+                        className="text-xs font-medium text-warm-gray hover:text-slate-900 transition-colors underline pt-2"
                       >
                         Submit another enquiry
                       </button>
@@ -213,7 +213,7 @@ const Admissions = () => {
                             value={form.parentName}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all bg-white"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all bg-white"
                             placeholder="Enter parent's name"
                           />
                         </div>
@@ -225,7 +225,7 @@ const Admissions = () => {
                             value={form.studentName}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all bg-white"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all bg-white"
                             placeholder="Enter student's name"
                           />
                         </div>
@@ -239,7 +239,7 @@ const Admissions = () => {
                             value={form.className}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all bg-white"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all bg-white"
                           >
                             <option value="">Select class</option>
                             {classOptions.map((cls) => (
@@ -255,7 +255,7 @@ const Admissions = () => {
                             value={form.phone}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all bg-white"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all bg-white"
                             placeholder="Enter phone number"
                           />
                         </div>
@@ -268,7 +268,7 @@ const Admissions = () => {
                           name="email"
                           value={form.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all bg-white"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all bg-white"
                           placeholder="Enter email address"
                         />
                       </div>
@@ -280,7 +280,7 @@ const Admissions = () => {
                           value={form.message}
                           onChange={handleChange}
                           rows={4}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#8F2D3A]/20 focus:border-[#8F2D3A] transition-all resize-none bg-white"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#574737]/20 focus:border-[#574737] transition-all resize-none bg-white"
                           placeholder="Any specific questions or requirements?"
                         />
                       </div>
@@ -288,7 +288,7 @@ const Admissions = () => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-[#8F2D3A] hover:bg-[#78232F] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-base tracking-wide flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.99]"
+                        className="w-full bg-[#574737] hover:bg-[#3D1418] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-base tracking-wide flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.99]"
                       >
                         {loading ? 'Submitting...' : 'Submit Enquiry'}
                       </button>
@@ -351,7 +351,7 @@ const Admissions = () => {
                     const IconComp = feat.icon;
                     return (
                       <div key={idx} className="flex items-start gap-3.5">
-                        <div className="w-10 h-10 rounded-xl bg-[#8F2D3A] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                        <div className="w-10 h-10 rounded-xl bg-[#574737] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                           <IconComp size={18} strokeWidth={2.2} />
                         </div>
                         <div>

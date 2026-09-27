@@ -27,7 +27,7 @@ const Facilities = () => {
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0">
           <img
-            src="/images/hero/campus-facilities-hero.jpg"
+            src="/images/hero/campus-facilities-hero.webp"
             alt="Mount Carmel School Campus"
             className="w-full h-full object-cover object-center"
           />
@@ -36,7 +36,7 @@ const Facilities = () => {
 
 
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full text-left">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-40 md:pb-16 w-full text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,10 +46,10 @@ const Facilities = () => {
             <span className="text-[#FDF0D5] font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-2 [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
               INFRASTRUCTURE
             </span>
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.7)]">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
               Campus & Facilities
             </h1>
-            <p className="text-white/95 text-sm sm:text-base md:text-lg font-sans max-w-lg leading-relaxed [text-shadow:_0_2px_8px_rgba(0,0,0,0.7)]">
+            <p className="text-white/95 text-sm md:text-base lg:text-lg font-sans max-w-lg leading-relaxed [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)] pr-4">
               A modern campus designed to inspire learning, growth, and community.
             </p>
           </motion.div>
@@ -65,7 +65,7 @@ const Facilities = () => {
           flip
           className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
         />
-        <div className="relative z-10 max-w-7xl mx-auto px-4">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <SectionTitle
             subtitle="Our Campus"
             title="Welcome to Our Campus"
@@ -91,7 +91,7 @@ const Facilities = () => {
 
       {/* Facilities */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <SectionTitle
             subtitle="Facilities"
             title="What Our Campus Offers"
@@ -105,7 +105,7 @@ const Facilities = () => {
                   <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                     <Icon size={24} className="text-secondary" />
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-primary mb-2">{facility.title}</h3>
+                  <h3 className="font-heading text-lg font-medium text-slate-900 mb-2">{facility.title}</h3>
                   <p className="text-warm-gray text-sm leading-relaxed">{facility.description}</p>
                 </Card>
               );
@@ -123,7 +123,7 @@ const Facilities = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Our Krishnanagar Campus</h2>
+            <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Our Krishnanagar Campus</h2>
             <div className="space-y-4 text-warm-gray text-sm md:text-base leading-relaxed">
               <p>
                 Our present campus at {schoolInfo.address.line1}, {schoolInfo.address.city} is a modern facility designed to provide an ideal learning environment. The campus features well-designed classrooms, a library, a playground, and spaces for cultural and spiritual activities.
@@ -137,10 +137,10 @@ const Facilities = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-primary to-secondary">
+      <section className="pt-4 pb-16 md:pt-6 md:pb-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Visit Our Campus</h2>
-          <p className="text-white/80 text-sm md:text-base mb-8">Schedule a visit to see our campus and meet our team.</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Visit Our Campus</h2>
+          <p className="text-warm-gray text-sm md:text-base mb-8">Schedule a visit to see our campus and meet our team.</p>
           <Button to="/contact" variant="dark" size="lg" icon>Contact Us</Button>
         </div>
       </section>

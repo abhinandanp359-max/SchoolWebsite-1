@@ -10,7 +10,7 @@ import api from "../../utils/api";
 const TYPE_CONFIG = {
   admission: {
     label: "Admission Enquiry",
-    badgeClass: "bg-primary/10 text-primary border-primary/20",
+    badgeClass: "bg-primary/10 text-slate-900 border-primary/20",
     icon: GraduationCap,
     // Fields shown in the info grid, in order; empty fields are hidden automatically
     fields: [
@@ -133,7 +133,7 @@ export default function AdminEnquiryDetail() {
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <Link
           to="/admin/enquiries"
-          className="inline-flex items-center gap-1.5 text-sm text-warm-gray hover:text-primary transition"
+          className="inline-flex items-center gap-1.5 text-sm text-warm-gray hover:text-slate-900 transition"
         >
           <ArrowLeft size={15} /> Back to Enquiries
         </Link>
@@ -158,7 +158,7 @@ export default function AdminEnquiryDetail() {
       {/* info card */}
       <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-5">
         <div className="px-5 sm:px-6 pt-5 pb-4 border-b border-[#eee3cd] bg-ivory">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-primary">Enquiry Information</h2>
+          <h2 className="text-xs font-bold uppercase tracking-widest text-slate-900">Enquiry Information</h2>
         </div>
         <div className="px-5 sm:px-6 py-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6">
@@ -183,7 +183,7 @@ export default function AdminEnquiryDetail() {
 
           {enquiry.message && (
             <div className="py-4">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-2">Message</p>
+              <p className="text-[11px] font-bold uppercase tracking-widest text-slate-900 mb-2">Message</p>
               <div className="rounded-lg border border-[#eee3cd] border-l-4 border-l-secondary bg-[#fffdf7] px-4 py-3 text-sm leading-6 text-charcoal whitespace-pre-wrap break-words">
                 {enquiry.message}
               </div>

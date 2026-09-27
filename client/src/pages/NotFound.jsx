@@ -10,7 +10,7 @@ const NotFound = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="font-heading text-[120px] md:text-[160px] font-bold text-primary/10 leading-none"
+          className="font-heading text-[120px] md:text-[160px] font-medium text-slate-900/10 leading-none"
         >
           404
         </motion.h1>
@@ -18,7 +18,7 @@ const NotFound = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="font-heading text-2xl md:text-3xl font-bold text-primary -mt-6 md:-mt-8 mb-4"
+          className="font-heading text-2xl md:text-3xl font-medium text-slate-900 -mt-6 md:-mt-8 mb-4"
         >
           Page Not Found
         </motion.h2>

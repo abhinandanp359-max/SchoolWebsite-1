@@ -41,20 +41,20 @@ const Academics = () => {
   return (
     <PageLayout title="Academics" description="Explore the academic programs at Mount Carmel School - Primary, Middle, and Secondary education with a focus on holistic development.">
       {/* Full-width Scenic Academics Hero Section */}
-      <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-primary">
+      <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center bg-primary">
         <div className="absolute inset-0">
           <img
-            src="/images/hero/academics-hero.jpg"
+            src="/images/hero/academics-hero.webp"
             alt="Students learning in classroom"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-top"
           />
-          {/* Soft warm burgundy/golden overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#4A151C]/90 via-[#722F37]/70 to-[#B8860B]/40 pointer-events-none" />
+          {/* Subtle localized radial gradient for text readability */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/50 via-black/10 to-transparent pointer-events-none" />
         </div>
 
 
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full text-center">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-40 md:pb-16 w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ const Academics = () => {
             <span className="text-[#FDF0D5] font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-3 [text-shadow:_0_2px_10px_rgba(0,0,0,0.6)]">
               EDUCATION & LEARNING
             </span>
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight leading-[1.15] [text-shadow:_0_2px_14px_rgba(0,0,0,0.7)]">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
               Academics
             </h1>
             <p className="text-white/95 text-base md:text-lg font-sans max-w-xl mx-auto leading-relaxed [text-shadow:_0_2px_8px_rgba(0,0,0,0.7)]">
@@ -76,7 +76,7 @@ const Academics = () => {
 
       {/* Programs */}
       <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <SectionTitle
             subtitle="Programs"
             title="Our Academic Programs"
@@ -90,7 +90,7 @@ const Academics = () => {
                   <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                     <Icon size={28} className="text-secondary" />
                   </div>
-                  <h3 className="font-heading text-xl font-bold text-primary mb-1">{program.title}</h3>
+                  <h3 className="font-heading text-xl font-medium text-slate-900 mb-1">{program.title}</h3>
                   <p className="text-secondary font-semibold text-sm mb-3">{program.subtitle}</p>
                   <p className="text-warm-gray text-sm leading-relaxed">{program.description}</p>
                 </Card>
@@ -102,7 +102,7 @@ const Academics = () => {
 
       {/* Why Choose Us */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -141,7 +141,7 @@ const Academics = () => {
               className="md:w-1/2"
             >
               <Card className="p-8 md:p-10">
-                <h3 className="font-heading text-xl font-bold text-primary mb-4">Our Teaching Approach</h3>
+                <h3 className="font-heading text-xl font-medium text-slate-900 mb-4">Our Teaching Approach</h3>
                 <div className="space-y-4 text-warm-gray text-sm leading-relaxed">
                   <p>
                     At Mount Carmel School, we believe that every child learns differently. Our teachers employ a blend of traditional and modern pedagogical methods to ensure that every student is engaged, challenged, and supported.
@@ -160,10 +160,10 @@ const Academics = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-primary to-secondary">
+      <section className="pt-4 pb-16 md:pt-6 md:pb-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Ready to Join Our Community?</h2>
-          <p className="text-white/80 text-sm md:text-base max-w-2xl mx-auto">Explore admissions and give your child the gift of quality, value-based education.</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Ready to Join Our Community?</h2>
+          <p className="text-warm-gray text-sm md:text-base max-w-2xl mx-auto">Explore admissions and give your child the gift of quality, value-based education.</p>
         </div>
       </section>
     </PageLayout>

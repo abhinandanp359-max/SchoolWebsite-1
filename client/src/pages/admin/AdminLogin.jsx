@@ -32,14 +32,14 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-ivory px-4 relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.png')] opacity-20 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.webp')] opacity-20 mix-blend-overlay"></div>
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary rounded-full blur-[100px] opacity-10"></div>
       <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-secondary rounded-full blur-[100px] opacity-20"></div>
 
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8 space-y-8 relative z-10">
         <div className="flex flex-col items-center gap-3">
           <img src="/images/branding/logo.webp" alt="School Logo" className="h-24 w-24 object-contain mb-2" />
-          <h1 className="text-2xl font-bold text-primary font-heading uppercase tracking-wide">Admin Panel</h1>
+          <h1 className="text-2xl font-medium text-slate-900 font-heading uppercase tracking-wide">Admin Panel</h1>
           <p className="text-sm font-semibold text-secondary uppercase tracking-widest">Mount Carmel School</p>
         </div>
 
@@ -77,7 +77,7 @@ export default function AdminLogin() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center pr-4 text-warm-gray hover:text-primary transition-colors focus:outline-none"
+                className="absolute inset-y-0 right-0 flex items-center pr-4 text-warm-gray hover:text-slate-900 transition-colors focus:outline-none"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 title={showPassword ? "Hide password" : "Show password"}
               >

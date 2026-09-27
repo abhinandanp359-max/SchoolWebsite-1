@@ -14,7 +14,7 @@ const SectionTitle = ({ subtitle, title, description, center = true, light = fal
           {subtitle}
         </span>
       )}
-      <h2 className={`font-heading text-2xl md:text-3xl lg:text-4xl font-bold mt-2 ${light ? 'text-white' : 'text-primary'}`}>
+      <h2 className={`font-heading text-2xl md:text-3xl lg:text-4xl font-medium mt-2 ${light ? 'text-white' : 'text-slate-900'}`}>
         {title}
       </h2>
       {description && (

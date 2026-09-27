@@ -7,20 +7,26 @@ const PrincipalMessage = () => {
   return (
     <PageLayout title="Principal's Message" description={`Read the message from ${principalData.principalName}, Principal of Mount Carmel School.`}>
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <BotanicalAccent 
-          className="absolute -top-3 -left-3 w-28 sm:w-36 text-amber-200/20 pointer-events-none" 
-        />
-        <BotanicalAccent 
-          flip 
-          className="absolute -top-3 -right-3 w-32 sm:w-40 text-amber-200/20 rotate-12 pointer-events-none" 
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center bg-[#1f2924]">
+        
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero/principal-desk.webp"
+            className="w-full h-full object-cover object-center"
+            alt="Principal's Desk"
+          />
+        </div>
+
+        {/* Subtle Darkening for text readability */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 pt-28 pb-12 md:pt-40 md:pb-16 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="font-heading text-3xl md:text-5xl font-bold text-white mb-4"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]"
           >
             {principalData.heading}
           </motion.h1>
@@ -28,7 +34,7 @@ const PrincipalMessage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-white/80 text-base md:text-lg max-w-2xl mx-auto italic"
+            className="text-white/95 text-sm md:text-base lg:text-lg max-w-2xl mx-auto italic font-sans leading-relaxed [text-shadow:_0_2px_6px_rgba(0,0,0,0.8)] pr-4"
           >
             "{principalData.motto}"
           </motion.p>
@@ -59,7 +65,7 @@ const PrincipalMessage = () => {
                   <img src={principalData.image} alt={principalData.imageAlt} className="w-full h-auto object-cover" />
                 </div>
                 <div className="text-center mt-4">
-                  <h2 className="font-heading text-xl font-bold text-primary">{principalData.principalName}</h2>
+                  <h2 className="font-heading text-xl font-medium text-slate-900">{principalData.principalName}</h2>
                   <p className="text-secondary text-sm font-semibold">{principalData.designation}</p>
                 </div>
               </div>
@@ -79,7 +85,7 @@ const PrincipalMessage = () => {
                   
                   // Styling the greeting (first paragraph)
                   if (i === 0) {
-                    styleClass = "font-heading text-xl md:text-2xl font-bold text-primary mb-8 italic";
+                    styleClass = "font-heading text-xl md:text-2xl font-medium text-slate-900 mb-8 italic";
                   }
                   // Styling the blessing (last paragraph)
                   else if (i === principalData.paragraphs.length - 1) {
@@ -92,8 +98,8 @@ const PrincipalMessage = () => {
                     </p>
                   );
                 })}
-                <p className="text-primary font-heading italic text-lg md:text-xl font-medium mt-6">{principalData.closing}</p>
-                <p className="text-primary font-heading text-xl font-bold mt-1">{principalData.principalName}</p>
+                <p className="text-slate-900 font-heading italic text-lg md:text-xl font-medium mt-6">{principalData.closing}</p>
+                <p className="text-slate-900 font-heading text-xl font-bold mt-1">{principalData.principalName}</p>
                 <p className="text-secondary text-sm">{principalData.designation}</p>
                 <p className="text-warm-gray text-sm">Mount Carmel School</p>
               </div>

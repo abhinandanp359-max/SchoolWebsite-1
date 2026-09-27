@@ -37,16 +37,16 @@ const AdminLayout = () => {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden p-2 text-charcoal hover:text-primary">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden p-2 text-charcoal hover:text-slate-900">
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <Link to="/admin" className="flex items-center gap-2">
             <img src="/images/branding/logo.webp" alt="Logo" className="h-8 w-8 object-contain" />
-            <span className="font-heading text-lg font-bold text-primary hidden sm:inline">Admin Panel</span>
+            <span className="font-heading text-lg font-medium text-slate-900 hidden sm:inline">Admin Panel</span>
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <Link to="/" className="text-sm text-warm-gray hover:text-primary transition-colors">View Site</Link>
+          <Link to="/" className="text-sm text-warm-gray hover:text-slate-900 transition-colors">View Site</Link>
           <span className="text-sm text-charcoal hidden sm:inline">{user.username}</span>
           <button onClick={handleLogout} className="bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors flex items-center gap-2">
             <LogOut size={16} /> <span className="hidden sm:inline">Logout</span>

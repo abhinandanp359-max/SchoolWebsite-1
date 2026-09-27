@@ -240,7 +240,7 @@ export default function AdminNotifications() {
   return (
     <div className="p-4 sm:p-6 max-w-[1500px] mx-auto">
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <span className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+        <span className="h-10 w-10 rounded-xl bg-primary/10 text-slate-900 flex items-center justify-center shrink-0">
           <Bell size={18} />
         </span>
         <div className="min-w-0">
@@ -257,7 +257,7 @@ export default function AdminNotifications() {
           </h2>
 
           <div className="rounded-xl bg-ivory border border-[#eee3cd] p-4 mb-5">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-primary/70 mb-2">Enquiry Source</p>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-slate-900/70 mb-2">Enquiry Source</p>
             <div className="flex flex-wrap gap-2 mb-3">
               {TABS.map((t) => (
                 <button
@@ -270,7 +270,7 @@ export default function AdminNotifications() {
                   className={`px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer ${
                     tab === t.key
                       ? "bg-primary text-white"
-                      : "bg-white text-warm-gray hover:text-primary border border-gray-200"
+                      : "bg-white text-warm-gray hover:text-slate-900 border border-gray-200"
                   }`}
                 >
                   {t.label}
@@ -358,7 +358,7 @@ export default function AdminNotifications() {
           <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             
             <label className="w-full sm:flex-1 sm:min-w-0">
-              <span className="inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 rounded-lg border-2 border-gray-200 text-sm font-semibold text-warm-gray hover:border-primary hover:text-primary transition cursor-pointer">
+              <span className="inline-flex w-full sm:w-auto items-center justify-center sm:justify-start gap-2 px-4 py-3 sm:py-2.5 rounded-lg border-2 border-gray-200 text-sm font-semibold text-warm-gray hover:border-primary hover:text-slate-900 transition cursor-pointer">
                 <Paperclip size={16} />
                 {files.length > 0 ? `${files.length} file${files.length > 1 ? "s" : ""} selected` : "Attach files"}
                 <input

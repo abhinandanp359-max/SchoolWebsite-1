@@ -60,7 +60,7 @@ const Gallery = () => {
   return (
     <PageLayout>
       <section className="bg-ivory py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <SectionTitle
             subtitle="Our Gallery"
             title="School Life in Pictures"
@@ -76,7 +76,7 @@ const Gallery = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                   activeCategory === category
                     ? 'bg-primary text-white shadow-md'
-                    : 'bg-white text-charcoal hover:bg-primary/5 hover:text-primary border border-gray-100'
+                    : 'bg-white text-charcoal hover:bg-primary/5 hover:text-slate-900 border border-gray-100'
                 }`}
               >
                 {category}

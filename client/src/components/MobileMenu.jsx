@@ -78,7 +78,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="-mr-2 rounded-full p-2 text-warm-gray transition-colors hover:bg-gray-50 hover:text-primary"
+                className="-mr-2 rounded-full p-2 text-warm-gray transition-colors hover:bg-gray-50 hover:text-slate-900"
                 aria-label="Close menu"
               >
                 <X size={24} />
@@ -98,7 +98,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                         <button
                           type="button"
                           onClick={(e) => toggleSubmenu(e, item.name)}
-                          className="flex w-full items-center justify-between gap-2 py-4 text-left text-base font-medium text-charcoal transition-colors hover:text-primary"
+                          className="flex w-full items-center justify-between gap-2 py-4 text-left text-base font-medium text-charcoal transition-colors hover:text-slate-900"
                           aria-expanded={expandedMenu === item.name}
                         >
                           {item.name}
@@ -121,7 +121,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                                   <Link
                                     to={child.path}
                                     onClick={onClose}
-                                    className="flex items-center gap-2.5 py-3 pl-4 text-sm font-medium text-warm-gray transition-colors hover:text-primary"
+                                    className="flex items-center gap-2.5 py-3 pl-4 text-sm font-medium text-warm-gray transition-colors hover:text-slate-900"
                                   >
                                     <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/60" />
                                     {child.name}
@@ -137,7 +137,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                         to={item.path}
                         onClick={onClose}
                         className={`flex items-center py-4 text-base font-medium transition-colors ${
-                          location.pathname === item.path ? 'text-primary' : 'text-charcoal hover:text-primary'
+                          location.pathname === item.path ? 'text-slate-900' : 'text-charcoal hover:text-slate-900'
                         }`}
                       >
                         {item.name}

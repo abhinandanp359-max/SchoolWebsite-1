@@ -10,11 +10,11 @@ const Footer = () => {
 
   return (
     <footer className="bg-charcoal text-white">
-      <div className="max-w-7xl mx-auto px-5 md:px-4 py-10 md:py-16">
+      <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-5 md:px-4 py-10 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-11 w-11 md:h-12 md:w-12 object-contain" />
+              <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-11 w-11 md:h-12 md:w-12 object-contain" loading="lazy" decoding="async" />
               <div>
                 <h3 className="font-heading text-lg md:text-xl font-bold text-white">Mount Carmel</h3>
                 <p className="text-secondary text-[10px] md:text-xs font-semibold tracking-widest">SCHOOL</p>
@@ -81,7 +81,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-5 md:px-4 py-4 md:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 md:gap-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-5 md:px-4 py-4 md:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 md:gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <p className="text-gray-500 text-xs md:text-sm text-center sm:text-left">
               &copy; {new Date().getFullYear()} {schoolInfo.name}. All rights reserved.

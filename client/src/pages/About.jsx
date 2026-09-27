@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Cross } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import BotanicalAccent from '../components/ui/BotanicalAccent';
@@ -11,12 +12,17 @@ const About = () => {
   return (
     <PageLayout title="About Us" description="Learn about Mount Carmel School - a Christian missionary school rooted in values and committed to excellence in education.">
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 bg-gradient-to-br from-primary to-secondary">
-        <BotanicalAccent 
-          variant="corner" 
-          className="absolute -top-3 -left-3 w-28 sm:w-36 text-amber-200/15 pointer-events-none" 
-        />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center bg-[#1f2924]">
+        
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero/about-hero-new.webp"
+            className="w-full h-full object-cover object-center"
+            alt="School Campus Assembly"
+          />
+        </div>
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 pt-28 pb-12 md:pt-40 md:pb-16 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +48,7 @@ const About = () => {
           flip
           className="absolute -bottom-8 -right-8 w-44 sm:w-56 text-[#A26A38]/15 rotate-12 pointer-events-none"
         />
-        <div className="relative z-10 max-w-7xl mx-auto px-4">
+        <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -84,7 +90,7 @@ const About = () => {
 
       {/* Mother Mary */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
 
             {/* Left - Image */}
@@ -96,11 +102,11 @@ const About = () => {
               className="md:w-2/5 flex justify-center"
             >
               <div className="relative">
-                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-yellow-200/40 to-amber-100/30 blur-xl" />
+                <div className="absolute -inset-2 md:-inset-4 rounded-2xl bg-gradient-to-br from-yellow-200/40 to-amber-100/30 blur-lg md:blur-xl" />
                 <img
                   src="/images/branding/mother-marry.webp"
                   alt="Mother Mary - Our Patroness"
-                  className="relative w-64 md:w-80 rounded-2xl shadow-2xl object-cover"
+                  className="relative w-52 md:w-80 rounded-2xl shadow-xl md:shadow-2xl object-cover"
                 />
               </div>
             </motion.div>
@@ -114,7 +120,7 @@ const About = () => {
               className="md:w-3/5"
             >
               <p className="text-secondary font-semibold text-sm uppercase tracking-widest mb-2">Our Patroness</p>
-              <h2 className="font-heading text-2xl md:text-4xl font-bold text-primary mb-6 leading-tight">
+              <h2 className="font-heading text-2xl md:text-4xl font-medium text-slate-900 mb-6 leading-tight">
                 Mother Mary{' '}
                 <span className="text-secondary">- Model of Grace &amp; Love</span>
               </h2>
@@ -132,7 +138,7 @@ const About = () => {
                   As our patroness, Mother Mary intercedes for our students, teachers, and families. Her loving presence is felt in our prayers, our service, and our daily commitment to nurturing minds and hearts for a better world.
                 </p>
               </div>
-              <div className="mt-6 italic text-primary/70 text-sm border-l-4 border-secondary pl-4">
+              <div className="mt-6 italic text-slate-900/70 text-sm border-l-4 border-secondary pl-4">
                 "Do whatever He tells you." - John 2:5
               </div>
             </motion.div>
@@ -143,7 +149,7 @@ const About = () => {
 
       {/* Christian Identity */}
       <section className="py-16 md:py-24 bg-ivory">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -154,7 +160,7 @@ const About = () => {
               <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
                 <Cross size={28} className="text-secondary" />
               </div>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-4">Our Christian Identity</h2>
+              <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Our Christian Identity</h2>
               <p className="text-warm-gray text-sm md:text-base leading-relaxed mb-4">
                 As a {schoolInfo.type}, our faith is at the heart of everything we do. We believe that every child is created in the image of God and deserves to be loved, respected, and nurtured.
               </p>
@@ -171,7 +177,7 @@ const About = () => {
 
       {/* Core Values */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4">
           <SectionTitle
             subtitle="What Guides Us"
             title="Our Core Values"
@@ -188,7 +194,7 @@ const About = () => {
                 whileHover={{ y: -6 }}
                 className="bg-ivory/50 rounded-xl p-6 text-center"
               >
-                <h3 className="font-heading text-xl font-bold text-primary mb-2">{value.title}</h3>
+                <h3 className="font-heading text-xl font-medium text-slate-900 mb-2">{value.title}</h3>
                 <p className="text-warm-gray text-sm leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
@@ -197,13 +203,13 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-primary to-secondary">
+      <section className="pt-4 pb-16 md:pt-6 md:pb-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Want to Learn More?</h2>
-          <p className="text-white/80 text-sm md:text-base mb-8">Explore our history, meet our principal, or get in touch with us.</p>
+          <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Want to Learn More?</h2>
+          <p className="text-warm-gray text-sm md:text-base mb-8">Explore our history, meet our principal, or get in touch with us.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button to="/about/history" variant="dark" size="md" icon>Our History</Button>
-            <Button to="/about/principal-message" variant="outline-light-pill" size="md">Principal's Message</Button>
+            <Button to="/about/principal-message" variant="outline" size="md">Principal's Message</Button>
           </div>
         </div>
       </section>

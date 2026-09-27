@@ -59,7 +59,7 @@ const Events = () => {
     <PageLayout>
       {/* Hero Header */}
       <section className="bg-primary pt-24 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.png')] opacity-10 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('/images/pattern/subtle-dots.webp')] opacity-10 mix-blend-overlay"></div>
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary rounded-full blur-[120px] opacity-20"></div>
         
         {/* Subtle corner botanical leaf accents */}
@@ -71,13 +71,13 @@ const Events = () => {
           className="absolute -top-3 -right-3 w-32 sm:w-40 text-amber-200/20 rotate-12 pointer-events-none" 
         />
 
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
+        <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium text-white mb-4 md:mb-6 leading-[1.15] [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
               Upcoming <span className="text-secondary">Events</span>
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
@@ -107,7 +107,7 @@ const Events = () => {
               animate={{ opacity: 1 }}
               className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center flex flex-col items-center gap-4"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-slate-900">
                 <Calendar size={32} />
               </div>
               <h3 className="text-xl font-bold text-charcoal">No Upcoming Events</h3>
@@ -149,7 +149,7 @@ const Events = () => {
 
                     {/* Content */}
                     <div className="p-6 md:p-8 flex-1 flex flex-col justify-center">
-                      <h2 className="text-2xl font-bold text-primary mb-3 font-heading group-hover:text-secondary transition-colors">
+                      <h2 className="text-2xl font-medium text-slate-900 mb-3 font-heading group-hover:text-secondary transition-colors">
                         {event.title}
                       </h2>
                       

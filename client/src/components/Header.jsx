@@ -36,18 +36,18 @@ const Header = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className={`sticky top-0 z-50 bg-white shadow-sm transition-all duration-300 ${isScrolled ? 'bg-white/95 shadow-lg backdrop-blur-md' : ''} ${isNavbarHidden ? 'max-lg:-translate-y-full max-lg:shadow-none' : ''}`}>
-      <div className="mx-auto max-w-7xl px-4">
+    <header className={`absolute w-full left-0 top-0 z-50 bg-transparent transition-all duration-300 ${isNavbarHidden ? 'max-lg:-translate-y-full' : ''}`}>
+      <div className="mx-auto w-full max-w-[1440px] 2xl:max-w-[1920px] px-4">
         <div className={`flex h-18 items-center justify-between transition-[height] duration-300 md:h-24 ${isScrolled ? 'h-14 md:h-20' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
-            <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-14 w-14 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" />
+            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-14 w-14 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
           </Link>
 
           {/* Desktop navigation */}
           <nav className="hidden items-center gap-1 lg:flex">
             {mainNav.map((item) => (
               <div key={item.name} className="relative" onMouseEnter={() => item.children && setHoveredItem(item.name)} onMouseLeave={() => setHoveredItem(null)}>
-                <Link to={item.path} className={`flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === item.path ? 'bg-primary/5 text-primary' : 'text-charcoal hover:bg-primary/5 hover:text-primary'}`}>
+                <Link to={item.path} className={`flex items-center gap-1 rounded-[14px] px-4 py-2 text-sm font-medium transition-colors ${location.pathname === item.path ? 'bg-white/20 text-white font-bold shadow-sm' : 'text-white/95 hover:bg-white/10 hover:text-white'}`}>
                   {item.name}
                   {item.children && <ChevronDown size={14} className={`transition-transform ${hoveredItem === item.name ? 'rotate-180' : ''}`} />}
                 </Link>
@@ -55,7 +55,7 @@ const Header = () => {
                   {item.children && hoveredItem === item.name && (
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.15 }} className="absolute left-0 top-full mt-1 min-w-[200px] rounded-lg border border-gray-100 bg-white py-2 shadow-xl">
                       {item.children.map((child) => (
-                        <Link key={child.path} to={child.path} className="block px-4 py-2 text-sm text-charcoal transition-colors hover:bg-primary/5 hover:text-primary">{child.name}</Link>
+                        <Link key={child.path} to={child.path} className="block px-4 py-2 text-sm text-charcoal transition-colors hover:bg-primary/5 hover:text-slate-900">{child.name}</Link>
                       ))}
                     </motion.div>
                   )}
@@ -65,7 +65,7 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2 md:gap-3 max-lg:-translate-x-6">
-            {/* Unified Admissions Button — same colour (#8F2D3A) as APPLY NOW buttons */}
+            {/* Unified Admissions Button — same colour (#574737) as APPLY NOW buttons */}
             <Link
               to="/admissions"
               className={`flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-all whitespace-nowrap uppercase ${
@@ -73,7 +73,7 @@ const Header = () => {
                   ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
                   : 'hover:opacity-90 active:opacity-80'
               }`}
-              style={location.pathname !== '/admissions' ? { backgroundColor: '#8F2D3A' } : {}}
+              style={location.pathname !== '/admissions' ? { backgroundColor: '#574737' } : {}}
             >
               ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />
             </Link>
@@ -87,7 +87,7 @@ const Header = () => {
                   <button
                     type="button"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="-mr-2 rounded-lg p-2 text-charcoal transition-colors hover:text-primary"
+                    className="-mr-2 rounded-lg p-2 text-white transition-colors hover:bg-white/10"
                     aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                   >
                     <AnimatePresence mode="wait" initial={false}>
@@ -117,7 +117,7 @@ const Header = () => {
                           to={item.path}
                           onClick={() => setIsMobileMenuOpen(false)}
                           className={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                            location.pathname === item.path ? 'bg-primary/5 text-primary' : 'text-charcoal hover:bg-gray-50'
+                            location.pathname === item.path ? 'bg-primary/5 text-slate-900' : 'text-charcoal hover:bg-gray-50'
                           }`}
                         >
                           {item.name}
@@ -129,7 +129,7 @@ const Header = () => {
                                 <Link
                                   to={child.path}
                                   onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block rounded-lg py-2 text-sm text-warm-gray transition-colors hover:text-primary"
+                                  className="block rounded-lg py-2 text-sm text-warm-gray transition-colors hover:text-slate-900"
                                 >
                                   {child.name}
                                 </Link>

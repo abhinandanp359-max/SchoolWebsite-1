@@ -48,7 +48,7 @@ export default function EmailPreview({ html, loading, device, onDeviceChange }) 
           <button
             onClick={() => setRefreshKey((k) => k + 1)}
             title="Refresh preview"
-            className="p-2 rounded-lg text-warm-gray hover:text-primary hover:bg-gray-50 transition cursor-pointer"
+            className="p-2 rounded-lg text-warm-gray hover:text-slate-900 hover:bg-gray-50 transition cursor-pointer"
           >
             <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
           </button>

@@ -18,7 +18,6 @@ export const footerLinks = {
     { name: "About Us", path: "/about" },
     { name: "Academics", path: "/academics" },
     { name: "Events", path: "/events" },
-    { name: "Admissions", path: "/admissions" },
     { name: "Contact", path: "/contact" }
   ],
   about: [
