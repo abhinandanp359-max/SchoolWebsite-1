@@ -11,8 +11,10 @@ import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
 import values from '../data/values';
 import api from '../utils/api';
-
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 
 
 const valueIcons = [Award, HandHeart, Heart, GraduationCap];
@@ -402,39 +404,46 @@ const Home = () => {
             </Link>
           </div>
 
-          {/* Right Images (Infinite Smooth Auto-Scroll) */}
+          {/* Right Images (3D Cover Flow Carousel) */}
           <div className="w-full lg:w-2/3 relative overflow-hidden">
-            <motion.div 
-              className="flex w-max"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: Math.max(30, galleryImages.length * 8) }}
+            <Swiper
+              effect={'coverflow'}
+              grabCursor={true}
+              centeredSlides={true}
+              loop={true}
+              slidesPerView={'auto'}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false,
+              }}
+              speed={1200}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 200,
+                modifier: 1.5,
+                slideShadows: false,
+              }}
+              modules={[EffectCoverflow, Autoplay]}
+              className="w-full pb-8 pt-4"
             >
-              {/* Set 1 */}
-              <div className="flex gap-4 md:gap-5 pr-4 md:pr-5">
-                {galleryImages.map((img, idx) => (
-                  <div key={`set1-${idx}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                    <img src={img.image} alt={img.title || "School moment"} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                ))}
-                {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
-                  <div key={`set1-empty-${i}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                  </div>
-                ))}
-              </div>
-
-              {/* Set 2 (Duplicate for seamless loop) */}
-              <div className="flex gap-4 md:gap-5 pr-4 md:pr-5">
-                {galleryImages.map((img, idx) => (
-                  <div key={`set2-${idx}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                    <img src={img.image} alt={img.title || "School moment"} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </div>
-                ))}
-                {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
-                  <div key={`set2-empty-${i}`} className="flex-none w-[200px] sm:w-[240px] md:w-[260px] lg:w-[220px] xl:w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+              {galleryImages.map((img, idx) => (
+                <SwiperSlide key={idx} className="!w-[200px] sm:!w-[240px] md:!w-[260px] lg:!w-[220px] xl:!w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5 transition-all duration-700">
+                  {({ isActive }) => (
+                    <img 
+                      src={img.image} 
+                      alt={img.title || "School moment"} 
+                      className={`w-full h-full object-cover transition-all duration-700 ease-out ${isActive ? 'opacity-100 blur-none scale-100' : 'opacity-50 blur-[2px] scale-95'}`} 
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+              {/* Fallback empty states if not enough images */}
+              {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
+                <SwiperSlide key={`empty-${i}`} className="!w-[200px] sm:!w-[240px] md:!w-[260px] lg:!w-[220px] xl:!w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </section>
