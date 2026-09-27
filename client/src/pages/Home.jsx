@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, useSpring } from 'framer-motion';
 import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight, Play, Leaf, Users, Star } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
@@ -85,11 +85,16 @@ const Home = () => {
   }, []);
 
   const { scrollY } = useScroll();
+  
+  // Apply a spring physics smoothing to the scroll value. 
+  // This COMPLETELY eliminates the "shaking" or "jitter" on mobile devices 
+  // caused by the JS thread falling slightly behind the native scroll thread!
+  const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   // Fix: useTransform caches initial values. We must create two separate MotionValues 
   // and dynamically pick the right one so that mobile gets the aggressive 45% speed!
-  const desktopY = useTransform(scrollY, [0, 1000], [0, 200]);
-  const mobileY = useTransform(scrollY, [0, 1000], [0, 450]);
+  const desktopY = useTransform(smoothScrollY, [0, 1000], [0, 200]);
+  const mobileY = useTransform(smoothScrollY, [0, 1000], [0, 450]);
   const heroY = isMobile ? mobileY : desktopY;
 
   useEffect(() => {
