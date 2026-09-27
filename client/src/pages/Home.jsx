@@ -126,10 +126,10 @@ const Home = () => {
       <section ref={heroRef} className="relative w-full min-h-[100svh] flex flex-col items-center max-md:bg-transparent bg-[#3D1418] overflow-hidden">
         
         {/* Wrapper absolute to fill the 100svh container completely */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <motion.div 
-            style={{ y: heroY }} 
-            className="absolute -top-[25%] left-0 w-full h-[125%] transform-gpu"
+            style={{ y: heroY, scale: 1.2, transformOrigin: "bottom" }} 
+            className="w-full h-full transform-gpu"
           >
             <picture className="w-full h-full block">
               <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
