@@ -74,17 +74,10 @@ const Home = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
+  const { scrollY } = useScroll();
 
-  // Smooth parallax scrolling translation for the hero photo
-  const heroY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['0%', '20%']
-  );
+  // Bulletproof absolute scroll parallax (moves 40% as fast as the user scrolls)
+  const heroY = useTransform(scrollY, value => value * 0.4);
 
   useEffect(() => {
     const fetchGallery = async () => {
