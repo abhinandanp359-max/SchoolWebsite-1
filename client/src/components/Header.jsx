@@ -41,9 +41,9 @@ const Header = () => {
         <div className={`flex h-18 items-center justify-between transition-[height] duration-300 md:h-24 ${isScrolled ? 'h-14 md:h-20' : ''}`}>
           <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
             <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-12 w-12 shrink-0 object-contain md:h-16 md:w-16 transition-all duration-300" fetchpriority="high" />
-            <div className="flex flex-col">
-              <span className="font-heading text-[15px] sm:text-lg md:text-xl font-semibold text-white tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] whitespace-nowrap">
-                Mount Carmel School
+            <div className="flex flex-col items-center md:items-start md:block">
+              <span className="font-heading text-[15px] sm:text-lg md:text-xl font-semibold text-white tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] text-center md:text-left leading-tight">
+                Mount Carmel<span className="block md:inline"> School</span>
               </span>
             </div>
           </Link>
