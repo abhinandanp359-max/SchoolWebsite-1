@@ -78,7 +78,7 @@ const Header = () => {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 md:gap-3 max-lg:-translate-x-6">
+          <div className="flex items-center gap-3 md:gap-4 max-lg:mr-3">
             {/* Unified Admissions Button — same colour (#574737) as APPLY NOW buttons */}
             <Link
               to="/admissions"
