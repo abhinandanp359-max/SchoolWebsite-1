@@ -74,19 +74,16 @@ const Home = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const { scrollY } = useScroll();
-
-  // Smooth parallax scrolling translation for the hero photo using spring
-  const smoothScrollY = useSpring(scrollY, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
   });
 
+  // Smooth parallax scrolling translation for the hero photo
   const heroY = useTransform(
-    smoothScrollY,
-    [0, 1000],
-    [0, 150] // Move 150px down when scrolled 1000px
+    scrollYProgress,
+    [0, 1],
+    ['0%', '20%']
   );
 
   useEffect(() => {
