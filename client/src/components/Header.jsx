@@ -71,9 +71,8 @@ const Header = () => {
               className={`flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-all whitespace-nowrap uppercase ${
                 location.pathname === '/admissions'
                   ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
-                  : 'hover:opacity-90 active:opacity-80'
+                  : 'bg-primary hover:bg-primary-dark active:opacity-80'
               }`}
-              style={location.pathname !== '/admissions' ? { backgroundColor: '#574737' } : {}}
             >
               ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />
             </Link>

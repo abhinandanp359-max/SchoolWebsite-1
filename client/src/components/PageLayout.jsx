@@ -83,7 +83,7 @@ const PageLayout = ({ title, description, canonical, children, className = '', s
         <button
           type="button"
           onClick={handleBack}
-          className="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#574737] text-white shadow-lg hover:opacity-90 transition-all duration-300 focus:outline-none group active:scale-95 border border-white/20"
+          className="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary text-white shadow-lg hover:opacity-90 transition-all duration-300 focus:outline-none group active:scale-95 border border-white/20"
           aria-label="Go to previous page"
           title="Go back to previous page"
         >

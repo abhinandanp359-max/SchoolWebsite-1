@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import ArrowRight from '../icons/ArrowRight';
 
 // Shared colour — used by ADMISSIONS header button and all APPLY NOW buttons
-const BURGUNDY = '#574737';
+const BURGUNDY = '#722129';
 
 const Button = ({ children, to, href, variant = 'primary', size = 'md', icon = false, className = '', style: styleProp = {}, ...props }) => {
   const baseClasses = 'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300';
 
   const variants = {
-    primary:         'bg-[#574737] hover:bg-[#3D1418] text-white hover:shadow-lg rounded-full',
+    primary:         'bg-primary hover:bg-primary-dark text-white hover:shadow-lg rounded-full',
     secondary:       'bg-secondary hover:bg-secondary-dark text-white hover:shadow-lg rounded-full',
     // dark = shared pill — same colour and pill shape as the top ADMISSIONS button
     dark:            'border-2 border-transparent hover:opacity-90 active:opacity-80 text-white rounded-full uppercase tracking-wider shadow-sm font-bold',
-    outline:         'border-2 border-[#574737] text-slate-900 hover:bg-[#574737] hover:text-white rounded-full',
+    outline:         'border-2 border-primary text-slate-900 hover:bg-primary hover:text-white rounded-full',
     'outline-light': 'border-2 border-white text-white hover:bg-white hover:text-slate-900 rounded-lg',
     'outline-light-pill': 'border-2 border-white text-white hover:bg-white hover:text-slate-900 rounded-full uppercase tracking-wider font-bold',
   };
