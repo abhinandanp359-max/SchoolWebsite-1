@@ -128,10 +128,7 @@ const Home = () => {
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div 
-            style={{ 
-              y: typeof window !== 'undefined' && window.innerWidth >= 768 ? heroY : "0%", 
-              willChange: "transform" 
-            }} 
+            style={{ y: heroY, willChange: "transform" }} 
             className="absolute -top-[25%] left-0 w-full h-[125%] transform-gpu"
           >
             <picture className="w-full h-full block">
