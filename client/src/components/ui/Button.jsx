@@ -9,7 +9,7 @@ const Button = ({ children, to, href, variant = 'primary', size = 'md', icon = f
   const baseClasses = 'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300';
 
   const variants = {
-    primary:         'bg-primary hover:bg-primary-dark text-white hover:shadow-lg rounded-full',
+    primary:         'bg-[#574737] hover:brightness-90 text-white hover:shadow-lg rounded-full border-2 border-transparent',
     secondary:       'bg-secondary hover:bg-secondary-dark text-white hover:shadow-lg rounded-full',
     // dark = shared pill — same colour and pill shape as the top ADMISSIONS button
     dark:            'border-2 border-transparent hover:opacity-90 active:opacity-80 text-white rounded-full uppercase tracking-wider shadow-sm font-bold',
