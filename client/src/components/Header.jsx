@@ -42,7 +42,7 @@ const Header = () => {
           <Link to="/" className="group flex min-w-0 items-center gap-3 md:gap-4 py-1">
             <img src="/images/branding/logo-transparent.webp" alt="Mount Carmel School Logo" className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
             <span className={`hidden md:block font-heading text-lg lg:text-xl font-bold tracking-wide leading-tight ${location.pathname === '/gallery' ? 'text-slate-900 drop-shadow-sm' : 'text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.6)]'}`}>
-              Mount Carmel<br />School
+              Mount Carmel School
             </span>
           </Link>
 
