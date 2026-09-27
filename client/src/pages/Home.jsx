@@ -86,8 +86,8 @@ const Home = () => {
 
   const { scrollY } = useScroll();
 
-  // Bulletproof absolute scroll parallax (moves 40% as fast as the user scrolls)
-  const heroY = useTransform(scrollY, value => value * 0.4);
+  // Desktop gets standard 20% speed. Mobile gets 45% speed so it is MUCH more visible!
+  const heroY = useTransform(scrollY, [0, 1000], [0, isMobile ? 450 : 200]);
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -133,7 +133,7 @@ const Home = () => {
         {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <motion.div 
-            style={{ y: heroY, scale: 1.2, transformOrigin: "bottom" }} 
+            style={{ y: heroY, scale: isMobile ? 1.35 : 1.2, transformOrigin: "bottom" }} 
             className="w-full h-full transform-gpu"
           >
             <picture className="w-full h-full block">
