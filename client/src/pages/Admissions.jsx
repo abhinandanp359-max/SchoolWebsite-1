@@ -97,8 +97,7 @@ const Admissions = () => {
       <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center">
         {/* School Building and Students Photo - Natural & Bright */}
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/contact-hero.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/contact-hero.webp"
             alt="Mount Carmel School Campus and Students"
             className="w-full h-full object-cover object-[center_35%]"
           />
@@ -372,8 +371,7 @@ const Admissions = () => {
 
                 {/* Principal Quote Block */}
                 <div className="flex items-center gap-4 bg-white/70 p-4 rounded-xl border border-amber-200/50 shadow-xs">
-                  <img
-                    src={principalData.image}
+                  <img loading="lazy" decoding="async" src={principalData.image}
                     alt={principalData.imageAlt}
                     className="w-14 h-14 rounded-full object-cover border-2 border-[#D4A346] shadow-sm shrink-0"
                   />

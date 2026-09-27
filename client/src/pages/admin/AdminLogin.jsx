@@ -38,7 +38,7 @@ export default function AdminLogin() {
 
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8 space-y-8 relative z-10">
         <div className="flex flex-col items-center gap-3">
-          <img src="/images/branding/logo.webp" alt="School Logo" className="h-24 w-24 object-contain mb-2" />
+          <img loading="lazy" decoding="async" src="/images/branding/logo.webp" alt="School Logo" className="h-24 w-24 object-contain mb-2" />
           <h1 className="text-2xl font-medium text-slate-900 font-heading uppercase tracking-wide">Admin Panel</h1>
           <p className="text-sm font-semibold text-secondary uppercase tracking-widest">Mount Carmel School</p>
         </div>

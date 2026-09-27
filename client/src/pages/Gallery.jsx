@@ -163,8 +163,7 @@ const Gallery = () => {
               className="relative max-w-5xl w-full h-[80vh] flex items-center justify-center px-16"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={filteredImages[currentImage].image}
+              <img loading="lazy" decoding="async" src={filteredImages[currentImage].image}
                 alt={filteredImages[currentImage].title || 'Gallery image'}
                 className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               />

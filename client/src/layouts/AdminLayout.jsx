@@ -41,7 +41,7 @@ const AdminLayout = () => {
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <Link to="/admin" className="flex items-center gap-2">
-            <img src="/images/branding/logo.webp" alt="Logo" className="h-8 w-8 object-contain" />
+            <img loading="lazy" decoding="async" src="/images/branding/logo.webp" alt="Logo" className="h-8 w-8 object-contain" />
             <span className="font-heading text-lg font-medium text-slate-900 hidden sm:inline">Admin Panel</span>
           </Link>
         </div>

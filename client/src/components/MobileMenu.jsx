@@ -74,7 +74,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
           >
             {/* Menu header */}
             <div className="flex h-16 shrink-0 items-center justify-between border-b border-gray-100 px-5">
-              <img src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-10 w-10 object-contain" />
+              <img loading="lazy" decoding="async" src="/images/branding/logo.webp" alt="Mount Carmel School Logo" className="h-10 w-10 object-contain" />
               <button
                 type="button"
                 onClick={onClose}

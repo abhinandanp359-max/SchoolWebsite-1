@@ -6,6 +6,8 @@ import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
+import HeroOverlay from '../components/ui/HeroOverlay';
+
 const programs = [
   {
     title: 'Primary',
@@ -43,13 +45,11 @@ const Academics = () => {
       {/* Full-width Scenic Academics Hero Section */}
       <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center bg-primary">
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/academics-hero.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/academics-hero.webp"
             alt="Students learning in classroom"
             className="w-full h-full object-cover object-top"
           />
-          {/* Subtle localized radial gradient for text readability */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/50 via-black/10 to-transparent pointer-events-none" />
+          <HeroOverlay intensity="high" />
         </div>
 
 

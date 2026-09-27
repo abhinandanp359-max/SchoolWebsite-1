@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import PageLayout from '../components/PageLayout';
 import BotanicalAccent from '../components/ui/BotanicalAccent';
+import HeroOverlay from '../components/ui/HeroOverlay';
 import principalData from '../data/principalMessage';
 
 const PrincipalMessage = () => {
@@ -11,15 +12,12 @@ const PrincipalMessage = () => {
         
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/principal-desk.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/principal-desk.webp"
             className="w-full h-full object-cover object-center"
             alt="Principal's Desk"
           />
+          <HeroOverlay intensity="high" />
         </div>
-
-        {/* Subtle Darkening for text readability */}
-        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 pt-28 pb-12 md:pt-40 md:pb-16 text-center">
           <motion.h1
@@ -62,7 +60,7 @@ const PrincipalMessage = () => {
             >
               <div className="sticky top-28">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
-                  <img src={principalData.image} alt={principalData.imageAlt} className="w-full h-auto object-cover" />
+                  <img loading="lazy" decoding="async" src={principalData.image} alt={principalData.imageAlt} className="w-full h-auto object-cover" />
                 </div>
                 <div className="text-center mt-4">
                   <h2 className="font-heading text-xl font-medium text-slate-900">{principalData.principalName}</h2>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Clock, ExternalLink, Phone, Mail, MapPin, CircleCheckBig, CircleAlert } from 'lucide-react';
 import PageLayout from '../components/PageLayout';
 import BotanicalAccent from '../components/ui/BotanicalAccent';
+import HeroOverlay from '../components/ui/HeroOverlay';
 import schoolInfo from '../data/schoolInfo';
 import api from '../utils/api';
 
@@ -35,7 +36,7 @@ const Contact = () => {
 
   const fullAddress = schoolInfo.address.full;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
-  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent('Mount Carmel School, Chapra Village, Srinagar, Bangaljhi P.O., Nadia District, West Bengal 741123')}&z=15&output=embed`;
+  const mapEmbedUrl = `https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${encodeURIComponent('Mount Carmel School, Chapra Village, Srinagar, Bangaljhi P.O., Nadia District, West Bengal 741123')}&t=&z=15&ie=UTF8&iwloc=B&output=embed`;
 
   return (
     <PageLayout 
@@ -45,11 +46,11 @@ const Contact = () => {
       {/* Full-width Scenic Hero Section */}
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/admissions-hero.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/admissions-hero.webp"
             alt="Mount Carmel School Campus"
             className="w-full h-full object-cover object-[center_right] sm:object-center"
           />
+          <HeroOverlay intensity="high" />
         </div>
 
 

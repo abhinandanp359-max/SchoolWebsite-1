@@ -39,8 +39,11 @@ const Header = () => {
     <header className={`absolute w-full left-0 top-0 z-50 bg-transparent transition-all duration-300 ${isNavbarHidden ? 'max-lg:-translate-y-full' : ''}`}>
       <div className="mx-auto w-full max-w-[1440px] 2xl:max-w-[1920px] px-4">
         <div className={`flex h-20 items-center justify-between transition-[height] duration-300 md:h-28 ${isScrolled ? 'h-16 md:h-24' : ''}`}>
-          <Link to="/" className="group flex min-w-0 items-center gap-2 md:gap-3 py-1">
-            <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
+          <Link to="/" className="group flex min-w-0 items-center gap-3 md:gap-4 py-1">
+            <img src="/images/branding/logo-transparent.webp" alt="Mount Carmel School Logo" className="h-16 w-16 shrink-0 object-contain md:h-20 md:w-20 transition-all duration-300" fetchpriority="high" />
+            <span className="hidden md:block font-heading text-lg lg:text-xl font-bold text-white tracking-wide leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.6)]">
+              Mount Carmel<br />School
+            </span>
           </Link>
 
 

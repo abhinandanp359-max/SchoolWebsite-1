@@ -5,6 +5,7 @@ import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import HeroOverlay from '../components/ui/HeroOverlay';
 import schoolInfo from '../data/schoolInfo';
 
 const facilities = [
@@ -26,12 +27,11 @@ const Facilities = () => {
       {/* Full-width Scenic Facilities Hero Section */}
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/campus-facilities-hero.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/campus-facilities-hero.webp"
             alt="Mount Carmel School Campus"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+          <HeroOverlay intensity="high" />
         </div>
 
 
@@ -82,7 +82,7 @@ const Facilities = () => {
                 whileHover={{ scale: 1.03 }}
                 className="rounded-xl overflow-hidden shadow-lg"
               >
-                <img src={img.src} alt={img.alt} className="w-full h-64 md:h-72 object-cover" />
+                <img loading="lazy" decoding="async" src={img.src} alt={img.alt} className="w-full h-64 md:h-72 object-cover" />
               </motion.div>
             ))}
           </div>

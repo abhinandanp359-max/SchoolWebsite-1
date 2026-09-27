@@ -120,7 +120,7 @@ export default function AdminGallery() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Image</label>
                 <div className="flex items-center gap-4">
                   {form.image && (
-                    <img src={form.image} alt="Preview" className="h-16 w-16 rounded-lg object-cover bg-slate-100" />
+                    <img loading="lazy" decoding="async" src={form.image} alt="Preview" className="h-16 w-16 rounded-lg object-cover bg-slate-100" />
                   )}
                   <label className="flex-1">
                     <div className="flex items-center justify-center w-full px-4 py-4 border-2 border-dashed border-slate-300 rounded-lg hover:border-blue-500 hover:bg-slate-50 transition cursor-pointer">
@@ -212,8 +212,7 @@ export default function AdminGallery() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {filtered.map((img) => (
             <div key={img._id} className="relative group rounded-xl overflow-hidden bg-white shadow-sm">
-              <img
-                src={img.image}
+              <img loading="lazy" decoding="async" src={img.image}
                 alt={img.title || "Gallery image"}
                 className="w-full aspect-square object-cover"
               />

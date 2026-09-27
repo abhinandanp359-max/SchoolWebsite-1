@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
-              <img src="/images/branding/logo-transparent.png" alt="Mount Carmel School Logo" className="h-11 w-11 md:h-12 md:w-12 object-contain" loading="lazy" decoding="async" />
+              <img src="/images/branding/logo-transparent.webp" alt="Mount Carmel School Logo" className="h-11 w-11 md:h-12 md:w-12 object-contain" loading="lazy" decoding="async" />
               <div>
                 <h3 className="font-heading text-lg md:text-xl font-bold text-white">Mount Carmel</h3>
                 <p className="text-secondary text-[10px] md:text-xs font-semibold tracking-widest">SCHOOL</p>

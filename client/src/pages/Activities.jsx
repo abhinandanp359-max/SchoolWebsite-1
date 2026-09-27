@@ -6,6 +6,8 @@ import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 
+import HeroOverlay from '../components/ui/HeroOverlay';
+
 const activities = [
   { 
     icon: HandHeart, 
@@ -91,11 +93,11 @@ const Activities = () => {
       {/* Full-width Scenic Activities Hero Section */}
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="/images/hero/activities-hero-custom.png"
+          <img loading="lazy" decoding="async" src="/images/hero/activities-hero-custom.webp"
             alt="Mount Carmel School Student Activities"
             className="w-full h-full object-cover object-top scale-[1.05] md:scale-[1.15] origin-top"
           />
+          <HeroOverlay intensity="high" />
         </div>
 
 
@@ -142,8 +144,7 @@ const Activities = () => {
                 <Card key={i} className="group flex flex-col h-full border border-amber-200/60 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
                   {/* Activity Photo Header */}
                   <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
-                    <img 
-                      src={activity.image} 
+                    <img loading="lazy" decoding="async" src={activity.image} 
                       alt={activity.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                     />
@@ -189,7 +190,7 @@ const Activities = () => {
                 className="rounded-lg overflow-hidden cursor-pointer shadow-md"
                 onClick={() => openLightbox(i)}
               >
-                <img src={img.src} alt={img.alt} className="w-full h-40 md:h-48 object-cover" />
+                <img loading="lazy" decoding="async" src={img.src} alt={img.alt} className="w-full h-40 md:h-48 object-cover" />
               </motion.div>
             ))}
           </div>

@@ -4,6 +4,7 @@ import PageLayout from '../components/PageLayout';
 import BotanicalAccent from '../components/ui/BotanicalAccent';
 import SectionTitle from '../components/ui/SectionTitle';
 import Button from '../components/ui/Button';
+import HeroOverlay from '../components/ui/HeroOverlay';
 import schoolInfo from '../data/schoolInfo';
 
 const timeline = [
@@ -49,16 +50,13 @@ const SchoolHistory = () => {
         <div className="absolute inset-0">
           <picture>
             <source media="(min-width: 768px)" srcSet="/images/hero/history-hero-new.webp" />
-            <img
-              src="/images/hero/history-hero-mobile.webp"
+            <img loading="lazy" decoding="async" src="/images/hero/history-hero-mobile.webp"
               className="w-full h-full object-cover object-[center_35%] md:object-center"
               alt="Church Interior with Mother Mary"
             />
           </picture>
+          <HeroOverlay intensity="high" />
         </div>
-
-        {/* Subtle Darkening for text readability */}
-        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 sm:px-8 flex justify-center md:justify-end pt-28 pb-12 md:pt-40 md:pb-16 h-full items-center">
           

@@ -8,6 +8,8 @@ import Button from '../components/ui/Button';
 import schoolInfo from '../data/schoolInfo';
 import values from '../data/values';
 
+import HeroOverlay from '../components/ui/HeroOverlay';
+
 const About = () => {
   return (
     <PageLayout title="About Us" description="Learn about Mount Carmel School - a Christian missionary school rooted in values and committed to excellence in education.">
@@ -16,11 +18,11 @@ const About = () => {
         
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src="/images/hero/about-hero-new.webp"
+          <img loading="lazy" decoding="async" src="/images/hero/about-hero-new.webp"
             className="w-full h-full object-cover object-center"
             alt="School Campus Assembly"
           />
+          <HeroOverlay intensity="high" />
         </div>
         <div className="relative z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto px-4 pt-28 pb-12 md:pt-40 md:pb-16 text-center">
           <motion.h1
@@ -57,7 +59,7 @@ const About = () => {
               transition={{ duration: 0.6 }}
               className="md:w-1/2"
             >
-              <img src="/images/campus/campus01.webp" alt="Mount Carmel School Campus" className="w-full rounded-xl shadow-lg object-cover h-72 md:h-96" />
+              <img loading="lazy" decoding="async" src="/images/campus/campus01.webp" alt="Mount Carmel School Campus" className="w-full rounded-xl shadow-lg object-cover h-72 md:h-96" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -103,8 +105,7 @@ const About = () => {
             >
               <div className="relative">
                 <div className="absolute -inset-2 md:-inset-4 rounded-2xl bg-gradient-to-br from-yellow-200/40 to-amber-100/30 blur-lg md:blur-xl" />
-                <img
-                  src="/images/branding/mother-marry.webp"
+                <img loading="lazy" decoding="async" src="/images/branding/mother-marry.webp"
                   alt="Mother Mary - Our Patroness"
                   className="relative w-52 md:w-80 rounded-2xl shadow-xl md:shadow-2xl object-cover"
                 />

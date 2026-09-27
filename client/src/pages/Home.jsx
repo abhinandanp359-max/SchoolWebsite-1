@@ -12,11 +12,6 @@ import schoolInfo from '../data/schoolInfo';
 import principalData from '../data/principalMessage';
 import values from '../data/values';
 import api from '../utils/api';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-
 
 const valueIcons = [Award, HandHeart, Heart, GraduationCap];
 
@@ -26,6 +21,39 @@ const milestones = [
   { year: '2019', title: 'New Campus', description: 'Expanded and upgraded to the present campus at Seemanagar, 9th Mile, Krishnanagar.' },
   { year: 'Present', title: 'Continuing Legacy', description: 'Serving the community with faith, values, and academic excellence.' },
 ];
+
+const getRelativePosition = (index, current, length, isMobile) => {
+  if (length === 0) return null;
+  const diff = (index - current + length) % length;
+  
+  if (diff === 0) return 0;
+  if (diff === 1) return 1;
+  if (diff === length - 1) return -1;
+  
+  if (!isMobile) {
+    if (length > 3 && diff === 2) return 2;
+    if (length > 4 && diff === length - 2) return -2;
+  }
+  
+  return null;
+};
+
+const getCarouselStyles = (position, isMobile) => {
+  const baseRadius = isMobile ? 20 : 24;
+  
+  if (position === 0) {
+    return { x: "0%", scale: 1, zIndex: 30, opacity: 1, filter: "blur(0px)", borderRadius: `${baseRadius}px` };
+  } else if (position === 1) {
+    return { x: isMobile ? "60%" : "75%", scale: 0.8, zIndex: 20, opacity: 0.7, filter: "blur(1px)", borderRadius: `${baseRadius / 0.8}px` };
+  } else if (position === -1) {
+    return { x: isMobile ? "-60%" : "-75%", scale: 0.8, zIndex: 20, opacity: 0.7, filter: "blur(1px)", borderRadius: `${baseRadius / 0.8}px` };
+  } else if (position === 2) {
+    return { x: "140%", scale: 0.65, zIndex: 10, opacity: 0.3, filter: "blur(3px)", borderRadius: `${baseRadius / 0.65}px` };
+  } else if (position === -2) {
+    return { x: "-140%", scale: 0.65, zIndex: 10, opacity: 0.3, filter: "blur(3px)", borderRadius: `${baseRadius / 0.65}px` };
+  }
+  return { x: "0%", scale: 0.5, zIndex: 0, opacity: 0, filter: "blur(5px)", borderRadius: `${baseRadius / 0.5}px` };
+};
 
 const Home = () => {
   const navigate = useNavigate();
@@ -98,16 +126,16 @@ const Home = () => {
       <section ref={heroRef} className="relative w-full min-h-[100svh] flex flex-col items-center max-md:bg-transparent bg-[#3D1418] overflow-hidden">
         
         {/* Wrapper absolute to fill the 100svh container completely */}
-        <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <motion.div 
-            style={{ y: heroY, scale: 1.2, transformOrigin: "bottom", willChange: "transform" }} 
-            className="w-full h-full transform-gpu"
+            style={{ y: heroY, willChange: "transform" }} 
+            className="absolute -top-[25%] left-0 w-full h-[125%] transform-gpu"
           >
             <picture className="w-full h-full block">
-              <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
-              <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
+              <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
+              <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
               <img 
-                src="/images/hero/home-hero-students.jpg" 
+                src="/images/hero/home-hero-students.webp" 
                 alt="Mount Carmel School" 
                 className="w-full h-full object-cover object-center"
                 fetchpriority="high"
@@ -195,8 +223,7 @@ const Home = () => {
           {/* Right Image */}
           <div className="w-full lg:w-1/2 px-4 pb-6 pt-2 sm:p-6 lg:p-8 xl:p-10 flex flex-col relative min-h-[260px] md:min-h-[400px] lg:min-h-[350px]">
             <div className="relative w-full h-full flex-grow">
-              <img 
-                src="/images/legacy-girl.webp" 
+              <img loading="lazy" decoding="async" src="/images/legacy-girl.webp" 
                 alt="Student smiling in classroom" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -287,7 +314,7 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg shrink-0"
             >
-              <img src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" />
+              <img loading="lazy" decoding="async" src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -406,46 +433,68 @@ const Home = () => {
             </Link>
           </div>
 
-          {/* Right Images (3D Cover Flow Carousel) */}
-          <div className="w-full lg:w-2/3 relative overflow-hidden">
-            <Swiper
-              effect={'coverflow'}
-              grabCursor={true}
-              centeredSlides={true}
-              loop={true}
-              slidesPerView={'auto'}
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-              speed={1200}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 200,
-                modifier: 1.5,
-                slideShadows: false,
-              }}
-              modules={[EffectCoverflow, Autoplay]}
-              className="w-full pb-8 pt-4"
-            >
-              {galleryImages.map((img, idx) => (
-                <SwiperSlide key={idx} className="!w-[200px] sm:!w-[240px] md:!w-[260px] lg:!w-[220px] xl:!w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5 transition-all duration-700">
-                  {({ isActive }) => (
-                    <img 
-                      src={img.image} 
-                      alt={img.title || "School moment"} 
-                      className={`w-full h-full object-cover transition-all duration-700 ease-out ${isActive ? 'opacity-100 blur-none scale-100' : 'opacity-50 blur-[2px] scale-95'}`} 
-                    />
-                  )}
-                </SwiperSlide>
-              ))}
-              {/* Fallback empty states if not enough images */}
-              {galleryImages.length < 4 && Array.from({ length: 4 - galleryImages.length }).map((_, i) => (
-                <SwiperSlide key={`empty-${i}`} className="!w-[200px] sm:!w-[240px] md:!w-[260px] lg:!w-[220px] xl:!w-[260px] aspect-[3/4] rounded-[20px] overflow-hidden shadow-lg bg-white/5">
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          {/* Right Images (Custom 5-Image Carousel) */}
+          <div className="w-full lg:w-2/3 relative flex flex-col items-center justify-center min-h-[400px] sm:min-h-[500px] py-8">
+            {galleryImages.length > 0 ? (
+              <div className="relative w-full max-w-[800px] flex flex-col items-center justify-center">
+                
+                {/* Images Container */}
+                <div className="relative w-full h-[240px] sm:h-[300px] md:h-[350px] lg:h-[320px] xl:h-[380px] flex items-center justify-center mb-6">
+                  {galleryImages.map((img, idx) => {
+                    const position = getRelativePosition(idx, currentIndex, galleryImages.length, isMobile);
+                    const isCenter = position === 0;
+                    
+                    return (
+                      <motion.div
+                        key={idx}
+                        initial={false}
+                        animate={getCarouselStyles(position, isMobile)}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute w-[160px] sm:w-[220px] md:w-[260px] lg:w-[240px] xl:w-[280px] aspect-[3/4] overflow-hidden shadow-2xl bg-slate-900 cursor-pointer"
+                        style={{ pointerEvents: position === null ? 'none' : 'auto' }}
+                        onClick={() => {
+                          if (position === 1) nextImage();
+                          else if (position === -1) prevImage();
+                          else if (isCenter) navigate('/gallery');
+                        }}
+                      >
+                        <img loading="lazy" decoding="async" src={img.image} 
+                          alt={img.title || "School moment"} 
+                          className="w-full h-full object-cover" 
+                        />
+                        
+                        {/* Overlay for inactive images to add depth */}
+                        {!isCenter && (
+                          <div className="absolute inset-0 bg-black/20 pointer-events-none transition-opacity duration-300" />
+                        )}
+                      </motion.div>
+                    );
+                  })}
+                </div>
+                
+                {/* Dynamic Event Title Below the Carousel */}
+                <div className="text-center z-10 w-full px-4 mt-2">
+                  <AnimatePresence mode="wait">
+                    <motion.h3 
+                      key={currentIndex}
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 5 }}
+                      transition={{ duration: 0.3 }}
+                      style={{ color: '#F5E6C8' }} 
+                      className="font-heading text-lg sm:text-xl md:text-2xl font-medium tracking-wide drop-shadow-sm"
+                    >
+                      {galleryImages[currentIndex]?.title || "School Event"}
+                    </motion.h3>
+                  </AnimatePresence>
+                </div>
+                
+              </div>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white/50">
+                Loading moments...
+              </div>
+            )}
           </div>
         </div>
       </section>
