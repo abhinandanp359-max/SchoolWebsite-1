@@ -136,7 +136,7 @@ const SchoolHistory = () => {
           <h2 className="font-heading text-2xl md:text-3xl font-medium text-slate-900 mb-4">Be Part of Our Story</h2>
           <p className="text-warm-gray text-sm md:text-base mb-8">Join the Mount Carmel family and write the next chapter with us.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button to="/admissions" variant="dark" size="md" icon className="w-full sm:w-48">Apply Now</Button>
+            <Button to="/admissions" variant="primary" size="md" icon className="w-full sm:w-48">Apply Now</Button>
             <Button to="/contact" variant="outline-red-hover-brown" size="md" icon className="w-full sm:w-48">Contact Us</Button>
           </div>
         </div>
