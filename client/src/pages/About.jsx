@@ -209,7 +209,7 @@ const About = () => {
           <p className="text-warm-gray text-sm md:text-base mb-8">Explore our history, meet our principal, or get in touch with us.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button to="/about/history" variant="primary" size="md" icon>Our History</Button>
-            <Button to="/about/principal-message" variant="primary" size="md">Principal's Message</Button>
+            <Button to="/about/principal-message" variant="outline-red-hover-brown" size="md">Principal's Message</Button>
           </div>
         </div>
       </section>
