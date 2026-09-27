@@ -132,10 +132,12 @@ const Home = () => {
             className="w-full h-full transform-gpu"
           >
             <picture className="w-full h-full block">
-              <source media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
-              <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
+              <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
+              <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
+              <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
+              <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
               <img 
-                src="/images/hero/home-hero-students.webp" 
+                src="/images/hero/home-hero-students.jpg" 
                 alt="Mount Carmel School" 
                 className="w-full h-full object-cover object-center"
                 fetchpriority="high"
