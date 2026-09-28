@@ -261,14 +261,15 @@ const Home = () => {
                   fetchpriority="high"
                 />
                 
-                {/* Left-side tree depth-of-field blur (Desktop only) */}
-                <div 
-                  className="absolute top-0 left-0 w-[35%] h-full pointer-events-none hidden md:block"
+                {/* Desktop Image (Blurred duplicate for left-side tree depth of field, optimized for scroll performance) */}
+                <img 
+                  src="/images/hero/home-hero-students-v2.webp" 
+                  alt="" 
+                  className="absolute top-0 left-0 w-full h-full object-cover object-center hidden md:block pointer-events-none"
                   style={{
-                    backdropFilter: 'blur(6px)',
-                    WebkitBackdropFilter: 'blur(6px)',
-                    maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)'
+                    filter: 'blur(6px)',
+                    maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)',
+                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)'
                   }}
                 />
               </div>
