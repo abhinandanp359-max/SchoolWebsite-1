@@ -177,7 +177,7 @@ const Home = () => {
     });
 
     mm.add("(max-width: 767px)", () => {
-      // Mobile - simpler parallax
+      // Mobile - simpler parallax (ONE layer only)
       gsap.to(bgRef.current, {
         yPercent: 10, // 0.1x
         ease: "none",
@@ -185,7 +185,7 @@ const Home = () => {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
+          scrub: 0.1
         }
       });
     });
@@ -270,7 +270,7 @@ const Home = () => {
           </div>
           
           {/* Text Content absolutely positioned over the image bounds */}
-          <div ref={textRef} className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-start pt-[20vh] md:justify-center md:pt-16 pb-32 md:pb-0 px-6 sm:px-12 md:px-16 lg:px-24 overflow-visible will-change-transform">
+          <div ref={textRef} className="absolute inset-0 z-10 w-full max-w-[1440px] 2xl:max-w-[1920px] mx-auto flex flex-col items-start justify-start pt-[20svh] md:justify-center md:pt-16 pb-32 md:pb-0 px-6 sm:px-12 md:px-16 lg:px-24 overflow-visible will-change-transform">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
