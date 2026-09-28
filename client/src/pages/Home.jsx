@@ -245,7 +245,7 @@ const Home = () => {
               }} 
               className="w-full h-full will-change-transform max-md:scale-100 md:scale-100 origin-bottom transition-none"
             >
-              <div className="w-full h-full block">
+              <div className="w-full h-full block relative">
                 {/* Mobile Image */}
                 <img 
                   src="/images/hero/home-hero-students-mobile-v5.jpg" 
@@ -259,6 +259,17 @@ const Home = () => {
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center hidden md:block"
                   fetchpriority="high"
+                />
+                
+                {/* Left-side tree depth-of-field blur (Desktop only) */}
+                <div 
+                  className="absolute top-0 left-0 w-[35%] h-full pointer-events-none hidden md:block"
+                  style={{
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
+                    maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)'
+                  }}
                 />
               </div>
             </div>
