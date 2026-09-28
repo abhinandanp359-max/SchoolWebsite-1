@@ -246,12 +246,12 @@ const Home = () => {
               className="w-full h-full will-change-transform max-md:scale-[1.25] md:scale-100 origin-bottom transition-none"
             >
               <picture className="w-full h-full block">
-                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
-                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg" />
-                <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
-                <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
+                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp?v=2" />
+                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg?v=2" />
+                <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp?v=2" />
+                <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg?v=2" />
                 <img 
-                  src="/images/hero/home-hero-students.webp" 
+                  src="/images/hero/home-hero-students.webp?v=2" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center max-md:brightness-95 md:brightness-110"
                   fetchpriority="high"
