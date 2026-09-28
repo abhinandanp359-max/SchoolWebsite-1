@@ -50,9 +50,7 @@ export default function AdminGallery() {
 
     setUploading(true);
     try {
-      const res = await api.post('/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      const res = await api.post('/upload', formData);
       setForm(prev => ({ ...prev, image: res.url }));
     } catch (err) {
       console.error('Failed to upload image:', err);
