@@ -239,19 +239,19 @@ const Home = () => {
             <div 
               style={{ 
                 backgroundColor: "#2c1e16",
-                backgroundImage: "url(data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAAAwBwCdASooABcAPzmUvVevKqYjqrgKAeAnCWgAv2uNPkbGcO40qLO9m6eM319lxdRCWmNaLFXpkQiu/gUCcC7+4sAA/sv6zM5maUTc3+Z+zzmu2iP0WWxP04V11o8ndZQ+bmA5J0OJSixTSxZgmawIYjh1WdOKL2Y9DDWiu05pqXv/m1h2nElHPZNjjauCOznxFL634a5wRG+ngpeeMh7R/fv+epO8H8CkGq04rz+TeRx3fjZHnWVfCFzVYSa+iVgXJIGXWV5FlIGWUhqoLIyqsuBK6iFcAhSGX3rmq4nhEiqC2yjjAScf0yyOHLgP/zORqQtVwi3psSgivZP4TZg5Ip03Gydyx+8gmz7pFRS5MXYFClezCHBoaVHg/KAA)",
+                backgroundImage: "url(data:image/webp;base64,UklGRsgCAABXRUJQVlA4ILwCAADwDgCdASooAEgAPzWGr1OvKSOisR37aeAmiWYAvcggihZzGas4FjTDu0HdwW/iBeEa2KyHn+YAZUc+UIxOjqFkPgL5XUS9KGNZC1U72ZQi6h9Onvmv3WwR3w/glJP1/XbTV0owiHyGYfDnFWisiqY/pHqXa+1UY4bypbw29z1PIAD2dlnWnuHUKTIW2iMxDOP1DfPkNlh6HrNjOBm/ti6BD42QZGvKWazYKGt/eLE5W8BSPGWTBQGOmJK4D1lW9/7TAR2/mphADjX3CY4WqGAcHdwrM4hfgvhPTcJTVaAbmo/WAHiheANHLWhMG5U1FJFdiIDNtkfhI0WOxvIpstlC/RgH1B10+6atSmwUZfq+2KXpv4eTf92au3tJDXtcv1X9NT3fibTX/4Qw1zBQ60XtIdi+kLh6ofOcEpfJe3c09LmTZ1Aj1M5R4smi2tAZu7n2WscpgHe7ze4BT4eSb6dTVAnO+pGxwtZB5eqFSDl22xfM8EDCS6TQ9Xwn0CbL4MCytaE0fF/jkYEl2kc5F2Epwd1TXUeDyN/iVPV4+ZqE0wv9DCodRvkksMDwC0uhdPSJFVd71CvU3t3BaP8YRWk7EvfMjYtzIbbhGSjq/7aTmH83+EiQgjMqGXGNSnJjtVfyG3vewF016KiZlQsdfuBMlxuQde80AmFSxUZAcWPOU+b0S0a62jxNOTq3qRRF8Q0H8sXLkV9Kyo1gu/4PwzOmwD6a43e6TD+E/YgbkzbPGUKo3ABozh8Gz6iQ1Oq6W4hNJYFm8EDNn3YjGNXSUx2aEgbkrCUmVGBQVXUa2Slqh83fVBjsBhjxjdRmohYpY7Vq8hw1IV15IBkQ6T8Zogd3BIUvAjhL6ezGoXSSxUuLZhlOSp/sbbgUAy5uT01k+n7s1RINOxbtaqOGteo5yBzXa01AldAAW7xB8AAA)",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
               }} 
               className="w-full h-full will-change-transform max-md:scale-[1.25] md:scale-100 origin-bottom transition-none"
             >
               <picture className="w-full h-full block">
-                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp?v=2" />
-                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg?v=2" />
-                <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp?v=2" />
-                <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg?v=2" />
+                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp?v=3" />
+                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg?v=3" />
+                <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp?v=3" />
+                <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg?v=3" />
                 <img 
-                  src="/images/hero/home-hero-students.webp?v=2" 
+                  src="/images/hero/home-hero-students.webp?v=3" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center max-md:brightness-125 md:brightness-110"
                   fetchpriority="high"
