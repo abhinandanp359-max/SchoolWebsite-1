@@ -4,6 +4,7 @@ import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import useScrollToTop from './hooks/useScrollToTop';
+import SmoothScroll from './components/SmoothScroll';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -41,6 +42,7 @@ function ScrollToTop() {
 function App() {
   return (
     <Suspense fallback={pageFallback}>
+      <SmoothScroll />
       <ScrollToTop />
       <Routes>
         <Route element={<PublicLayout />}>
