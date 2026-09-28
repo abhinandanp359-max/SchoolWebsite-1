@@ -253,7 +253,7 @@ const Home = () => {
                 <img 
                   src="/images/hero/home-hero-students.webp" 
                   alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center md:brightness-[1.15] md:contrast-[1.05]"
                   fetchpriority="high"
                   width="1024"
                   height="576"
