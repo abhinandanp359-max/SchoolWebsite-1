@@ -248,7 +248,7 @@ const Home = () => {
               <div className="w-full h-full block">
                 {/* Mobile Image */}
                 <img 
-                  src="/images/hero/home-hero-students-mobile-v4.webp" 
+                  src="/images/hero/home-hero-students-mobile-v5.jpg" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center brightness-125 md:hidden"
                   fetchpriority="high"
