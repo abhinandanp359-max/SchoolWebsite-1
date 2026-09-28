@@ -7,6 +7,8 @@ import { useGSAP } from '@gsap/react';
 import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft, ChevronRight, Play, Leaf, Users, Star } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
@@ -92,6 +94,31 @@ const Home = () => {
   const bgRef = useRef(null);
   const midRef = useRef(null);
   const textRef = useRef(null);
+
+  // Lock hero height on mobile to completely prevent address bar resize jumps
+  useEffect(() => {
+    const lockMobileHeight = () => {
+      if (window.innerWidth < 768 && heroRef.current) {
+        heroRef.current.style.height = `${window.innerHeight}px`;
+        heroRef.current.style.minHeight = `${window.innerHeight}px`;
+      } else if (heroRef.current) {
+        heroRef.current.style.height = '';
+        heroRef.current.style.minHeight = '100svh';
+      }
+    };
+    
+    // Initial lock
+    lockMobileHeight();
+    
+    // Only recalculate on orientation change, not regular scrolling/resize
+    window.addEventListener('orientationchange', () => {
+      setTimeout(lockMobileHeight, 150);
+    });
+    
+    return () => {
+      window.removeEventListener('orientationchange', lockMobileHeight);
+    };
+  }, []);
 
   useGSAP(() => {
     if (shouldReduceMotion) return;
