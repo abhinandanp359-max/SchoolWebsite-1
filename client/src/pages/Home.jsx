@@ -255,9 +255,9 @@ const Home = () => {
                 />
                 {/* Desktop Image */}
                 <img 
-                  src="/images/hero/home-hero-students.webp" 
+                  src="/images/hero/home-hero-students-v2.webp" 
                   alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center brightness-110 hidden md:block"
+                  className="w-full h-full object-cover object-center hidden md:block"
                   fetchpriority="high"
                 />
               </div>
