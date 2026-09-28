@@ -245,20 +245,22 @@ const Home = () => {
               }} 
               className="w-full h-full will-change-transform max-md:scale-100 md:scale-100 origin-bottom transition-none"
             >
-              <picture className="w-full h-full block">
-                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile-v4.webp" />
-                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile-v4.jpg" />
-                <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp?v=3" />
-                <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg?v=3" />
+              <div className="w-full h-full block">
+                {/* Mobile Image */}
                 <img 
-                  src="/images/hero/home-hero-students.webp?v=3" 
+                  src="/images/hero/home-hero-students-mobile-v4.webp" 
                   alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center max-md:brightness-125 md:brightness-110"
+                  className="w-full h-full object-cover object-center brightness-125 md:hidden"
                   fetchpriority="high"
-                  width="1024"
-                  height="576"
                 />
-              </picture>
+                {/* Desktop Image */}
+                <img 
+                  src="/images/hero/home-hero-students.webp" 
+                  alt="Mount Carmel School" 
+                  className="w-full h-full object-cover object-center brightness-110 hidden md:block"
+                  fetchpriority="high"
+                />
+              </div>
             </div>
           </div>
           {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
