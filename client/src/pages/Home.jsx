@@ -101,35 +101,35 @@ const Home = () => {
     mm.add("(min-width: 768px)", () => {
       // Desktop Parallax Layers
       gsap.to(bgRef.current, {
-        yPercent: 30, // 0.3x
+        yPercent: 15, // 0.15x
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
+          scrub: 0.5
         }
       });
 
       gsap.to(midRef.current, {
-        yPercent: 50, // 0.5x midground
+        yPercent: 25, // 0.25x midground
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
+          scrub: 0.5
         }
       });
 
       gsap.to(textRef.current, {
-        yPercent: 70, // 0.7x foreground text
+        yPercent: 35, // 0.35x foreground text
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
+          scrub: 0.5
         }
       });
     });
@@ -137,13 +137,13 @@ const Home = () => {
     mm.add("(max-width: 767px)", () => {
       // Mobile - simpler parallax
       gsap.to(bgRef.current, {
-        yPercent: 15,
+        yPercent: 10, // 0.1x
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true
+          scrub: 0.5
         }
       });
     });
@@ -196,7 +196,14 @@ const Home = () => {
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <div 
             ref={bgRef}
-            style={{ transform: `scale(${isMobile ? 1.35 : 1.2})`, transformOrigin: "bottom" }} 
+            style={{ 
+              transform: `scale(${isMobile ? 1.35 : 1.2})`, 
+              transformOrigin: "bottom",
+              backgroundColor: "#2c1e16",
+              backgroundImage: "url(data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAAAwBwCdASooABcAPzmUvVevKqYjqrgKAeAnCWgAv2uNPkbGcO40qLO9m6eM319lxdRCWmNaLFXpkQiu/gUCcC7+4sAA/sv6zM5maUTc3+Z+zzmu2iP0WWxP04V11o8ndZQ+bmA5J0OJSixTSxZgmawIYjh1WdOKL2Y9DDWiu05pqXv/m1h2nElHPZNjjauCOznxFL634a5wRG+ngpeeMh7R/fv+epO8H8CkGq04rz+TeRx3fjZHnWVfCFzVYSa+iVgXJIGXWV5FlIGWUhqoLIyqsuBK6iFcAhSGX3rmq4nhEiqC2yjjAScf0yyOHLgP/zORqQtVwi3psSgivZP4TZg5Ip03Gydyx+8gmz7pFRS5MXYFClezCHBoaVHg/KAA)",
+              backgroundSize: "cover",
+              backgroundPosition: "center"
+            }} 
             className="w-full h-full will-change-transform"
           >
             <picture className="w-full h-full block">
@@ -205,10 +212,12 @@ const Home = () => {
               <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp" />
               <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg" />
               <img 
-                src="/images/hero/home-hero-students.jpg" 
+                src="/images/hero/home-hero-students.webp" 
                 alt="Mount Carmel School" 
                 className="w-full h-full object-cover object-center"
                 fetchpriority="high"
+                width="1024"
+                height="576"
               />
             </picture>
           </div>
@@ -298,6 +307,8 @@ const Home = () => {
               <img loading="lazy" decoding="async" src="/images/legacy-girl.webp" 
                 alt="Student smiling in classroom" 
                 className="absolute inset-0 w-full h-full object-cover"
+                width="800"
+                height="600"
               />
             </div>
           </div>
@@ -386,7 +397,7 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden shadow-lg shrink-0"
             >
-              <img loading="lazy" decoding="async" src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" />
+              <img loading="lazy" decoding="async" src={principalData.image} alt={principalData.imageAlt} className="w-full h-full object-cover" width="400" height="400" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -533,6 +544,8 @@ const Home = () => {
                         <img loading="lazy" decoding="async" src={img.image} 
                           alt={img.title || "School moment"} 
                           className="w-full h-full object-cover" 
+                          width="400"
+                          height="533"
                         />
                         
                         {/* Overlay for inactive images to add depth */}
