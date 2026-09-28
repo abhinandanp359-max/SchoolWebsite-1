@@ -224,7 +224,7 @@ const Home = () => {
           <div ref={bgRef} className="w-full h-full will-change-transform">
             <div 
               style={{ 
-                transform: `scale(${isMobile ? 1.35 : 1.2})`, 
+                transform: `scale(${isMobile ? 1.25 : 1.2})`, 
                 transformOrigin: "bottom",
                 backgroundColor: "#2c1e16",
                 backgroundImage: "url(data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAAAwBwCdASooABcAPzmUvVevKqYjqrgKAeAnCWgAv2uNPkbGcO40qLO9m6eM319lxdRCWmNaLFXpkQiu/gUCcC7+4sAA/sv6zM5maUTc3+Z+zzmu2iP0WWxP04V11o8ndZQ+bmA5J0OJSixTSxZgmawIYjh1WdOKL2Y9DDWiu05pqXv/m1h2nElHPZNjjauCOznxFL634a5wRG+ngpeeMh7R/fv+epO8H8CkGq04rz+TeRx3fjZHnWVfCFzVYSa+iVgXJIGXWV5FlIGWUhqoLIyqsuBK6iFcAhSGX3rmq4nhEiqC2yjjAScf0yyOHLgP/zORqQtVwi3psSgivZP4TZg5Ip03Gydyx+8gmz7pFRS5MXYFClezCHBoaVHg/KAA)",
