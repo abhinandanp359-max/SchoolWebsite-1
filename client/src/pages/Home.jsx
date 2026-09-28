@@ -243,11 +243,11 @@ const Home = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center"
               }} 
-              className="w-full h-full will-change-transform max-md:scale-[1.25] md:scale-100 origin-bottom transition-none"
+              className="w-full h-full will-change-transform max-md:scale-100 md:scale-100 origin-bottom transition-none"
             >
               <picture className="w-full h-full block">
-                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp?v=3" />
-                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.jpg?v=3" />
+                <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile-v4.webp" />
+                <source type="image/jpeg" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile-v4.jpg" />
                 <source type="image/webp" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.webp?v=3" />
                 <source type="image/jpeg" media="(min-width: 768px)" srcSet="/images/hero/home-hero-students.jpg?v=3" />
                 <img 
