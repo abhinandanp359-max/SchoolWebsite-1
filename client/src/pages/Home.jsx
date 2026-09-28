@@ -8,7 +8,6 @@ import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft,
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
-ScrollTrigger.normalizeScroll(true); // Force scroll normalization on touch devices to eliminate all jumping
 
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
@@ -235,19 +234,16 @@ const Home = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="relative w-full min-h-[100svh] flex flex-col items-center max-md:bg-transparent bg-[#3D1418] overflow-hidden">
         
-        {/* Wrapper absolute to fill the 100svh container completely */}
         <div className="absolute inset-0 flex flex-col items-center justify-start overflow-hidden">
           <div ref={bgRef} className="w-full h-full will-change-transform">
             <div 
               style={{ 
-                transform: `scale(${isMobile ? 1.25 : 1.2})`, 
-                transformOrigin: "bottom",
                 backgroundColor: "#2c1e16",
                 backgroundImage: "url(data:image/webp;base64,UklGRioBAABXRUJQVlA4IB4BAAAwBwCdASooABcAPzmUvVevKqYjqrgKAeAnCWgAv2uNPkbGcO40qLO9m6eM319lxdRCWmNaLFXpkQiu/gUCcC7+4sAA/sv6zM5maUTc3+Z+zzmu2iP0WWxP04V11o8ndZQ+bmA5J0OJSixTSxZgmawIYjh1WdOKL2Y9DDWiu05pqXv/m1h2nElHPZNjjauCOznxFL634a5wRG+ngpeeMh7R/fv+epO8H8CkGq04rz+TeRx3fjZHnWVfCFzVYSa+iVgXJIGXWV5FlIGWUhqoLIyqsuBK6iFcAhSGX3rmq4nhEiqC2yjjAScf0yyOHLgP/zORqQtVwi3psSgivZP4TZg5Ip03Gydyx+8gmz7pFRS5MXYFClezCHBoaVHg/KAA)",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
               }} 
-              className="w-full h-full will-change-transform"
+              className="w-full h-full will-change-transform max-md:scale-[1.25] md:scale-[1.2] origin-bottom transition-none"
             >
               <picture className="w-full h-full block">
                 <source type="image/webp" media="(max-width: 767px)" srcSet="/images/hero/home-hero-students-mobile.webp" />
