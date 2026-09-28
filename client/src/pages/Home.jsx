@@ -8,6 +8,7 @@ import { GraduationCap, Heart, HandHeart, Award, Clock, ArrowRight, ChevronLeft,
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
+ScrollTrigger.normalizeScroll(true); // Force scroll normalization on touch devices to eliminate all jumping
 
 import PageLayout from '../components/PageLayout';
 import SectionTitle from '../components/ui/SectionTitle';
