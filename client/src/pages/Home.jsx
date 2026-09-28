@@ -87,7 +87,7 @@ const Home = () => {
       setIsMobile(window.innerWidth < 768);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -111,13 +111,28 @@ const Home = () => {
     lockMobileHeight();
     
     // Only recalculate on orientation change, not regular scrolling/resize
-    window.addEventListener('orientationchange', () => {
+    const handleOrientationChange = () => {
       setTimeout(lockMobileHeight, 150);
-    });
+    };
+    
+    window.addEventListener('orientationchange', handleOrientationChange, { passive: true });
     
     return () => {
-      window.removeEventListener('orientationchange', lockMobileHeight);
+      window.removeEventListener('orientationchange', handleOrientationChange);
     };
+  }, []);
+
+  // Ensure ScrollTrigger refreshes after all images and fonts load
+  useEffect(() => {
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad, { passive: true });
+    }
+    return () => window.removeEventListener('load', handleLoad);
   }, []);
 
   useGSAP(() => {
