@@ -250,7 +250,7 @@ const Home = () => {
                 <img 
                   src="/images/hero/home-hero-students-mobile-v5.jpg" 
                   alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center brightness-95 md:hidden"
+                  className="w-full h-full object-cover object-center brightness-90 md:hidden"
                   fetchpriority="high"
                 />
                 {/* Desktop Image */}
