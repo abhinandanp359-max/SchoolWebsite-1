@@ -50,7 +50,7 @@ const SchoolHistory = () => {
         <div className="absolute inset-0">
           <picture>
             <source media="(min-width: 768px)" srcSet="/images/hero/history-hero-new.webp" />
-            <img loading="lazy" decoding="async" src="/images/hero/history-hero-mobile.webp"
+            <img fetchpriority="high" decoding="async" src="/images/hero/history-hero-mobile.webp"
               className="w-full h-full object-cover object-[center_35%] md:object-center"
               alt="Church Interior with Mother Mary"
             />

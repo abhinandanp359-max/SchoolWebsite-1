@@ -251,6 +251,11 @@ const Home = () => {
                   src="/images/hero/home-hero-students-mobile-v5.jpg" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center brightness-90 md:hidden"
+                  style={{
+                    imageRendering: 'high-quality',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
+                  }}
                   fetchpriority="high"
                 />
                 {/* Desktop Image */}
@@ -258,6 +263,11 @@ const Home = () => {
                   src="/images/hero/home-hero-students-v2.webp" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center hidden md:block"
+                  style={{
+                    imageRendering: 'high-quality',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
+                  }}
                   fetchpriority="high"
                 />
                 
@@ -269,7 +279,10 @@ const Home = () => {
                   style={{
                     filter: 'blur(6px)',
                     maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)',
-                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)'
+                    WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)',
+                    imageRendering: 'high-quality',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)'
                   }}
                 />
               </div>
@@ -277,7 +290,7 @@ const Home = () => {
           </div>
           {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
           <div ref={midRef} className="absolute inset-0 z-[5] w-full h-full will-change-transform">
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/40 to-black/0" />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/30 to-black/0" />
             
             {/* Diffused depth shadow behind typography */}
             <div className="absolute top-0 left-0 w-full h-1/2 md:h-full md:bottom-0 md:w-2/3 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-black/50 to-transparent md:blur-3xl opacity-60 md:mix-blend-multiply" />

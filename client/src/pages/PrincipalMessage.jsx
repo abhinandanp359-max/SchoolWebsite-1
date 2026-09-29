@@ -12,7 +12,7 @@ const PrincipalMessage = () => {
         
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img loading="lazy" decoding="async" src="/images/hero/principal-desk.webp"
+          <img fetchpriority="high" decoding="async" src="/images/hero/principal-desk.webp"
             className="w-full h-full object-cover object-center"
             alt="Principal's Desk"
           />

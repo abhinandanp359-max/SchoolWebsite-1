@@ -45,7 +45,7 @@ const Academics = () => {
       {/* Full-width Scenic Academics Hero Section */}
       <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center bg-primary">
         <div className="absolute inset-0">
-          <img loading="lazy" decoding="async" src="/images/hero/academics-hero.webp"
+          <img fetchpriority="high" decoding="async" src="/images/hero/academics-hero.webp"
             alt="Students learning in classroom"
             className="w-full h-full object-cover object-top"
           />

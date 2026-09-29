@@ -97,7 +97,7 @@ const Admissions = () => {
       <section className="relative overflow-hidden min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] max-h-[800px] flex items-center">
         {/* School Building and Students Photo - Natural & Bright */}
         <div className="absolute inset-0">
-          <img loading="lazy" decoding="async" src="/images/hero/contact-hero.webp"
+          <img fetchpriority="high" decoding="async" src="/images/hero/contact-hero.webp"
             alt="Mount Carmel School Campus and Students"
             className="w-full h-full object-cover object-[center_35%]"
           />

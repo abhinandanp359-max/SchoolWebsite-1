@@ -93,7 +93,7 @@ const Activities = () => {
       {/* Full-width Scenic Activities Hero Section */}
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0 overflow-hidden">
-          <img loading="lazy" decoding="async" src="/images/hero/activities-hero-custom.webp"
+          <img fetchpriority="high" decoding="async" src="/images/hero/activities-hero-custom.webp"
             alt="Mount Carmel School Student Activities"
             className="w-full h-full object-cover object-top scale-[1.05] md:scale-[1.15] origin-top"
           />

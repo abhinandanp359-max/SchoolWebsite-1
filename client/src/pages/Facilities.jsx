@@ -27,7 +27,7 @@ const Facilities = () => {
       {/* Full-width Scenic Facilities Hero Section */}
       <section className="relative overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-[#3D1418]">
         <div className="absolute inset-0">
-          <img loading="lazy" decoding="async" src="/images/hero/campus-facilities-hero.webp"
+          <img fetchpriority="high" decoding="async" src="/images/hero/campus-facilities-hero.webp"
             alt="Mount Carmel School Campus"
             className="w-full h-full object-cover object-center"
           />
