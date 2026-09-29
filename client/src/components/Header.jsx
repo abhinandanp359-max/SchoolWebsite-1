@@ -80,13 +80,13 @@ const Header = () => {
             {/* Unified Admissions Button — same colour (#574737) as APPLY NOW buttons */}
             <Link
               to="/admissions"
-              className={`flex items-center gap-1 text-white px-4 py-1.5 rounded-full text-[12px] font-bold tracking-wider shadow-sm transition-all whitespace-nowrap uppercase ${
+              className={`flex items-center gap-1 text-white px-4 py-1.5 lg:px-5 lg:py-2 rounded-full text-[12px] lg:text-[13px] font-bold tracking-wider shadow-sm transition-all whitespace-nowrap uppercase ${
                 location.pathname === '/admissions'
                   ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700'
                   : 'bg-primary hover:bg-primary-dark active:opacity-80'
               }`}
             >
-              ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} />
+              ADMISSIONS <ArrowUpRight size={14} strokeWidth={2.5} className="lg:w-[15px] lg:h-[15px]" />
             </Link>
 
             {/* Mobile Dropdown Menu using the new AnimatedDropdown component */}
