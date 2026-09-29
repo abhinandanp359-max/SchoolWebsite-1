@@ -89,7 +89,7 @@ export default function AdminEvents() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-0 md:p-6 w-full max-w-full overflow-hidden">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-slate-800">Events</h1>
         <button
