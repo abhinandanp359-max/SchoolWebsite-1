@@ -7,6 +7,11 @@ import api from '../utils/api';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 const initialImages = [
+  { _id: 'static-td-1', image: '/images/events/teachers-day-01.webp', title: "Teacher's Day Celebration", category: 'Events' },
+  { _id: 'static-td-2', image: '/images/events/teachers-day-02.webp', title: "Teacher's Day Felicitation", category: 'Events' },
+  { _id: 'static-td-3', image: '/images/events/teachers-day-03.webp', title: "Teacher's Day Blessings", category: 'Events' },
+  { _id: 'static-td-4', image: '/images/events/teachers-day-04.webp', title: "Teacher's Day Gift", category: 'Events' },
+  { _id: 'static-td-5', image: '/images/events/teachers-day-05.webp', title: "Teacher's Day Honors", category: 'Events' },
   { _id: 'static-1', image: '/images/campus/campus01.webp', title: 'School Campus', category: 'Campus' },
   { _id: 'static-2', image: '/images/campus/campus02.webp', title: 'Campus Building', category: 'Campus' },
   { _id: 'static-3', image: '/images/campus/campus03.webp', title: 'Campus Grounds', category: 'Campus' },
