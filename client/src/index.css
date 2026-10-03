@@ -86,3 +86,9 @@ video {
   max-width: 100%;
   height: auto;
 }
+
+/* Hide default browser password reveal icon (Edge) to prevent duplicate icons */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
