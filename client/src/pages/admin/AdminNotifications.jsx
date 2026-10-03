@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { Bell, Mail, Paperclip, Save, Send, FlaskConical, CheckCircle2, AlertCircle } from "lucide-react";
 import api from "../../utils/api";
 import EmailPreview from "./notifications/EmailPreview";
@@ -257,43 +257,28 @@ export default function AdminNotifications() {
           </h2>
 
           <div className="rounded-xl bg-ivory border border-[#eee3cd] p-4 mb-5">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-slate-900/70 mb-2">Enquiry Source</p>
-            <div className="flex flex-wrap gap-2 mb-3">
-              {TABS.map((t) => (
-                <button
-                  key={t.key}
-                  onClick={() => {
-                    setTab(t.key);
-                    setMessage(t.key === "admission" ? defaultAdmissionMessage : defaultContactMessage);
-                    setSubjectDirty(false);
-                  }}
-                  className={`px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer ${
-                    tab === t.key
-                      ? "bg-primary text-white"
-                      : "bg-white text-warm-gray hover:text-slate-900 border border-gray-200"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              ))}
+            <p className="text-[11px] font-bold uppercase tracking-widest text-slate-900/70 mb-2">Back to Enquiries</p>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                to="/admin/admissions"
+                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray hover:text-slate-900 border border-gray-200 hover:border-gray-300"
+              >
+                Admission Enquiries
+              </Link>
+              <Link
+                to="/admin/contacts"
+                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray hover:text-slate-900 border border-gray-200 hover:border-gray-300"
+              >
+                Contact Enquiries
+              </Link>
             </div>
-            <select
-              value={selectedId}
-              onChange={(e) => setSelectedId(e.target.value)}
-              disabled={recordsLoading || records.length === 0}
-              className="w-full px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-sm text-charcoal focus:outline-none focus:border-primary disabled:bg-gray-50"
-            >
-              {records.length === 0 && <option value="">No enquiries found</option>}
-              {records.map((r) => (
-                <option key={r._id} value={r._id}>
-                  {displayName(r)} — {(r.email || r.phone || "").slice(0, 34)}
-                  {r.createdAt ? ` · ${new Date(r.createdAt).toLocaleDateString("en-IN")}` : ""}
-                </option>
-              ))}
-            </select>
-            <p className="mt-2 text-[11px] text-gray-400">
-              Data comes live from the existing enquiries store — nothing is hard-coded.
-            </p>
+            {selectedRecord && (
+              <div className="mt-4 pt-3 border-t border-gray-200/50">
+                <p className="text-sm text-slate-700">
+                  <span className="font-semibold text-slate-900">Replying to:</span> {displayName(selectedRecord)} <span className="text-gray-500">({selectedRecord.email || "No email"})</span>
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="space-y-4">

@@ -28,7 +28,6 @@ const AdminLayout = () => {
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={18} /> },
     { label: 'Events', path: '/admin/events', icon: <CalendarDays size={18} /> },
     { label: 'Gallery', path: '/admin/gallery', icon: <Images size={18} /> },
-    { label: 'Enquiries', path: '/admin/enquiries', icon: <MessageSquare size={18} /> },
     { label: 'Notifications', path: '/admin/notifications', icon: <Bell size={18} /> },
     { label: 'Settings', path: '/admin/settings', icon: <Settings size={18} /> }
   ];

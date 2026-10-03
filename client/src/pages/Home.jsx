@@ -177,21 +177,57 @@ const Home = () => {
     });
 
     mm.add("(max-width: 767px)", () => {
-      // Mobile - simpler parallax (ONE layer only)
-      gsap.to(bgRef.current, {
-        yPercent: 10, // 0.1x
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.1
-        }
-      });
+      // Mobile parallax is now handled by a dedicated, highly-optimized requestAnimationFrame 
+      // scroll listener below to ensure buttery smooth performance without scrub lag.
     });
 
     return () => mm.revert(); // cleanup
   }, { scope: heroRef, dependencies: [shouldReduceMotion] });
+
+  // Highly optimized mobile parallax implementation using requestAnimationFrame
+  // This bypasses GSAP for mobile to eliminate scrub lag and main-thread stutter
+  useEffect(() => {
+    if (!isMobile || shouldReduceMotion || !bgRef.current) return;
+
+    let ticking = false;
+    let rafId;
+
+    const updateParallax = () => {
+      // Clamp scrollY to >= 0 to prevent overscroll empty space at the top on iOS/Android
+      const scrollY = Math.max(0, window.scrollY);
+      
+      // Only calculate and apply transform when the hero is actually in the viewport.
+      // Using innerHeight * 1.5 as a safe margin.
+      if (scrollY < window.innerHeight * 1.5 && bgRef.current) {
+        // Move at 15% of scroll speed for a subtle, premium feel.
+        // Using translate3d enforces hardware (GPU) acceleration.
+        const yVal = scrollY * 0.15;
+        bgRef.current.style.transform = `translate3d(0, ${yVal}px, 0)`;
+      }
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    };
+
+    // Initial position
+    updateParallax();
+
+    // Use passive listener to absolutely guarantee it never blocks the scroll compositor
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId);
+      if (bgRef.current) {
+        bgRef.current.style.transform = '';
+      }
+    };
+  }, [isMobile, shouldReduceMotion]);
 
   useEffect(() => {
     const fetchGallery = async () => {

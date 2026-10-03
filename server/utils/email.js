@@ -39,11 +39,16 @@ const adminEnquiriesUrl = () => {
  * Deep link to the EXACT enquiry record that generated this email.
  * Uses the unique Mongo _id — never names/phones/emails.
  */
-const enquiryViewUrl = (enquiry) => {
+const enquiryViewUrl = (enquiry, type) => {
   const id = enquiry?._id || enquiry?.id;
   const base = clientBaseUrl();
   if (!base || !id) return adminEnquiriesUrl();
-  return `${base}/admin/enquiries/${id}`;
+  
+  if (type === "Admission Enquiry") {
+    return `${base}/admin/notifications?tab=admission&id=${id}`;
+  } else {
+    return `${base}/admin/notifications?tab=contact&id=${id}`;
+  }
 };
 
 /**
@@ -61,7 +66,7 @@ const renderEnquiryEmail = ({ type, enquiry }) => {
     type,
     enquiry,
     logoSrc: logoUrl(),
-    viewUrl: enquiryViewUrl(enquiry),
+    viewUrl: enquiryViewUrl(enquiry, type),
   });
 
   return { subject, html, tokenValues: norm.tokenValues };

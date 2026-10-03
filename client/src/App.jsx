@@ -23,7 +23,8 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
 const AdminNews = lazy(() => import('./pages/admin/AdminNews'));
 const AdminGallery = lazy(() => import('./pages/admin/AdminGallery'));
-const AdminEnquiries = lazy(() => import('./pages/admin/AdminEnquiries'));
+const AdminAdmissions = lazy(() => import('./pages/admin/AdminAdmissions'));
+const AdminContacts = lazy(() => import('./pages/admin/AdminContacts'));
 const AdminEnquiryDetail = lazy(() => import('./pages/admin/AdminEnquiryDetail'));
 const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
 const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
@@ -63,7 +64,8 @@ function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="events" element={<AdminEvents />} />
           <Route path="gallery" element={<AdminGallery />} />
-          <Route path="enquiries" element={<AdminEnquiries />} />
+          <Route path="admissions" element={<AdminAdmissions />} />
+          <Route path="contacts" element={<AdminContacts />} />
           <Route path="enquiries/:id" element={<AdminEnquiryDetail />} />
           <Route path="notifications" element={<AdminNotifications />} />
           <Route path="settings" element={<AdminSettings />} />

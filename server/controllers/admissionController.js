@@ -118,3 +118,28 @@ exports.exportAdmissionsExcel = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteAdmission = async (req, res, next) => {
+  try {
+    const enquiry = await AdmissionEnquiry.findByIdAndDelete(req.params.id);
+    if (!enquiry) {
+      return res.status(404).json({ message: 'Admission enquiry not found' });
+    }
+    res.status(200).json({ success: true, data: {} });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteAdmissionsBulk = async (req, res, next) => {
+  try {
+    const { ids } = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: 'No IDs provided for deletion' });
+    }
+    const result = await AdmissionEnquiry.deleteMany({ _id: { $in: ids } });
+    res.status(200).json({ success: true, deletedCount: result.deletedCount });
+  } catch (error) {
+    next(error);
+  }
+};
