@@ -22,6 +22,9 @@ const uploadRoutes = require('./routes/upload');
 
 const app = express();
 
+// Trust the first proxy (required for express-rate-limit on Render/Vercel/Heroku)
+app.set('trust proxy', 1);
+
 connectDB().then(() => {
   seedAdmin();
 });
