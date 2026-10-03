@@ -69,8 +69,7 @@ export default function AdminNotifications() {
 
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
-  const [subjectDirty, setSubjectDirty] = useState(false);
-  const [message, setMessage] = useState(defaultAdmissionMessage);
+  const [message, setMessage] = useState("");
   const [files, setFiles] = useState([]);
   const [busy, setBusy] = useState(null);
   const [status, setStatus] = useState(null);
@@ -85,9 +84,9 @@ export default function AdminNotifications() {
   const messageRef = useRef(null);
 
   const activeTab = TABS.find((t) => t.key === tab);
-  const selectedRecord = records.find((r) => r._id === selectedId) || records[0] || null;
+  const selectedRecord = records.find((r) => r._id === selectedId) || null;
 
-  /* config + saved template */
+  /* config */
   useEffect(() => {
     api
       .get("/notifications/config")
@@ -95,28 +94,20 @@ export default function AdminNotifications() {
         setConfig(res.data || { notifyEmail: "", fields: [] });
       })
       .catch(() => {});
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (saved) {
-        if (saved.subject) {
-          setSubject(saved.subject);
-          setSubjectDirty(true);
-        }
-        if (saved.message) setMessage(saved.message);
-      }
-    } catch {
-      /* ignore */
-    }
   }, []);
 
-  /* auto-fill the "to" field with the user's email */
+  /* auto-fill the composer ONLY when a new enquiry is selected */
   useEffect(() => {
-    if (selectedRecord && selectedRecord.email) {
-      setTo(selectedRecord.email);
+    if (selectedRecord) {
+      setTo(selectedRecord.email || "");
+      setSubject(defaultSubject(tab, selectedRecord));
+      setMessage(tab === "admission" ? defaultAdmissionMessage : defaultContactMessage);
     } else {
       setTo("");
+      setSubject("");
+      setMessage("");
     }
-  }, [selectedRecord]);
+  }, [selectedRecord?._id, tab]);
 
   /* real enquiry records for the active tab */
   useEffect(() => {
@@ -129,7 +120,7 @@ export default function AdminNotifications() {
         setRecords(res.data || []);
         setSelectedId((prev) => {
           if (prev && (res.data || []).some((r) => r._id === prev)) return prev;
-          return res.data?.[0]?._id || "";
+          return ""; // DO NOT auto-select the first enquiry
         });
       })
       .catch(() => !cancelled && setRecords([]))
@@ -138,11 +129,6 @@ export default function AdminNotifications() {
       cancelled = true;
     };
   }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /* subject follows the selection until edited manually */
-  useEffect(() => {
-    if (!subjectDirty) setSubject(defaultSubject(tab, selectedRecord));
-  }, [selectedRecord, tab, subjectDirty]);
 
   /* live preview — debounced render of the actual final email HTML */
   useEffect(() => {
@@ -181,7 +167,6 @@ export default function AdminNotifications() {
     const next = value.slice(0, start) + text + value.slice(end);
     if (isSubject) {
       setSubject(next);
-      setSubjectDirty(true);
     } else {
       setMessage(next);
     }
