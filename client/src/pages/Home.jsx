@@ -281,12 +281,12 @@ const Home = () => {
               }} 
               className="w-full h-full will-change-transform max-md:scale-100 md:scale-100 origin-bottom transition-none"
             >
-              <div className="w-full h-full block relative">
-                {/* Mobile Image */}
+              <picture className="w-full h-full block relative">
+                <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-desktop-new.jpg" />
                 <img 
                   src="/images/hero/home-hero-mobile-new.jpg" 
                   alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center brightness-90 md:hidden"
+                  className="w-full h-full object-cover object-center brightness-90 md:brightness-100"
                   style={{
                     imageRendering: 'high-quality',
                     backfaceVisibility: 'hidden',
@@ -294,24 +294,15 @@ const Home = () => {
                   }}
                   fetchpriority="high"
                 />
-                {/* Desktop Image */}
-                <img 
-                  src="/images/hero/home-hero-desktop-new.jpg" 
-                  alt="Mount Carmel School" 
-                  className="w-full h-full object-cover object-center hidden md:block"
-                  style={{
-                    imageRendering: 'high-quality',
-                    backfaceVisibility: 'hidden',
-                    transform: 'translateZ(0)'
-                  }}
-                  fetchpriority="high"
-                />
+              </picture>
                 
-                {/* Desktop Image (Blurred duplicate for left-side tree depth of field, optimized for scroll performance) */}
+              {/* Desktop Image (Blurred duplicate for left-side tree depth of field, optimized for scroll performance) */}
+              <picture className="absolute top-0 left-0 w-full h-full hidden md:block pointer-events-none">
+                <source media="(min-width: 768px)" srcSet="/images/hero/home-hero-desktop-new.jpg" />
                 <img 
                   src="/images/hero/home-hero-desktop-new.jpg" 
                   alt="" 
-                  className="absolute top-0 left-0 w-full h-full object-cover object-center hidden md:block pointer-events-none"
+                  className="w-full h-full object-cover object-center"
                   style={{
                     filter: 'blur(6px)',
                     maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 35%)',
@@ -321,7 +312,7 @@ const Home = () => {
                     transform: 'translateZ(0)'
                   }}
                 />
-              </div>
+              </picture>
             </div>
           </div>
           {/* Cinematic Gradient Overlay (Top to bottom on mobile, Left to right on desktop) */}
