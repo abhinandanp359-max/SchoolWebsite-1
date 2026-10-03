@@ -284,7 +284,7 @@ const Home = () => {
               <div className="w-full h-full block relative">
                 {/* Mobile Image */}
                 <img 
-                  src="/images/hero/home-hero-students-mobile-v5.jpg" 
+                  src="/images/hero/home-hero-mobile-new.jpg" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center brightness-90 md:hidden"
                   style={{
