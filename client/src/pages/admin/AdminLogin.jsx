@@ -95,6 +95,12 @@ export default function AdminLogin() {
             {loading ? "Signing in..." : "Secure Sign In"}
           </button>
         </form>
+
+        <div className="flex justify-center pt-2">
+          <Link to="/" className="text-sm text-warm-gray hover:text-slate-900 transition-colors">
+            View Site
+          </Link>
+        </div>
       </div>
     </div>
   );
