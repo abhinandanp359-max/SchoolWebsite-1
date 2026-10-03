@@ -6,6 +6,9 @@ const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enq
 const resendKey = process.env.RESEND_API_KEY;
 const resend = resendKey ? new Resend(resendKey) : null;
 
+// Initialize Brevo if API key is provided
+const brevoKey = process.env.BREVO_API_KEY;
+
 // Initialize Nodemailer fallback
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -76,7 +79,36 @@ const renderEnquiryEmail = ({ type, enquiry }) => {
 };
 
 const sendEmail = async ({ to, subject, html, attachments = [] }) => {
-  if (resend) {
+  if (brevoKey) {
+    const payload = {
+      sender: { name: "Mount Carmel School", email: process.env.EMAIL_USER },
+      to: [{ email: to }],
+      subject: subject,
+      htmlContent: html,
+      attachment: attachments.length > 0 ? attachments.map(att => ({
+        name: att.filename,
+        content: att.content.toString('base64')
+      })) : undefined
+    };
+
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': brevoKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error("Brevo API Error:", errorData);
+      throw new Error(errorData.message || `Brevo API error: ${response.status}`);
+    }
+    
+    return await response.json();
+  } else if (resend) {
     const mappedAttachments = attachments.map(att => ({
       filename: att.filename,
       content: att.content
@@ -94,13 +126,20 @@ const sendEmail = async ({ to, subject, html, attachments = [] }) => {
     }
     return data;
   } else {
-    return transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to,
-      subject,
-      html,
-      attachments
-    });
+    try {
+      return await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to,
+        subject,
+        html,
+        attachments
+      });
+    } catch (err) {
+      if (err.code === 'ETIMEDOUT') {
+        throw new Error('SMTP Connection timed out. Port 465 is blocked by your host.');
+      }
+      throw err;
+    }
   }
 };
 
