@@ -99,6 +99,7 @@ router.post('/test', protect, async (req, res, next) => {
 
     res.json({ success: true, message: `Test notification sent to ${recipient}` });
   } catch (error) {
+    error.statusCode = 400;
     next(error);
   }
 });
@@ -141,6 +142,8 @@ router.post('/send', protect, async (req, res, next) => {
 
     res.json({ success: true, message: `Notification sent to ${to}` });
   } catch (error) {
+    // If it's an email failure, set status to 400 so it doesn't get masked as 500 Internal Server Error
+    error.statusCode = 400;
     next(error);
   }
 });
