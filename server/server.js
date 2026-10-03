@@ -62,8 +62,9 @@ app.use(cors({
   origin: (origin, callback) => {
     // In production, we expect FRONTEND_URL to be set, but we also allow same-origin requests dynamically
     if (process.env.NODE_ENV === 'production') {
-      const allowed = process.env.FRONTEND_URL || 'https://schoolwebsite-1-6.onrender.com';
-      if (!origin || origin === allowed) {
+      const allowed = process.env.FRONTEND_URL || '';
+      const isFallbackRender = origin && /^https:\/\/schoolwebsite-1-\d+\.onrender\.com$/.test(origin);
+      if (!origin || origin === allowed || isFallbackRender) {
         return callback(null, true);
       }
       return callback(null, false); // Return false instead of throwing Error to prevent 500s

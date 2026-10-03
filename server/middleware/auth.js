@@ -6,8 +6,9 @@ const protect = async (req, res, next) => {
     // 1. Strict CSRF Check (Origin/Referer)
     if (req.method !== 'GET' && process.env.NODE_ENV === 'production') {
       const origin = req.headers.origin || req.headers.referer;
-      const allowedOrigin = process.env.FRONTEND_URL || 'https://schoolwebsite-1-6.onrender.com';
-      if (!origin || !origin.startsWith(allowedOrigin)) {
+      const allowedOrigin = process.env.FRONTEND_URL || '';
+      const isFallbackRender = origin && /^https:\/\/schoolwebsite-1-\d+\.onrender\.com$/.test(origin);
+      if (!origin || (origin !== allowedOrigin && !origin.startsWith(allowedOrigin) && !isFallbackRender)) {
         console.warn(`[SECURITY AUDIT] CSRF Attempt blocked from origin: ${origin} at ${new Date().toISOString()}`);
         return res.status(403).json({ message: 'Forbidden: Invalid Origin' });
       }
