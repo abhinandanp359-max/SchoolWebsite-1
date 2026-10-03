@@ -11,9 +11,28 @@ const adminSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    minlength: 6,
+    validate: {
+      validator: function(v) {
+        // Enforce strong password: at least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
+      },
+      message: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
+    },
     select: false,
   },
+  role: {
+    type: String,
+    enum: ['admin', 'superadmin'],
+    default: 'admin'
+  },
+  totpSecret: {
+    type: String,
+    select: false,
+  },
+  isTwoFactorEnabled: {
+    type: Boolean,
+    default: false,
+  }
 }, { timestamps: true });
 
 adminSchema.pre('save', async function () {

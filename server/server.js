@@ -28,6 +28,14 @@ connectDB().then(() => {
 
 app.use(helmet({
   crossOriginResourcePolicy: false,
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  xContentTypeOptions: true,
+  xFrameOptions: { action: 'deny' },
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
@@ -49,11 +57,21 @@ app.use(limiter);
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests from any localhost port or no-origin requests (e.g. Postman/curl)
-    if (!origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+    const allowedOrigins = process.env.NODE_ENV === 'production' 
+      ? [process.env.FRONTEND_URL] 
+      : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5000', 'http://127.0.0.1:5000'];
+    
+    // In production, block if origin is not explicitly allowed
+    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
+      return callback(new Error('CORS policy violation'), false);
+    }
+    
+    // In dev, allow Postman/curl (no origin) or localhost
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:')) {
       return callback(null, true);
     }
-    return callback(null, true);
+    
+    return callback(new Error('Not allowed by CORS'), false);
   },
   credentials: true,
 }));

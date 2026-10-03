@@ -51,11 +51,12 @@ const seedAdmin = async () => {
   try {
     const existingAdmin = await Admin.findOne({ username: 'admin' });
     if (!existingAdmin) {
+      const defaultPassword = process.env.DEFAULT_ADMIN_PASSWORD || 'ChangeMe123!@';
       await Admin.create({
         username: 'admin',
-        password: 'MountCarmel@2024',
+        password: defaultPassword,
       });
-      console.log('Default admin user created successfully.');
+      console.info(`[SECURITY AUDIT] Default admin user created successfully. Use the password defined in DEFAULT_ADMIN_PASSWORD or 'ChangeMe123!@' if not set.`);
     }
 
     const galleryCount = await Gallery.countDocuments();
