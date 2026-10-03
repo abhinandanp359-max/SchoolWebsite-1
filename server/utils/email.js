@@ -50,11 +50,7 @@ const enquiryViewUrl = (enquiry, type) => {
   const base = clientBaseUrl();
   if (!base || !id) return adminEnquiriesUrl();
   
-  if (type === "Admission Enquiry") {
-    return `${base}/admin/notifications?tab=admission&id=${id}`;
-  } else {
-    return `${base}/admin/notifications?tab=contact&id=${id}`;
-  }
+  return `${base}/admin/enquiries/${id}`;
 };
 
 /**
