@@ -60,13 +60,28 @@ app.use(limiter);
 
 app.use(cors({
   origin: (origin, callback) => {
-    const allowedOrigins = process.env.NODE_ENV === 'production' 
-      ? [process.env.FRONTEND_URL] 
-      : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5000', 'http://127.0.0.1:5000'];
+    let allowedOrigins = [];
+    if (process.env.NODE_ENV === 'production') {
+      const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, '') : '';
+      allowedOrigins = [frontendUrl];
+    } else {
+      allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5000', 'http://127.0.0.1:5000'];
+    }
     
     // In production, block if origin is not explicitly allowed
-    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
-      return callback(new Error('CORS policy violation'), false);
+    if (process.env.NODE_ENV === 'production') {
+      if (!origin) {
+        // Allow requests with no origin (like server-to-server) or block them? We should allow them or it breaks some tools. Let's allow for now to prevent 500s.
+        return callback(null, true);
+      }
+      const requestOrigin = origin.replace(/\/$/, '');
+      if (!allowedOrigins.includes(requestOrigin)) {
+        console.warn(`[CORS BLOCKED] Origin ${origin} not in allowed origins: ${allowedOrigins.join(', ')}`);
+        const err = new Error('CORS policy violation');
+        err.statusCode = 403;
+        return callback(err, false);
+      }
+      return callback(null, true);
     }
     
     // In dev, allow Postman/curl (no origin) or localhost
@@ -74,7 +89,9 @@ app.use(cors({
       return callback(null, true);
     }
     
-    return callback(new Error('Not allowed by CORS'), false);
+    const err = new Error('Not allowed by CORS');
+    err.statusCode = 403;
+    return callback(err, false);
   },
   credentials: true,
 }));
