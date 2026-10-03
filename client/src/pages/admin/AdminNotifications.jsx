@@ -319,7 +319,7 @@ export default function AdminNotifications() {
                 onFocus={() => (lastFocused.current = "message")}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write an additional note… use Insert Field to personalise."
-                className="mt-1.5 w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm text-charcoal placeholder:text-gray-300 focus:outline-none focus:border-primary resize-y overflow-y-scroll"
+                className="mt-1.5 w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-sm text-charcoal placeholder:text-gray-300 focus:outline-none focus:border-primary resize-y overflow-y-scroll show-scrollbar"
               />
             </label>
 
