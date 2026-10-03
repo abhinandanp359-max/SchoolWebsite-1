@@ -296,7 +296,7 @@ const Home = () => {
                 />
                 {/* Desktop Image */}
                 <img 
-                  src="/images/hero/home-hero-students-v2.webp" 
+                  src="/images/hero/home-hero-desktop-new.jpg" 
                   alt="Mount Carmel School" 
                   className="w-full h-full object-cover object-center hidden md:block"
                   style={{
@@ -309,7 +309,7 @@ const Home = () => {
                 
                 {/* Desktop Image (Blurred duplicate for left-side tree depth of field, optimized for scroll performance) */}
                 <img 
-                  src="/images/hero/home-hero-students-v2.webp" 
+                  src="/images/hero/home-hero-desktop-new.jpg" 
                   alt="" 
                   className="absolute top-0 left-0 w-full h-full object-cover object-center hidden md:block pointer-events-none"
                   style={{
