@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enquiryEmailTemplate");
 
 // Initialize Resend if API key is provided
-const resendKey = process.env.RESEND_API_KEY;
-const resend = resendKey ? new Resend(resendKey) : null;
+// const resendKey = process.env.RESEND_API_KEY;
+const resend = null;
 
 // Initialize Nodemailer fallback
 const transporter = nodemailer.createTransport({
