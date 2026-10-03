@@ -246,13 +246,13 @@ export default function AdminNotifications() {
             <div className="flex flex-wrap gap-2">
               <Link
                 to="/admin/admissions"
-                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray hover:text-slate-900 border border-gray-200 hover:border-gray-300"
+                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray border border-gray-200 hover:bg-primary hover:text-white hover:border-primary active:bg-primary-dark"
               >
                 Admission Enquiries
               </Link>
               <Link
                 to="/admin/contacts"
-                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray hover:text-slate-900 border border-gray-200 hover:border-gray-300"
+                className="px-3.5 py-2 text-sm font-medium rounded-lg transition cursor-pointer bg-white text-warm-gray border border-gray-200 hover:bg-primary hover:text-white hover:border-primary active:bg-primary-dark"
               >
                 Contact Enquiries
               </Link>
