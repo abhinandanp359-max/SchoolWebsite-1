@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 const { buildEnquiryEmail, substituteTokens, normaliseEnquiry } = require("./enquiryEmailTemplate");
 
 // Initialize Resend if API key is provided
-// const resendKey = process.env.RESEND_API_KEY;
-const resend = null;
+const resendKey = process.env.RESEND_API_KEY;
+const resend = resendKey ? new Resend(resendKey) : null;
 
 // Initialize Nodemailer fallback
 const transporter = nodemailer.createTransport({
@@ -12,7 +12,10 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  }
+  },
+  connectionTimeout: 5000,
+  greetingTimeout: 5000,
+  socketTimeout: 5000
 });
 
 const clientBaseUrl = () => (process.env.CLIENT_URL || "").trim().replace(/\/$/, "");
