@@ -1,3 +1,6 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first'); // Fix for Render IPv6 ENETUNREACH issues
+
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
