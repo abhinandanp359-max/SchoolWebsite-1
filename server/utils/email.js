@@ -11,14 +11,20 @@ const brevoKey = process.env.BREVO_API_KEY;
 
 // Initialize Nodemailer fallback
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  connectionTimeout: 5000,
-  greetingTimeout: 5000,
-  socketTimeout: 5000
+  tls: {
+    rejectUnauthorized: false
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
+  family: 4 // Force IPv4 to fix Render's IPv6 ENETUNREACH error
 });
 
 const clientBaseUrl = () => (process.env.CLIENT_URL || "").trim().replace(/\/$/, "");
