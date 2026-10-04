@@ -111,8 +111,8 @@ export default function AdminEnquiryDetail() {
           <CircleAlert size={28} className="text-red-500" />
           <h1 className="text-lg font-semibold text-slate-800">Could not open this enquiry</h1>
           <p className="text-sm text-warm-gray">{error}</p>
-          <Link to="/admin/enquiries" className="mt-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition">
-            Back to Enquiries
+          <Link to="/admin" className="mt-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition">
+            Back to Dashboard
           </Link>
         </div>
       </div>
@@ -132,7 +132,7 @@ export default function AdminEnquiryDetail() {
       {/* header */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
         <Link
-          to="/admin/enquiries"
+          to={typeKey === "admission" ? "/admin/admissions" : "/admin/contacts"}
           className="inline-flex items-center gap-1.5 text-sm text-warm-gray hover:text-slate-900 transition"
         >
           <ArrowLeft size={15} /> Back to Enquiries

@@ -44,7 +44,7 @@ const logoUrl = () => {
 /* Fallback link when no specific enquiry id is available */
 const adminEnquiriesUrl = () => {
   const base = clientBaseUrl();
-  return base ? `${base}/admin/enquiries` : "";
+  return base ? `${base}/admin` : "";
 };
 
 /*

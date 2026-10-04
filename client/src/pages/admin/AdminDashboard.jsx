@@ -6,8 +6,8 @@ import api from "../../utils/api";
 const stats = [
   { key: "events", label: "Total Events", icon: Calendar, color: "bg-blue-500", link: "/admin/events" },
   { key: "gallery", label: "Gallery Images", icon: Images, color: "bg-purple-500", link: "/admin/gallery" },
-  { key: "admissions", label: "Admission Enquiries", icon: ClipboardList, color: "bg-amber-500", link: "/admin/enquiries" },
-  { key: "contact", label: "Contact Enquiries", icon: Mail, color: "bg-rose-500", link: "/admin/enquiries" },
+  { key: "admissions", label: "Admission Enquiries", icon: ClipboardList, color: "bg-amber-500", link: "/admin/admissions" },
+  { key: "contact", label: "Contact Enquiries", icon: Mail, color: "bg-rose-500", link: "/admin/contacts" },
 ];
 
 export default function AdminDashboard() {
