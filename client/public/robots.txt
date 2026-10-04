@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://mountcarmelschool.edu.in/sitemap.xml
+Sitemap: https://mcschapra.com/sitemap.xml
